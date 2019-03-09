@@ -11,7 +11,6 @@ import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Objects;
 
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "user")
 public class User {
@@ -40,7 +39,7 @@ public class User {
     @Column(name= "flag")
     private boolean flag;
 
-    // from parent to child
+    // from parent (user) to child (profile)
     @OneToOne(fetch = FetchType.LAZY,
             cascade =  CascadeType.ALL,
             mappedBy = "user")
