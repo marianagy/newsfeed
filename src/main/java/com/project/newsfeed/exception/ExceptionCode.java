@@ -12,7 +12,7 @@ package com.project.newsfeed.exception;
         USERNAME_NOT_FOUND(1005, "Username is not found."),
         PASSWORD_NOT_VALID(1006, "Password not valid."),
         USER_DEACTIVATED(1007, "User deactivated"),
-        TOKEN_EXPIRED(1008, "Token expired"),
+        USER_WITH_ID_NOT_FOUND(1008,"User deactivated" ),
         USER_PERMISSION_VALIDATION(2001, "User does not have this permission"),
         ROLE_DOESNT_EXIST(2002, "User does not have this permission"),
         PROFILE_VALIDATION_EXCEPTION(5001, "Validation Exception"),

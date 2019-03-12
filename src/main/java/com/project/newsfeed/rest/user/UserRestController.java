@@ -1,6 +1,7 @@
 package com.project.newsfeed.rest.user;
 
 import com.project.newsfeed.entity.user.User;
+import com.project.newsfeed.exception.BusinessException;
 import com.project.newsfeed.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +37,7 @@ public class UserRestController{
 
     // add mapping for GET /users/{userId}
     @GetMapping("/users/{userId}")
-    public User getUserById(@PathVariable int userId){
+    public User getUserById(@PathVariable int userId) throws BusinessException {
         User user = userService.findById(userId);
         if(user==null){
             throw new RuntimeException("User id not found - " + userId);
@@ -65,7 +66,7 @@ public class UserRestController{
 
     // add mapping for DELETE /users/{userId} - delete user
     @DeleteMapping("/users/{userId}")
-    public String deleteUser(@PathVariable int userId) {
+    public String deleteUser(@PathVariable int userId) throws BusinessException {
 
         User tempUser = userService.findById(userId);
 

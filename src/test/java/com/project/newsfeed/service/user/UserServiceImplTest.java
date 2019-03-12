@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
@@ -30,14 +31,41 @@ public class UserServiceImplTest {
 
     @Test
     public void findAll() {
+        User user = new User();
+        List<User> userList = new ArrayList<>();
+        userList.add(user);
+        when(userDAO.findAll()).thenReturn(userList);
+
+        assertEquals(1,userService.findAll().size());
     }
 
     @Test
-    public void findById() {
+    public void findById_ExpectedSuccess() throws BusinessException {
+        User user = new User();
+        user.setId(1);
+        when(userDAO.findById(1)).thenReturn(Optional.of(user));
+        assertEquals(user,userService.findById(1));
+    }
+
+    @Test
+    public void findById_ExpectedUserNotFound() {
+        User user = new User();
+        user.setId(1);
+        when(userDAO.findById(1)).thenReturn(Optional.of(user));
+        try{userService.findById(2);
+            fail("Should not reach this point");
+        } catch (BusinessException e) {
+           assertEquals(ExceptionCode.USER_WITH_ID_NOT_FOUND,e.getExceptionCode());
+        }
     }
 
     @Test
     public void save() {
+
+
+
+
+
     }
 
     @Test
@@ -69,7 +97,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void loginUser_ExpectedSucces() {
+    public void loginUser_ExpectedSuccess() {
         User user = new User();
         user.setUsername("usernamujhfgv");
         user.setPassword(Encryptor.encrypt("passwordjhf"));

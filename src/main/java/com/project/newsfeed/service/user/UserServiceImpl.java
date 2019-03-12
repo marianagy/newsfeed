@@ -46,25 +46,16 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public User findById(int id) {
+    public User findById(int id) throws BusinessException {
         Optional<User> result = userDAO.findById(id);
 
-        User user=null;
-
         if(result.isPresent()){
-            user=result.get(); // gives value
+
+            return result.get();
         }
         else{
-            // we didn't find the user
-            throw new RuntimeException("Did not find the user id - "+ id);
+            throw new BusinessException(ExceptionCode.USER_WITH_ID_NOT_FOUND);
         }
-        return user;
-
-//        try {
-//            return Optional.of(q.getSingleResult());
-//        } catch (NoResultException ex) {
-//            return Optional.empty();
-//        }
     }
 
     /**
@@ -73,8 +64,6 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public void save(User user) {
-
-        // TODO: sa vad daca e ok cum am facut
 
         Role role = new Role();
         role.setId(1);
