@@ -135,9 +135,13 @@ public class UserServiceImpl implements UserService {
                 .stream()
                 .filter(user -> user.getUsername().equals(username))
                 .collect(Collectors.toList());
-        User user = userList.get(0);
+        if(userList.size()>0) {
+            return Optional.of(userList.get(0));
+        }
+        else{
+            return Optional.empty();
+        }
 
-        return Optional.of(user);
     }
 
     public void activateUser(String username) throws BusinessException {
@@ -176,8 +180,8 @@ public class UserServiceImpl implements UserService {
         if (!userOptional.get().isFlag()) {
             throw new BusinessException(ExceptionCode.USER_DEACTIVATED);
         }
-        if(Encryptor.encrypt(password).equals(userOptional.get().getPassword()))      {
-            return userOptional.get();
+        if(!Encryptor.encrypt(password).equals(userOptional.get().getPassword()))      {
+            throw new BusinessException(ExceptionCode.PASSWORD_NOT_VALID);
         }
         return userOptional.get();
     }
