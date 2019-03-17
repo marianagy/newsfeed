@@ -15,9 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -57,19 +56,6 @@ public class UserServiceImplTest {
         } catch (BusinessException e) {
            assertEquals(ExceptionCode.USER_WITH_ID_NOT_FOUND,e.getExceptionCode());
         }
-    }
-
-    @Test
-    public void save() {
-
-
-
-
-
-    }
-
-    @Test
-    public void deleteById() {
     }
 
     @Test

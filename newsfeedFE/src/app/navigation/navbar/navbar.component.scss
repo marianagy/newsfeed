@@ -1,0 +1,19 @@
+.menu {
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-start;
+
+  .align-right {
+    margin-left: auto;
+
+    .language {
+      display: inline-block;
+    }
+  }
+}
+
+.menu {
+}
+
+.menu .logout {
+}
