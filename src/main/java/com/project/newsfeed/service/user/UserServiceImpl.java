@@ -7,13 +7,8 @@ import com.project.newsfeed.exception.BusinessException;
 import com.project.newsfeed.exception.ExceptionCode;
 import com.project.newsfeed.utils.Encryptor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.NoResultException;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -169,7 +164,10 @@ public class UserServiceImpl implements UserService {
         if (!userOptional.get().isFlag()) {
             throw new BusinessException(ExceptionCode.USER_DEACTIVATED);
         }
+        //String passwordDB=userOptional.get().getPassword();
+        //password = Encryptor.encrypt(password);
         if(!Encryptor.encrypt(password).equals(userOptional.get().getPassword()))      {
+
             throw new BusinessException(ExceptionCode.PASSWORD_NOT_VALID);
         }
         return userOptional.get();
