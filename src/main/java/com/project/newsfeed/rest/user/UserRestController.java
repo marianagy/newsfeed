@@ -3,6 +3,7 @@ package com.project.newsfeed.rest.user;
 import com.project.newsfeed.entity.user.User;
 import com.project.newsfeed.exception.BusinessException;
 import com.project.newsfeed.service.user.UserService;
+import com.project.newsfeed.service.user.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +33,7 @@ public class UserRestController{
 
     // expose "/users" and return list of users
     @GetMapping("/users")
-    public List<User> findAll(){
+    public List<UserDTO> findAll() {
         return userService.findAll();
     }
 

@@ -49,6 +49,14 @@ public class Role {
         this.name = name;
     }
 
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

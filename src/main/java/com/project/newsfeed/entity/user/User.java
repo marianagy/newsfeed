@@ -1,14 +1,8 @@
 package com.project.newsfeed.entity.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -37,13 +31,15 @@ public class User {
     private Role role;
 
     @Column(name= "flag")
-    private boolean flag;
+    private Boolean flag;
 
     // from parent (user) to child (profile)
     @OneToOne(fetch = FetchType.LAZY,
             cascade =  CascadeType.ALL,
             mappedBy = "user")
     private Profile profile;
+
+    // Todo: sa ii pun si lista de notificari la user
 
     public User(){}
 
@@ -87,11 +83,11 @@ public class User {
         this.role = role;
     }
 
-    public boolean isFlag() {
+    public Boolean getFlag() {
         return flag;
     }
 
-    public void setFlag(boolean flag) {
+    public void setFlag(Boolean flag) {
         this.flag = flag;
     }
 

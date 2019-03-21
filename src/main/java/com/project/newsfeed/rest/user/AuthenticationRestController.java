@@ -1,9 +1,9 @@
 package com.project.newsfeed.rest.user;
 
-import com.project.newsfeed.entity.user.User;
 import com.project.newsfeed.exception.BusinessException;
 import com.project.newsfeed.exception.ExceptionCode;
 import com.project.newsfeed.service.user.UserServiceImpl;
+import com.project.newsfeed.service.user.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,8 +29,8 @@ public class AuthenticationRestController {
             method = RequestMethod.POST,
             consumes = {"application/x-www-form-urlencoded"})
     @ResponseBody
-    public ResponseEntity<User> authenticateUser(@RequestBody MultiValueMap<String, String> paramMap) {
-        User user = null;
+    public ResponseEntity<UserDTO> authenticateUser(@RequestBody MultiValueMap<String, String> paramMap) {
+        UserDTO userDTO = null;
         try {
             if (paramMap.get("username") == null || paramMap.get("password") == null) {
                 throw new BusinessException(ExceptionCode.UNKNOWN_EXCEPTION);
@@ -38,9 +38,9 @@ public class AuthenticationRestController {
             }
             String username = paramMap.getFirst("username");
             String password = paramMap.getFirst("password");
-            user = userService.loginUser(username, password);
+            userDTO = userService.loginUser(username, password);
 
-            return ResponseEntity.accepted().body(user);
+            return ResponseEntity.accepted().body(userDTO);
         } catch (BusinessException e) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, e.getExceptionCode().getMessage(), e);

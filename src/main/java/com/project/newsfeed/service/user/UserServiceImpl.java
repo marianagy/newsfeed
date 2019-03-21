@@ -5,6 +5,8 @@ import com.project.newsfeed.entity.user.Role;
 import com.project.newsfeed.entity.user.User;
 import com.project.newsfeed.exception.BusinessException;
 import com.project.newsfeed.exception.ExceptionCode;
+import com.project.newsfeed.service.user.dto.UserDTO;
+import com.project.newsfeed.service.user.dto.UserDTOHelper;
 import com.project.newsfeed.utils.Encryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,8 +33,11 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public List<User> findAll() {
-        return userDAO.findAll();
+    public List<UserDTO> findAll() {
+
+        return userDAO.findAll().stream()
+                .map(UserDTOHelper::fromEntity)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -43,7 +48,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findById(int id) throws BusinessException {
         Optional<User> result = userDAO.findById(id);
-
         if(result.isPresent()){
 
             return result.get();
@@ -102,17 +106,6 @@ public class UserServiceImpl implements UserService {
         return matcher.find();
     }
 
-//    public Optional<User> getUserByUsername(String username){
-//
-//        User user = new User();
-//        user.setUsername(username);
-//
-//
-//        // returns a single entity matching the given Example or Optional.empty() if none was found.
-//        return userDAO.findOne(Example.of(user));
-//
-//    }
-
     public Optional<User> getUserByUsername(String username) {
 
         return userDAO.findAll()
@@ -151,12 +144,12 @@ public class UserServiceImpl implements UserService {
      * @return
      * @throws BusinessException
      */
-    public User loginUser(String username, String password) throws BusinessException {
+    public UserDTO loginUser(String username, String password) throws BusinessException {
         Optional<User> userOptional = getUserByUsername(username);
         if(!userOptional.isPresent()){
             throw new BusinessException(ExceptionCode.USERNAME_NOT_FOUND);
         }
-        if (!userOptional.get().isFlag()) {
+        if (!userOptional.get().getFlag()) {
             throw new BusinessException(ExceptionCode.USER_DEACTIVATED);
         }
         //String passwordDB=userOptional.get().getPassword();
@@ -165,9 +158,37 @@ public class UserServiceImpl implements UserService {
 
             throw new BusinessException(ExceptionCode.PASSWORD_NOT_VALID);
         }
-        return userOptional.get();
+        return UserDTOHelper.fromEntity(userOptional.get());
     }
 
+    private boolean validateFields(UserDTO userDTO) {
+        return
+                userDTO.getUsername() != null;
+    }
+
+    private boolean isValidForCreation(UserDTO userDTO) throws BusinessException {
+        //validate if email already exists
+        if (userDAO.findByUsername(userDTO.getUsername()) != null) {
+            //Todo: username already exists
+            throw new BusinessException(ExceptionCode.UNKNOWN_EXCEPTION);
+        }
+        return validateFields(userDTO)
+                && userDTO.getPassword() != null;
+    }
+
+    /**
+     * Validates the DTO. To use before sending it further.
+     *
+     * @param userDTO
+     * @throws BusinessException
+     */
+    private void validateUserForCreation(UserDTO userDTO) throws BusinessException {
+        if (!isValidForCreation(userDTO)) {
+            throw new BusinessException(ExceptionCode.USER_VALIDATION_EXCEPTION);
+        }
+
+
+    }
 
 
 }
