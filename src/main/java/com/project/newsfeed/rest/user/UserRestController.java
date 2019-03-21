@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class UserRestController{
@@ -55,6 +56,7 @@ public class UserRestController{
     }
 
     // add mapping for PUT /users - update existing yser
+
     @PutMapping("/users")
     public User updateUser(@RequestBody User user) {
 
@@ -65,6 +67,7 @@ public class UserRestController{
     }
 
     // add mapping for DELETE /users/{userId} - delete user
+
     @DeleteMapping("/users/{userId}")
     public String deleteUser(@PathVariable int userId) throws BusinessException {
 

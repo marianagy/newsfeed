@@ -115,16 +115,11 @@ public class UserServiceImpl implements UserService {
 
     public Optional<User> getUserByUsername(String username) {
 
-        List<User> userList = userDAO.findAll()
+        return userDAO.findAll()
                 .stream()
                 .filter(user -> user.getUsername().equals(username))
-                .collect(Collectors.toList());
-        if(userList.size()>0) {
-            return Optional.of(userList.get(0));
-        }
-        else{
-            return Optional.empty();
-        }
+                .findFirst();
+
 
     }
 
