@@ -20,9 +20,11 @@ import {
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {RegisterComponent} from './register/register.component';
+import {BrowserModule} from "@angular/platform-browser";
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, RegisterComponent],
   imports: [
     BrowserAnimationsModule,
     CommonModule,
@@ -42,7 +44,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     MatButtonModule,
     MatDialogModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserModule
   ],
   exports: [LoginComponent, RouterModule]
 })

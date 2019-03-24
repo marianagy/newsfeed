@@ -5,9 +5,11 @@ import {RouterModule, Routes} from "@angular/router";
 import {LoginComponent} from "../user/login/login.component";
 import {MatBadgeModule, MatButtonModule, MatIconModule, MatMenuModule, MatToolbarModule} from "@angular/material";
 import {UserModule} from "../user/user.module";
+import {RegisterComponent} from "../user/register/register.component";
 
 const loginRoutes: Routes = [
-  {path: 'login', component: LoginComponent}
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
 ];
 
 @NgModule({

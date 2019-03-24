@@ -26,6 +26,12 @@ export class AuthenticationService {
   //   return localStorage.getItem('token');
   // }
 
+  private static setSession(authResult) {
+
+    localStorage.setItem('username', authResult.username);
+
+  }
+
   validateUser(username: string, password: string) {
 
     let body = new URLSearchParams();
@@ -41,13 +47,8 @@ export class AuthenticationService {
           {'Content-Type': 'application/x-www-form-urlencoded'}
         )
       }).pipe(
-      tap(res => this.setSession(res))
+      tap(res => AuthenticationService.setSession(res))
     );
-  }
-
-  private setSession(authResult) {
-
-    localStorage.setItem('username', authResult.username);
   }
 
   // public isLoggedIn() {
