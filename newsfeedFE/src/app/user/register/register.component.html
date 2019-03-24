@@ -1,0 +1,105 @@
+<mat-card class="register-component">
+  <form
+    #formElement
+    #registerForm="ngForm"
+    (ngSubmit)="submitRegister()"
+    class="register-form"
+  >
+    <h1>Sign Up</h1>
+    <mat-form-field appearance="outline" class="first-name form-field">
+      <mat-label>First Name</mat-label>
+      <input
+
+        #firstNameElement
+        [(ngModel)]="userRegisterData.firstName"
+        matInput
+        name="first-name"
+        placeholder="first name"
+        required
+        type="text"
+      >
+      <!--<mat-icon matSuffix color="primary">username</mat-icon>-->
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="last-name form-field">
+      <mat-label>Last Name</mat-label>
+      <input
+
+        #lastNameElement
+        [(ngModel)]="userRegisterData.lastName"
+        matInput
+        name="last-name"
+        placeholder="last name"
+        required
+        type="text">
+      <!--<mat-icon matSuffix color="primary">security</mat-icon>-->
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="email form-field">
+      <mat-label>Email</mat-label>
+      <input
+        #emailElement
+        [(ngModel)]="userRegisterData.email"
+        [errorStateMatcher]="matcher"
+        [formControl]="emailFormControl"
+        matInput
+        name="email"
+        placeholder="email"
+        required
+
+        type="text">
+
+      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <!--<mat-icon matSuffix color="primary">security</mat-icon>-->
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="username form-field">
+      <mat-label>Username</mat-label>
+      <input
+        #userElement
+        [(ngModel)]="userRegisterData.username"
+        matInput
+        name="user"
+        placeholder="username"
+        required
+        type="text"
+      >
+      <!--<mat-icon matSuffix color="primary">username</mat-icon>-->
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="password form-field">
+      <mat-label>Password</mat-label>
+      <input
+        #passwordElement
+        [(ngModel)]="userRegisterData.password"
+        [errorStateMatcher]="matcher"
+        [formControl]="passwordFormControl"
+        matInput
+        name="password"
+        placeholder="password"
+        required
+        type="password">
+      <!--<mat-icon matSuffix color="primary">security</mat-icon>-->
+      <mat-error *ngIf="passwordFormControl.hasError('passwordInvalid')">{{getPasswordErrorMessage()}}</mat-error>
+
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="password-confirmation form-field">
+      <mat-label>Password Confirmation</mat-label>
+      <input
+        #passwordConfirmationElement
+        [(ngModel)]="userRegisterData.passwordConfirmation"
+        [errorStateMatcher]="matcher"
+        [formControl]="passwordFormControl"
+        matInput
+        name="password-confirmation"
+        placeholder="password confirmation"
+        required
+        type="password">
+      <!--<mat-icon matSuffix color="primary">security</mat-icon>-->
+      <mat-error *ngIf="!areCorrectPasswords()">{{getPasswordErrorMessage()}}</mat-error>
+
+    </mat-form-field>
+
+    <button color="primary" mat-raised-button type="submit">Sign Up</button>
+  </form>
+</mat-card>
