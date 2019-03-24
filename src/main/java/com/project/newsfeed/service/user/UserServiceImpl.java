@@ -1,6 +1,8 @@
 package com.project.newsfeed.service.user;
 
+import com.project.newsfeed.dao.user.ProfileDAO;
 import com.project.newsfeed.dao.user.UserDAO;
+import com.project.newsfeed.entity.user.Profile;
 import com.project.newsfeed.entity.user.Role;
 import com.project.newsfeed.entity.user.User;
 import com.project.newsfeed.exception.BusinessException;
@@ -23,9 +25,13 @@ public class UserServiceImpl implements UserService {
 
     private UserDAO userDAO;
 
+
+    private ProfileDAO profileDAO;
+
     @Autowired
-    public UserServiceImpl(UserDAO userDAO){
+    public UserServiceImpl(UserDAO userDAO, ProfileDAO profileDAO) {
         this.userDAO=userDAO;
+        this.profileDAO = profileDAO;
     }
 
     /**
@@ -132,7 +138,35 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    public void registerUser(){
+    private boolean usernameExist(String username) {
+        Optional<User> user = getUserByUsername(username);
+        return user.isPresent();
+    }
+
+    public void registerUser(String firstName, String lastName, String email, String username, String password) throws BusinessException {
+
+        if (usernameExist(username)) {
+            throw new BusinessException(ExceptionCode.USERNAME_ALREADY_EXISTS);
+        }
+        if (!isEmailValid(email)) {
+            throw new BusinessException(ExceptionCode.EMAIL_VALIDATION_EXCEPTION);
+        }
+        if (profileDAO.findbyEmail(email) != null) {
+            throw new BusinessException(ExceptionCode.EMAIL_EXISTS_ALREADY);
+        }
+
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        save(user);
+
+        Profile profile = new Profile();
+        profile.setFirstName(firstName);
+        profile.setLastName(lastName);
+        profile.setEmail(email);
+        profile.setUser(user);
+
+        profileDAO.save(profile);
 
     }
 
