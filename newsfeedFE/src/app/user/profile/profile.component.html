@@ -1,0 +1,24 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image">
+
+    </div>
+
+    <mat-card-title>{{profileLoginData.firstName}} {{profileLoginData.lastName}}</mat-card-title>
+
+    <mat-card-subtitle style="color:#000000">
+
+      <h4 class="mat-card-content">{{profileLoginData.email}}</h4>
+      <h4 class="mat-card-content">{{profileLoginData.bio}}</h4>
+    </mat-card-subtitle>
+
+  </mat-card-header>
+
+  <button (click)="editProfileDialog()" color="primary" mat-raised-button>
+    <i class="material-icons">edit</i> Edit Profile
+  </button>
+  <!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" width="400px"-->
+  <!--alt="Photo of a Shiba Inu">-->
+
+</mat-card>

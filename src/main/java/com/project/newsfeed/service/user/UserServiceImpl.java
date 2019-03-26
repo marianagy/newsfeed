@@ -1,8 +1,8 @@
 package com.project.newsfeed.service.user;
 
-import com.project.newsfeed.dao.user.ProfileDAO;
+import com.project.newsfeed.dao.profile.ProfileDAO;
 import com.project.newsfeed.dao.user.UserDAO;
-import com.project.newsfeed.entity.user.Profile;
+import com.project.newsfeed.entity.profile.Profile;
 import com.project.newsfeed.entity.user.Role;
 import com.project.newsfeed.entity.user.User;
 import com.project.newsfeed.exception.BusinessException;
@@ -30,12 +30,13 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     public UserServiceImpl(UserDAO userDAO, ProfileDAO profileDAO) {
-        this.userDAO=userDAO;
+        this.userDAO = userDAO;
         this.profileDAO = profileDAO;
     }
 
     /**
      * Get all users
+     *
      * @return
      */
     @Override
@@ -48,23 +49,24 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Get user by id
+     *
      * @param id
      * @return
      */
     @Override
     public User findById(int id) throws BusinessException {
         Optional<User> result = userDAO.findById(id);
-        if(result.isPresent()){
+        if (result.isPresent()) {
 
             return result.get();
-        }
-        else{
+        } else {
             throw new BusinessException(ExceptionCode.USER_WITH_ID_NOT_FOUND);
         }
     }
 
     /**
      * Save user - encrypt password and set default flag to true (means user is activated), set default role to user
+     *
      * @param user
      */
     @Override
@@ -81,6 +83,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Delete user
+     *
      * @param id
      */
     @Override
@@ -90,6 +93,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Get all users that have the same role
+     *
      * @param role
      * @return
      */
@@ -102,6 +106,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Check if email is valid using regex
+     *
      * @param email
      * @return
      */
@@ -155,24 +160,28 @@ public class UserServiceImpl implements UserService {
             throw new BusinessException(ExceptionCode.EMAIL_EXISTS_ALREADY);
         }
 
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        save(user);
 
         Profile profile = new Profile();
         profile.setFirstName(firstName);
         profile.setLastName(lastName);
         profile.setEmail(email);
-        profile.setUser(user);
+
 
         profileDAO.save(profile);
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setProfile(profile);
+        save(user);
+
+
 
     }
 
     /**
      * Takes the username and password of a user and if they are correct, it returns the
      * corresponding user. Otherwise it will throw an exception.
+     *
      * @param username
      * @param password
      * @return
@@ -180,7 +189,7 @@ public class UserServiceImpl implements UserService {
      */
     public UserDTO loginUser(String username, String password) throws BusinessException {
         Optional<User> userOptional = getUserByUsername(username);
-        if(!userOptional.isPresent()){
+        if (!userOptional.isPresent()) {
             throw new BusinessException(ExceptionCode.USERNAME_NOT_FOUND);
         }
         if (!userOptional.get().getFlag()) {
@@ -188,7 +197,7 @@ public class UserServiceImpl implements UserService {
         }
         //String passwordDB=userOptional.get().getPassword();
         //password = Encryptor.encrypt(password);
-        if(!Encryptor.encrypt(password).equals(userOptional.get().getPassword()))      {
+        if (!Encryptor.encrypt(password).equals(userOptional.get().getPassword())) {
 
             throw new BusinessException(ExceptionCode.PASSWORD_NOT_VALID);
         }

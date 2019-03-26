@@ -1,4 +1,7 @@
-package com.project.newsfeed.entity.user;
+package com.project.newsfeed.entity.profile;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -8,6 +11,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name= "profile")
 public class Profile {
 
@@ -41,19 +45,22 @@ public class Profile {
     private String bio;
 
     // from child to parent
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+//    @OneToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "user_id", nullable = false)
+//    private User user;
 
     public Profile(){}
 
-    public Profile(@NotNull @Size(max = 100) String firstName, @NotNull @Size(max = 100) String lastName, @NotNull @Email @Size(max = 100) String email, Byte[] profilePicture, String bio, User user) {
+    public Profile(@NotNull @Size(max = 100) String firstName,
+                   @NotNull @Size(max = 100) String lastName,
+                   @NotNull @Email @Size(max = 100) String email,
+                   Byte[] profilePicture,
+                   String bio) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.profilePicture = profilePicture;
         this.bio = bio;
-        this.user = user;
     }
 
     public Integer getId() {
@@ -104,13 +111,6 @@ public class Profile {
         this.bio = bio;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -122,13 +122,12 @@ public class Profile {
                 Objects.equals(lastName, profile.lastName) &&
                 Objects.equals(email, profile.email) &&
                 Arrays.equals(profilePicture, profile.profilePicture) &&
-                Objects.equals(bio, profile.bio) &&
-                Objects.equals(user, profile.user);
+                Objects.equals(bio, profile.bio);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, firstName, lastName, email, bio, user);
+        int result = Objects.hash(id, firstName, lastName, email, bio);
         result = 31 * result + Arrays.hashCode(profilePicture);
         return result;
     }
@@ -142,7 +141,6 @@ public class Profile {
                 ", email='" + email + '\'' +
                 ", profilePicture=" + Arrays.toString(profilePicture) +
                 ", bio='" + bio + '\'' +
-                ", user=" + user +
                 '}';
     }
 }

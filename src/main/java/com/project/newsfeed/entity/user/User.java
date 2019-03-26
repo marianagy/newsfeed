@@ -1,11 +1,15 @@
 package com.project.newsfeed.entity.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.project.newsfeed.entity.profile.Profile;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "user")
 public class User {
 
@@ -34,16 +38,21 @@ public class User {
     private Boolean flag;
 
     // from parent (user) to child (profile)
-    @OneToOne(fetch = FetchType.LAZY,
-            cascade =  CascadeType.ALL,
-            mappedBy = "user")
+//    @OneToOne(fetch = FetchType.LAZY,
+//            cascade =  CascadeType.ALL,
+//            mappedBy = "user")
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "profile_id", nullable = false)
     private Profile profile;
 
     // Todo: sa ii pun si lista de notificari la user
 
     public User(){}
 
-    public User(@NotNull @Size(max = 100) String username, @NotNull @Size(max = 100) String password, Role role, boolean flag, Profile profile) {
+    public User(@NotNull @Size(max = 100) String username,
+                @NotNull @Size(max = 100) String password,
+                Role role, boolean flag,
+                Profile profile) {
         this.username = username;
         this.password = password;
         this.role = role;

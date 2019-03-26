@@ -9,15 +9,15 @@ import java.util.Optional;
 
 public interface UserService {
 
-    public List<UserDTO> findAll();
+    List<UserDTO> findAll();
 
-    public User findById(int id) throws BusinessException;
+    User findById(int id) throws BusinessException;
 
-    public void save(User user);
+    void save(User user);
 
-    public void deleteById(int id);
+    void deleteById(int id);
 
-    public Optional<User> getUserByUsername(String username);
+    Optional<User> getUserByUsername(String username);
 
 
 

@@ -1,7 +1,7 @@
 package com.project.newsfeed.rest.user;
 
 
-import com.project.newsfeed.entity.user.Profile;
+import com.project.newsfeed.entity.profile.Profile;
 import com.project.newsfeed.exception.BusinessException;
 import com.project.newsfeed.exception.ExceptionCode;
 import com.project.newsfeed.service.user.UserServiceImpl;

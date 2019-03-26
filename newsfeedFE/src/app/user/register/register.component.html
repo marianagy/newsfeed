@@ -96,7 +96,7 @@
         required
         type="password">
       <!--<mat-icon matSuffix color="primary">security</mat-icon>-->
-      <mat-error *ngIf="!areCorrectPasswords()">{{getPasswordErrorMessage()}}</mat-error>
+      <mat-error *ngIf="!areCorrectPasswords()">{{getPasswordsNotEqualErrorMessage()}}</mat-error>
 
     </mat-form-field>
 

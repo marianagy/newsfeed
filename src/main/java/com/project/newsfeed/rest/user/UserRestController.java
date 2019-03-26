@@ -82,7 +82,7 @@ public class UserRestController{
 
         userService.deleteById(userId);
 
-        return "Deleted employee id - " + userId;
+        return "Deleted user id - " + userId;
     }
 
     @GetMapping("/get-user-by-username/{username}")

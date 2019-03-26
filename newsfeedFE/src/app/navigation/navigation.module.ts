@@ -6,10 +6,12 @@ import {LoginComponent} from "../user/login/login.component";
 import {MatBadgeModule, MatButtonModule, MatIconModule, MatMenuModule, MatToolbarModule} from "@angular/material";
 import {UserModule} from "../user/user.module";
 import {RegisterComponent} from "../user/register/register.component";
+import {ProfileComponent} from "../user/profile/profile.component";
 
 const loginRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'profile', component: ProfileComponent}
 ];
 
 @NgModule({

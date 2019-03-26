@@ -3,8 +3,6 @@ package com.project.newsfeed.entity.user;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -22,10 +20,10 @@ public class Role {
     private String name;
 
     // from parent to child
-    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            mappedBy = "role")
-    private List<User> userList = new ArrayList<>();
+//    @OneToMany(cascade = CascadeType.ALL,
+//            fetch = FetchType.LAZY,
+//            mappedBy = "role")
+//    private List<User> userList = new ArrayList<>();
 
     public Role(){}
 
@@ -49,13 +47,13 @@ public class Role {
         this.name = name;
     }
 
-    public List<User> getUserList() {
-        return userList;
-    }
+//    public List<User> getUserList() {
+//        return userList;
+//    }
 
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
-    }
+//    public void setUserList(List<User> userList) {
+//        this.userList = userList;
+//    }
 
     @Override
     public boolean equals(Object o) {

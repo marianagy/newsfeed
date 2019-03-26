@@ -22,9 +22,10 @@ import {RouterModule} from "@angular/router";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {RegisterComponent} from './register/register.component';
 import {BrowserModule} from "@angular/platform-browser";
+import {ProfileComponent} from './profile/profile.component';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
+  declarations: [LoginComponent, RegisterComponent, ProfileComponent],
   imports: [
     BrowserAnimationsModule,
     CommonModule,

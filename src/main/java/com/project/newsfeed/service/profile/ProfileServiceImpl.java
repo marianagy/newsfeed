@@ -1,7 +1,9 @@
-package com.project.newsfeed.service.user;
+package com.project.newsfeed.service.profile;
 
-import com.project.newsfeed.dao.user.ProfileDAO;
-import com.project.newsfeed.entity.user.Profile;
+import com.project.newsfeed.dao.profile.ProfileDAO;
+import com.project.newsfeed.dao.user.UserDAO;
+import com.project.newsfeed.entity.profile.Profile;
+import com.project.newsfeed.entity.user.User;
 import com.project.newsfeed.exception.BusinessException;
 import com.project.newsfeed.exception.ExceptionCode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,12 @@ import java.util.Optional;
 public class ProfileServiceImpl implements ProfileService {
 
     private ProfileDAO profileDAO;
+    private UserDAO userDAO;
 
     @Autowired
-    public ProfileServiceImpl(ProfileDAO profileDAO) {
+    public ProfileServiceImpl(ProfileDAO profileDAO, UserDAO userDAO) {
         this.profileDAO = profileDAO;
+        this.userDAO = userDAO;
     }
 
     @Override
@@ -47,7 +51,14 @@ public class ProfileServiceImpl implements ProfileService {
         profileDAO.deleteById(id);
     }
 
-    public Profile findByEmail(String email) {
-        return profileDAO.findbyEmail(email);
+    /**
+     * Method gets profiles of a certain user
+     *
+     * @param username
+     * @return
+     */
+    public Profile getProfileByUser(String username) {
+        User user = userDAO.findByUsername(username);
+        return user.getProfile();
     }
 }
