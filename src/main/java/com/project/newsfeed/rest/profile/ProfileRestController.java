@@ -36,7 +36,7 @@ public class ProfileRestController {
         return profile;
     }
 
-    @PostMapping("/profiles")
+    @PostMapping("/save-profile")
     public Profile addProfile(@RequestBody Profile profile) {
 
 
@@ -44,7 +44,10 @@ public class ProfileRestController {
         return profile;
     }
 
-    @PutMapping("/profiles")
+    //    @PutMapping("/update-profile")
+    @RequestMapping(value = "/update-profile",
+            method = RequestMethod.PUT
+    )
     public Profile updateProfile(@RequestBody Profile profile) {
 
 

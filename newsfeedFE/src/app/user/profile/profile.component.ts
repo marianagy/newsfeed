@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ProfileData, ProfileService} from "../profile.service";
+import {MatDialog} from "@angular/material";
+import {EditProfileComponent} from "../edit-profile/edit-profile.component";
 
 
 @Component({
@@ -9,9 +11,10 @@ import {ProfileData, ProfileService} from "../profile.service";
 })
 export class ProfileComponent implements OnInit {
 
+
   profileLoginData: ProfileData;
 
-  constructor(private profileService: ProfileService) {
+  constructor(private profileService: ProfileService, public dialog: MatDialog,) {
     this.profileLoginData = {
       firstName: "",
       lastName: "",
@@ -20,6 +23,7 @@ export class ProfileComponent implements OnInit {
       bio: ""
     };
   }
+
 
   loadProfileData() {
     this.profileService.getProfileByUsername(localStorage.getItem("username"))
@@ -38,12 +42,20 @@ export class ProfileComponent implements OnInit {
       )
   }
 
+
   ngOnInit() {
     this.loadProfileData();
   }
 
-  editProfileDialog(): void {
-  };
+  editUserInfoDialog(): void {
+    const dialogRef = this.dialog.open(EditProfileComponent, {
+      width: '350px',
+      data: {}
+    });
+  }
+
+  addUserBioDialog(): void {
+  }
 
 
 }

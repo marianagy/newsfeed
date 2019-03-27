@@ -23,9 +23,10 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {RegisterComponent} from './register/register.component';
 import {BrowserModule} from "@angular/platform-browser";
 import {ProfileComponent} from './profile/profile.component';
+import {EditProfileComponent} from './edit-profile/edit-profile.component';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, ProfileComponent],
+  declarations: [LoginComponent, RegisterComponent, ProfileComponent, EditProfileComponent],
   imports: [
     BrowserAnimationsModule,
     CommonModule,
@@ -48,7 +49,10 @@ import {ProfileComponent} from './profile/profile.component';
     ReactiveFormsModule,
     BrowserModule
   ],
-  exports: [LoginComponent, RouterModule]
+  exports: [LoginComponent, RouterModule],
+  entryComponents: [EditProfileComponent]
+
 })
+
 export class UserModule {
 }

@@ -20,6 +20,7 @@ export class ProfileService {
   constructor(private http: HttpClient) {
   }
 
+  // method used foe request -> called in profile component
   getProfileByUsername(username) {
     return this.http.get(this.baseURL + '/current-profile/' + username);
   }
