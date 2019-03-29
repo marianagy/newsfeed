@@ -27,7 +27,7 @@
 		<!-- Add dependency for Spring Data REST -->
 		<!--<dependency>-->
 			<!--<groupId>org.springframework.boot</groupId>-->
-			<!--<artifactId>spring-boot-starter-data-rest</artifactId>-->
+        <!--<artifactId>spring-boot-starter-profileData-rest</artifactId>-->
 		<!--</dependency>-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

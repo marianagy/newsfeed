@@ -1,3 +1,19 @@
-<p>
-  edit-profile works!
-</p>
+<h1 mat-dialog-title>Edit profile info</h1>
+<div mat-dialog-content style="overflow: inherit">
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.firstName" placeholder="First Name">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.lastName" placeholder="Last Name">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.email" placeholder="Email">
+  </mat-form-field>
+
+  <div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Submit</button>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+  </div>
+
+
+</div>

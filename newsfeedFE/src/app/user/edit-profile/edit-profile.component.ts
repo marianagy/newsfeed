@@ -1,9 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {ProfileComponent} from "../profile/profile.component";
-import {ProfileService} from "../profile.service";
+import {ProfileData, ProfileService} from "../profile.service";
 
 export interface ProfileDialogData {
+  id: any;
   firstName: string;
   lastName: string;
   photo: any;
@@ -18,12 +19,22 @@ export interface ProfileDialogData {
 })
 export class EditProfileComponent implements OnInit {
 
+  private profileData: ProfileData;
+
   constructor(public dialogRef: MatDialogRef<ProfileComponent>,
+
               private profileService: ProfileService,
               @Inject(MAT_DIALOG_DATA) public data: ProfileDialogData) {
   }
 
-  ngOnInit() {
+  onNoClick(): void {
+    this.dialogRef.close();
   }
+
+  ngOnInit() {
+
+  }
+
+
 
 }

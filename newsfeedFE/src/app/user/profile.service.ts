@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 
 export interface ProfileData {
+  id: any;
   firstName: string;
   lastName: string;
   email: string;
@@ -24,6 +25,17 @@ export class ProfileService {
   getProfileByUsername(username) {
     return this.http.get(this.baseURL + '/current-profile/' + username);
   }
+
+  updateProfileInfo(profile) {
+    return this.http.put(this.baseURL + '/update-profile',
+      profile,
+      {
+        headers: new HttpHeaders(
+          {'Content-Type': 'application/json'}
+        )
+      });
+  }
+
 
 }
 
