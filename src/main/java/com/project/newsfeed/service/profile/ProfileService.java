@@ -10,7 +10,7 @@ public interface ProfileService {
 
     Profile findById(int id) throws BusinessException;
 
-    void save(Profile profile);
+    void save(Profile profile) throws BusinessException;
 
     void deleteById(int id);
 

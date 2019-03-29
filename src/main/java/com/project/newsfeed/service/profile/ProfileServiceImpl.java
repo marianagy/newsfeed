@@ -42,8 +42,21 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public void save(Profile profile) {
+    public void save(Profile profile) throws BusinessException {
+        validateProfileInput(profile);
         profileDAO.save(profile);
+    }
+
+    private void validateProfileInput(Profile profile) throws BusinessException {
+        if (profile.getFirstName() == null || profile.getFirstName().trim().equals("")) {
+            throw new BusinessException(ExceptionCode.FIELD_VALUE_IS_NULL);
+        }
+        if (profile.getLastName() == null || profile.getLastName().trim().equals("")) {
+            throw new BusinessException(ExceptionCode.FIELD_VALUE_IS_NULL);
+        }
+        if (profile.getEmail() == null || profile.getEmail().trim().equals("")) {
+            throw new BusinessException(ExceptionCode.FIELD_VALUE_IS_NULL);
+        }
     }
 
     @Override

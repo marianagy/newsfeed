@@ -40,7 +40,11 @@ public class ProfileRestController {
     public Profile addProfile(@RequestBody Profile profile) {
 
 
-        profileService.save(profile);
+        try {
+            profileService.save(profile);
+        } catch (BusinessException e) {
+            e.printStackTrace();
+        }
         return profile;
     }
 
@@ -51,7 +55,12 @@ public class ProfileRestController {
     public Profile updateProfile(@RequestBody Profile profile) {
 
 
-        profileService.save(profile);
+        try {
+            profileService.save(profile);
+        } catch (BusinessException e) {
+            //todo : fa-l bine
+            e.printStackTrace();
+        }
 
         return profile;
     }

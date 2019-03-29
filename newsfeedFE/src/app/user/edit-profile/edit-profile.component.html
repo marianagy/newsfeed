@@ -1,19 +1,55 @@
-<h1 mat-dialog-title>Edit profile info</h1>
-<div mat-dialog-content style="overflow: inherit">
+<div class="pop-up" mat-dialog-content style="overflow: inherit">
+  <form
+    #editProfileControl="ngForm"
+    #formElement
+    (ngSubmit)="submitForm()"
+  >
+    <h1 mat-dialog-title>Edit profile info</h1>
   <mat-form-field>
-    <input matInput [(ngModel)]="data.firstName" placeholder="First Name">
+    <input
+      #firstNameControl="ngModel"
+      #firstNameElement
+      [(ngModel)]="data.firstName"
+      matInput
+      name="firstName"
+      placeholder="First Name"
+      required
+    >
   </mat-form-field>
   <mat-form-field>
-    <input matInput [(ngModel)]="data.lastName" placeholder="Last Name">
+    <input
+      #lastNameControl="ngModel"
+      #lastNameElement
+      [(ngModel)]="data.lastName"
+      matInput
+      name="lastName"
+      placeholder="Last Name"
+      required
+    >
+
   </mat-form-field>
   <mat-form-field>
-    <input matInput [(ngModel)]="data.email" placeholder="Email">
+    <input
+
+      #emailElement
+      [(ngModel)]="data.email"
+      [errorStateMatcher]="matcher"
+      [formControl]="emailFormControl"
+      matInput
+      name="email"
+
+      placeholder="Email"
+    >
+    <mat-error *ngIf="emailFormControl.invalid">Error email</mat-error>
+
   </mat-form-field>
 
   <div mat-dialog-actions>
-    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Submit</button>
-    <button mat-button (click)="onNoClick()">Cancel</button>
-  </div>
+    <button mat-button type="submit">Submit</button>
 
+  </div>
+  </form>
+
+  <button (click)="dialogRef.close()" class="cancel-button" color="warn" mat-mini-fab>X</button>
 
 </div>

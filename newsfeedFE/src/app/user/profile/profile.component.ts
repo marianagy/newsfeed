@@ -53,20 +53,24 @@ export class ProfileComponent implements OnInit {
   editUserInfoDialog(): void {
     const dialogRef = this.dialog.open(EditProfileComponent, {
       width: '350px',
-      data: this.profileData
+      data: {
+        "id": this.profileData.id,
+        "firstName": this.profileData.firstName,
+        "lastName": this.profileData.lastName,
+        "email": this.profileData.email,
+        "bio": this.profileData.bio,
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      console.log(result);
       this.new_profile = result;
-      this.new_profile.id = this.profileData.id;
-      this.new_profile.firstName = this.profileData.firstName;
-      this.new_profile.lastName = this.profileData.lastName;
-      this.new_profile.email = this.profileData.email;
-      this.new_profile.bio = this.profileData.bio;
+      this.profileData.firstName = this.new_profile.firstName;
+      this.profileData.lastName = this.new_profile.lastName;
+      this.profileData.email = this.new_profile.email;
 
       // @ts-ignore
-      this.profileService.updateProfileInfo(this.new_profile).subscribe(res => this.profile = res);
 
     });
   }
