@@ -59,7 +59,7 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
-  onNoClick(): void {
+  onClick(): void {
     this.dialogRef.close(this.data);
   }
 

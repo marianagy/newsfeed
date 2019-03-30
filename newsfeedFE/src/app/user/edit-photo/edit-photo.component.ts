@@ -27,7 +27,7 @@ export class EditPhotoComponent implements OnInit {
   ngOnInit() {
   }
 
-  onNoClick(): void {
+  onClick(): void {
     this.dialogRef.close(this.data);
   }
 
