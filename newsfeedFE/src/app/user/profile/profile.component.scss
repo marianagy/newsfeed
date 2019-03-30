@@ -3,12 +3,13 @@
   margin: 50px auto;
 
   .example-header-image {
-
+    position: relative;
     background-size: cover;
     margin: 10px 20px;
 
     .edit-photo {
-      size: 10px;
+      right: 0;
+      position: absolute;;
     }
   }
 
