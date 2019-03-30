@@ -25,9 +25,10 @@ import {BrowserModule} from "@angular/platform-browser";
 import {ProfileComponent} from './profile/profile.component';
 import {EditProfileComponent} from './edit-profile/edit-profile.component';
 import {EditBioComponent} from './edit-bio/edit-bio.component';
+import {EditPhotoComponent} from './edit-photo/edit-photo.component';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, ProfileComponent, EditProfileComponent, EditBioComponent],
+  declarations: [LoginComponent, RegisterComponent, ProfileComponent, EditProfileComponent, EditBioComponent, EditPhotoComponent],
   imports: [
     BrowserAnimationsModule,
     CommonModule,
@@ -51,7 +52,7 @@ import {EditBioComponent} from './edit-bio/edit-bio.component';
     BrowserModule
   ],
   exports: [LoginComponent, RouterModule],
-  entryComponents: [EditProfileComponent, EditBioComponent]
+  entryComponents: [EditProfileComponent, EditBioComponent, EditPhotoComponent]
 
 })
 

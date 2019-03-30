@@ -1,0 +1,23 @@
+.example-card {
+  max-width: 800px;
+  margin: 50px auto;
+
+  .example-header-image {
+
+    background-size: cover;
+    margin: 10px 20px;
+
+    .edit-photo {
+      size: 10px;
+    }
+  }
+
+  .mat-card-avatar {
+    width: 200px;
+    height: 200px;
+  }
+
+
+}
+
+

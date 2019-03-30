@@ -3,6 +3,7 @@ import {ProfileData, ProfileService} from "../profile.service";
 import {MatDialog} from "@angular/material";
 import {EditProfileComponent, ProfileDialogData} from "../edit-profile/edit-profile.component";
 import {EditBioComponent} from "../edit-bio/edit-bio.component";
+import {EditPhotoComponent} from "../edit-photo/edit-photo.component";
 
 
 @Component({
@@ -44,6 +45,7 @@ export class ProfileComponent implements OnInit {
           this.profileData.lastName = data["lastName"];
           this.profileData.email = data["email"];
           this.profileData.bio = data["bio"];
+          this.profileData.photo = data["photo"];
         }, error => {
           console.log("Error happened.");
           console.log(error);
@@ -60,6 +62,7 @@ export class ProfileComponent implements OnInit {
         "lastName": this.profileData.lastName,
         "email": this.profileData.email,
         "bio": this.profileData.bio,
+        "photo": this.profileData.photo,
       }
     });
 
@@ -87,6 +90,7 @@ export class ProfileComponent implements OnInit {
         "lastName": this.profileData.lastName,
         "email": this.profileData.email,
         "bio": this.profileData.bio,
+        "photo": this.profileData.photo,
       }
     });
 
@@ -99,6 +103,33 @@ export class ProfileComponent implements OnInit {
 
       // @ts-ignore
 
+    });
+  }
+
+  editPhotoDialog() {
+    const dialogRef = this.dialog.open(EditPhotoComponent, {
+      width: '350px',
+      data: {
+        "id": this.profileData.id,
+        "firstName": this.profileData.firstName,
+        "lastName": this.profileData.lastName,
+        "email": this.profileData.email,
+        "bio": this.profileData.bio,
+        "photo": this.profileData.photo,
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      this.new_profile = result;
+      if (this.new_profile.photo != undefined) {
+        this.profileData.photo = this.new_profile.photo;
+      }
+
+
+      // @ts-ignore
+      this.profileService.updateProfileInfo(this.new_profile).subscribe(res => this.profile = res);
     });
   }
 

@@ -4,7 +4,14 @@
     <!-- TODO: upload profile picture -->
     <div mat-card-avatar class="example-header-image">
 
+      <img mat-card-avatar
+           src={{profileData.photo}}>
+      <button (click)="editPhotoDialog()" class="edit-photo" color="primary" mat-mini-fab>
+        <i class="material-icons">edit</i>
+      </button>
+
     </div>
+
 
     <mat-card-title>{{profileData.firstName}}</mat-card-title>
     <mat-card-title>{{profileData.lastName}}</mat-card-title>

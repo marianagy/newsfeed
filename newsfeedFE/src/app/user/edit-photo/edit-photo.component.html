@@ -1,0 +1,25 @@
+<div class="pop-up" mat-dialog-content style="overflow: inherit">
+  <!--<form-->
+  <!--#editPhotoControl="ngForm"-->
+  <!--#photoElement-->
+  <!--(ngSubmit)="submitForm()"-->
+  <!--&gt;-->
+  <h1 mat-dialog-title>Edit photo</h1>
+  <button (click)="imgFileInput.click()" mat-button md-button type="button">Add Photo
+  </button>
+
+  <input #imgFileInput (change)="previewImage($event)" hidden type="file"/>
+  <div id="chosen_image" style="float:right" width="100px">
+
+  </div>
+
+
+  <div mat-dialog-actions>
+    <button [mat-dialog-close]="data" mat-button>Submit</button>
+
+  </div>
+  <!--</form>-->
+
+  <button (click)=onNoClick() class="cancel-button" class="cancel-button" color="warn" mat-mini-fab>X</button>
+
+</div>
