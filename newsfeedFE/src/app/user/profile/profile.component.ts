@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ProfileData, ProfileService} from "../profile.service";
 import {MatDialog} from "@angular/material";
 import {EditProfileComponent, ProfileDialogData} from "../edit-profile/edit-profile.component";
+import {EditBioComponent} from "../edit-bio/edit-bio.component";
 
 
 @Component({
@@ -76,7 +77,29 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  addUserBioDialog(): void {
+  editUserBioDialog(): void {
+    const dialogRef = this.dialog.open(EditBioComponent, {
+      width: '350px',
+      // autocompleteaza form-ul (si data), cu datele pe care le am din baza de date
+      data: {
+        "id": this.profileData.id,
+        "firstName": this.profileData.firstName,
+        "lastName": this.profileData.lastName,
+        "email": this.profileData.email,
+        "bio": this.profileData.bio,
+      }
+    });
+
+    // result va contine this.data
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      this.new_profile = result;
+      this.profileData.bio = this.new_profile.bio;
+
+      // @ts-ignore
+
+    });
   }
 
 

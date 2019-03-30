@@ -1,0 +1,29 @@
+<div class="pop-up" mat-dialog-content style="overflow: inherit">
+  <form
+    #editBioControl="ngForm"
+    #formElement
+    (ngSubmit)="submitForm()"
+  >
+    <h1 mat-dialog-title>Edit bio</h1>
+    <mat-form-field>
+      <input
+        #bioControl="ngModel"
+        #bioElement
+        [(ngModel)]="data.bio"
+        matInput
+        name="bio"
+        placeholder="Bio"
+        required
+      >
+    </mat-form-field>
+
+
+    <div mat-dialog-actions>
+      <button mat-button type="submit">Submit</button>
+
+    </div>
+  </form>
+
+  <button (click)="dialogRef.close(this.data)" class="cancel-button" color="warn" mat-mini-fab>X</button>
+
+</div>
