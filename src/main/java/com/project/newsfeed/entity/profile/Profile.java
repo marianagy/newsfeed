@@ -39,7 +39,7 @@ public class Profile {
 
     @Column(name= "profile_picture")
     @Lob
-    private Byte[] profilePicture;
+    private byte[] profilePicture;
 
     @Column(name = "bio")
     private String bio;
@@ -54,7 +54,7 @@ public class Profile {
     public Profile(@NotNull @Size(max = 100) String firstName,
                    @NotNull @Size(max = 100) String lastName,
                    @NotNull @Email @Size(max = 100) String email,
-                   Byte[] profilePicture,
+                   byte[] profilePicture,
                    String bio) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -95,11 +95,11 @@ public class Profile {
         this.email = email;
     }
 
-    public Byte[] getProfilePicture() {
+    public byte[] getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(Byte[] profilePicture) {
+    public void setProfilePicture(byte[] profilePicture) {
         this.profilePicture = profilePicture;
     }
 

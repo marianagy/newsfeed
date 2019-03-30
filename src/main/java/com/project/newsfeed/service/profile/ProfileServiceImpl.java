@@ -6,11 +6,14 @@ import com.project.newsfeed.entity.profile.Profile;
 import com.project.newsfeed.entity.user.User;
 import com.project.newsfeed.exception.BusinessException;
 import com.project.newsfeed.exception.ExceptionCode;
+import com.project.newsfeed.service.profile.dto.ProfileDTO;
+import com.project.newsfeed.service.profile.dto.ProfileDTOHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProfileServiceImpl implements ProfileService {
@@ -25,17 +28,19 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public List<Profile> findAll() {
+    public List<ProfileDTO> findAll() {
 
-        return profileDAO.findAll();
+        return profileDAO.findAll().stream()
+                .map(ProfileDTOHelper::fromEntity)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Profile findById(int id) throws BusinessException {
+    public ProfileDTO findById(int id) throws BusinessException {
         Optional<Profile> result = profileDAO.findById(id);
         if (result.isPresent()) {
 
-            return result.get();
+            return ProfileDTOHelper.fromEntity(result.get());
         } else {
             throw new BusinessException(ExceptionCode.PROFILE_DOES_NOT_EXIST);
         }
@@ -70,8 +75,8 @@ public class ProfileServiceImpl implements ProfileService {
      * @param username
      * @return
      */
-    public Profile getProfileByUser(String username) {
+    public ProfileDTO getProfileByUser(String username) {
         User user = userDAO.findByUsername(username);
-        return user.getProfile();
+        return ProfileDTOHelper.fromEntity(user.getProfile());
     }
 }

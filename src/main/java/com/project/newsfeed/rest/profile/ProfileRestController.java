@@ -1,9 +1,11 @@
 package com.project.newsfeed.rest.profile;
 
-import com.project.newsfeed.entity.profile.Profile;
 import com.project.newsfeed.exception.BusinessException;
 import com.project.newsfeed.service.profile.ProfileService;
+import com.project.newsfeed.service.profile.dto.ProfileDTO;
+import com.project.newsfeed.service.profile.dto.ProfileDTOHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,57 +24,67 @@ public class ProfileRestController {
 
     // expose "/profiles" and return list of profiles
 
-    @GetMapping("/profiles")
-    public List<Profile> findAll() {
-        return profileService.findAll();
+    @RequestMapping(value = "/profiles",
+            method = RequestMethod.GET
+    )
+    @ResponseBody
+    public ResponseEntity<List<ProfileDTO>> findAll() {
+        return ResponseEntity.accepted().body(profileService.findAll());
     }
 
-    @GetMapping("/profiles/{id}")
-    public Profile getProfileById(@PathVariable int profileId) throws BusinessException {
-        Profile profile = profileService.findById(profileId);
-        if (profile == null) {
-            throw new RuntimeException("Profile id not found - " + profile);
+    @RequestMapping(value = "/profiles/{id}",
+            method = RequestMethod.GET
+    )
+    @ResponseBody
+    public ResponseEntity<ProfileDTO> getProfileById(@PathVariable int profileId) throws BusinessException {
+        ProfileDTO profileDTO = profileService.findById(profileId);
+        if (profileDTO == null) {
+            throw new RuntimeException("Profile id not found - " + profileDTO);
         }
-        return profile;
+        return ResponseEntity.accepted().body(profileDTO);
     }
 
-    @PostMapping("/save-profile")
-    public Profile addProfile(@RequestBody Profile profile) {
+    @RequestMapping(value = "/save-profile",
+            method = RequestMethod.POST
+    )
+    @ResponseBody
+    public ResponseEntity<ProfileDTO> addProfile(@RequestBody ProfileDTO profileDTO) {
 
 
         try {
-            profileService.save(profile);
+            profileService.save(ProfileDTOHelper.toEntity(profileDTO));
         } catch (BusinessException e) {
             e.printStackTrace();
         }
-        return profile;
+        return ResponseEntity.accepted().body(profileDTO);
     }
 
     //    @PutMapping("/update-profile")
     @RequestMapping(value = "/update-profile",
             method = RequestMethod.PUT
     )
-    public Profile updateProfile(@RequestBody Profile profile) {
+    @ResponseBody
+    public ResponseEntity<ProfileDTO> updateProfile(@RequestBody ProfileDTO profileDTO) {
 
 
         try {
-            profileService.save(profile);
+            profileService.save(ProfileDTOHelper.toEntity(profileDTO));
         } catch (BusinessException e) {
             //todo : fa-l bine
             e.printStackTrace();
         }
 
-        return profile;
+        return ResponseEntity.accepted().body(profileDTO);
     }
 
     @DeleteMapping("/profile/{profileId}")
     public String deleteProfile(@PathVariable int profileId) throws BusinessException {
 
-        Profile tempProfile = profileService.findById(profileId);
+        ProfileDTO tempProfileDTO = profileService.findById(profileId);
 
         // throw exception if null
 
-        if (tempProfile == null) {
+        if (tempProfileDTO == null) {
             throw new RuntimeException("Profile id not found - " + profileId);
         }
 
@@ -86,8 +98,8 @@ public class ProfileRestController {
             method = RequestMethod.GET
     )
     @ResponseBody
-    public Profile getProfileByUser(@PathVariable("username") String username) {
-        return profileService.getProfileByUser(username);
+    public ResponseEntity<ProfileDTO> getProfileByUser(@PathVariable("username") String username) {
+        return ResponseEntity.accepted().body(profileService.getProfileByUser(username));
     }
 
 }
