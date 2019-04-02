@@ -40,7 +40,7 @@ public class AuthenticationRestController {
             String password = paramMap.getFirst("password");
             userDTO = userService.loginUser(username, password);
 
-            return ResponseEntity.accepted().body(userDTO);
+            return ResponseEntity.ok().body(userDTO);
         } catch (BusinessException e) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, e.getExceptionCode().getMessage(), e);

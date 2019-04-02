@@ -42,7 +42,7 @@ public class RegistrationRestController {
             }
 
             userService.registerUser(firstname, lastName, email, username, password);
-            return ResponseEntity.accepted().body(profile);
+            return ResponseEntity.ok().body(profile);
         } catch (BusinessException e) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, e.getExceptionCode().getMessage(), e);

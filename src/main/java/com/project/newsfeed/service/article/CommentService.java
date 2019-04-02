@@ -11,7 +11,7 @@ public interface CommentService {
 
     CommentDTO findById(int id) throws BusinessException;
 
-    void save(CommentDTO profile) throws BusinessException;
+    void save(CommentDTO commentDTO) throws BusinessException;
 
     void deleteById(int id);
 }

@@ -11,7 +11,7 @@ public interface ArticleService {
 
     ArticleDTO findById(int id) throws BusinessException;
 
-    void save(ArticleDTO profile) throws BusinessException;
+    void save(ArticleDTO articleDTO) throws BusinessException;
 
     void deleteById(int id);
 

@@ -10,7 +10,7 @@ public interface CategoryService {
 
     CategoryDTO findById(int id) throws BusinessException;
 
-    void save(CategoryDTO profile) throws BusinessException;
+    void save(CategoryDTO categoryDTO) throws BusinessException;
 
     void deleteById(int id);
 }

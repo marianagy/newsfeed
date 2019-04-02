@@ -11,7 +11,7 @@ public interface TagService {
 
     TagDTO findById(int id) throws BusinessException;
 
-    void save(TagDTO profile) throws BusinessException;
+    void save(TagDTO tagDTO) throws BusinessException;
 
     void deleteById(int id);
 }

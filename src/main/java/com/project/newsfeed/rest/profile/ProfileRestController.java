@@ -29,7 +29,7 @@ public class ProfileRestController {
     )
     @ResponseBody
     public ResponseEntity<List<ProfileDTO>> findAll() {
-        return ResponseEntity.accepted().body(profileService.findAll());
+        return ResponseEntity.ok().body(profileService.findAll());
     }
 
     @RequestMapping(value = "/profiles/{id}",
@@ -41,7 +41,7 @@ public class ProfileRestController {
         if (profileDTO == null) {
             throw new RuntimeException("Profile id not found - " + profileDTO);
         }
-        return ResponseEntity.accepted().body(profileDTO);
+        return ResponseEntity.ok().body(profileDTO);
     }
 
     @RequestMapping(value = "/save-profile",
@@ -56,7 +56,7 @@ public class ProfileRestController {
         } catch (BusinessException e) {
             e.printStackTrace();
         }
-        return ResponseEntity.accepted().body(profileDTO);
+        return ResponseEntity.ok().body(profileDTO);
     }
 
     //    @PutMapping("/update-profile")
@@ -74,16 +74,15 @@ public class ProfileRestController {
             e.printStackTrace();
         }
 
-        return ResponseEntity.accepted().body(profileDTO);
+        return ResponseEntity.ok().body(profileDTO);
     }
 
-    @DeleteMapping("/profile/{profileId}")
+    @DeleteMapping("/delete-profile/{profileId}")
     public String deleteProfile(@PathVariable int profileId) throws BusinessException {
 
         ProfileDTO tempProfileDTO = profileService.findById(profileId);
 
         // throw exception if null
-
         if (tempProfileDTO == null) {
             throw new RuntimeException("Profile id not found - " + profileId);
         }
