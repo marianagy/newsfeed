@@ -15,7 +15,6 @@ import java.util.Objects;
 @Table(name = "article")
 public class Article {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

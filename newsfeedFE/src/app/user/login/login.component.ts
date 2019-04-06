@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           this.error = false;
+          this.router.navigate([`/profile`]);
         },
         err => {
           this.error = true;
@@ -56,13 +57,13 @@ export class LoginComponent implements OnInit {
       );
   }
 
-  // isLoggedIn() {
-  //   return this.authenticationService.isLoggedIn();
-  // }
-  //
-  // logout() {
-  //   this.authenticationService.logout();
-  // }
+  isLoggedIn() {
+    return this.authenticationService.isLoggedIn();
+  }
+
+  logout() {
+    this.authenticationService.logout();
+  }
   ngOnInit() {
   }
 

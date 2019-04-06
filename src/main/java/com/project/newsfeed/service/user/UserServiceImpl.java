@@ -1,5 +1,8 @@
 package com.project.newsfeed.service.user;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
 import com.project.newsfeed.dao.profile.ProfileDAO;
 import com.project.newsfeed.dao.user.UserDAO;
 import com.project.newsfeed.entity.profile.Profile;
@@ -13,6 +16,11 @@ import com.project.newsfeed.utils.Encryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -187,7 +195,7 @@ public class UserServiceImpl implements UserService {
      * @return
      * @throws BusinessException
      */
-    public UserDTO loginUser(String username, String password) throws BusinessException {
+    public String loginUser(String username, String password) throws BusinessException {
         Optional<User> userOptional = getUserByUsername(username);
         if (!userOptional.isPresent()) {
             throw new BusinessException(ExceptionCode.USERNAME_NOT_FOUND);
@@ -201,7 +209,7 @@ public class UserServiceImpl implements UserService {
 
             throw new BusinessException(ExceptionCode.PASSWORD_NOT_VALID);
         }
-        return UserDTOHelper.fromEntity(userOptional.get());
+        return issueToken(userOptional.get());
     }
 
     private boolean validateFields(UserDTO userDTO) {
@@ -230,6 +238,31 @@ public class UserServiceImpl implements UserService {
             throw new BusinessException(ExceptionCode.USER_VALIDATION_EXCEPTION);
         }
 
+
+    }
+
+    private String issueToken(User user) {
+        LocalTime midnight = LocalTime.MIDNIGHT;
+        LocalDate today = LocalDate.now(ZoneId.of("Europe/Bucharest"));
+        LocalDateTime todayMidnight = LocalDateTime.of(today, midnight);
+        LocalDateTime tomorrowMidnight = todayMidnight.plusDays(1);
+        Date out = Date.from(tomorrowMidnight.atZone(ZoneId.systemDefault()).toInstant());
+
+
+        try {
+            Algorithm algorithm = Algorithm.HMAC256("secret");
+            return "{ \"token\" : \"" + JWT.create()
+                    .withIssuer(user.getUsername())
+                    .withExpiresAt(out)
+                    .withClaim("username", user.getUsername())
+                    .withClaim("role", user.getRole().getName())
+                    .sign(algorithm) + "\" }";
+
+        } catch (JWTCreationException exception) {
+            //Invalid Signing configuration / Couldn't convert Claims.
+            //log.catching(exception);
+            return "{token: ''}";
+        }
 
     }
 

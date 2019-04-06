@@ -4,6 +4,7 @@ import com.project.newsfeed.dao.user.UserDAO;
 import com.project.newsfeed.entity.user.User;
 import com.project.newsfeed.exception.BusinessException;
 import com.project.newsfeed.exception.ExceptionCode;
+import com.project.newsfeed.service.user.dto.UserDTOHelper;
 import com.project.newsfeed.utils.Encryptor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,9 +49,6 @@ public class UserServiceImplTest {
 
     @Test
     public void findById_ExpectedUserNotFound() {
-        User user = new User();
-        user.setId(1);
-        when(userDAO.findById(1)).thenReturn(Optional.of(user));
         try{userService.findById(2);
             fail("Should not reach this point");
         } catch (BusinessException e) {
@@ -92,9 +90,9 @@ public class UserServiceImplTest {
         ArrayList<User> users = new ArrayList<>();
         users.add(user);
         when(userDAO.findAll()).thenReturn(users);
-
         try {
-            assertEquals(user,userService.loginUser("usernamujhfgv","passwordjhf"));
+            assertEquals(UserDTOHelper.fromEntity(user), userService.loginUser("usernamujhfgv", "passwordjhf"));
+
         } catch (BusinessException e) {
             e.printStackTrace();
             fail("Should not reach this point");

@@ -27,6 +27,7 @@ import {EditProfileComponent} from './edit-profile/edit-profile.component';
 import {EditBioComponent} from './edit-bio/edit-bio.component';
 import {EditPhotoComponent} from './edit-photo/edit-photo.component';
 
+
 @NgModule({
   declarations: [LoginComponent, RegisterComponent, ProfileComponent, EditProfileComponent, EditBioComponent, EditPhotoComponent],
   imports: [
@@ -52,7 +53,8 @@ import {EditPhotoComponent} from './edit-photo/edit-photo.component';
     BrowserModule
   ],
   exports: [LoginComponent, RouterModule],
-  entryComponents: [EditProfileComponent, EditBioComponent, EditPhotoComponent]
+  entryComponents: [EditProfileComponent, EditBioComponent, EditPhotoComponent],
+
 
 })
 

@@ -1,8 +1,12 @@
 package com.project.newsfeed.rest.article;
 
+import com.auth0.jwt.JWT;
+import com.project.newsfeed.entity.user.User;
 import com.project.newsfeed.exception.BusinessException;
+import com.project.newsfeed.exception.ExceptionCode;
 import com.project.newsfeed.service.article.ArticleService;
 import com.project.newsfeed.service.article.dto.ArticleDTO;
+import com.project.newsfeed.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +19,12 @@ import java.util.List;
 public class ArticleRestController {
 
     private ArticleService articleService;
+    private UserService userService;
 
     @Autowired
-    public ArticleRestController(ArticleService articleService) {
+    public ArticleRestController(ArticleService articleService, UserService userService) {
         this.articleService = articleService;
+        this.userService = userService;
     }
 
     @RequestMapping(value = "/articles",
@@ -45,15 +51,31 @@ public class ArticleRestController {
             method = RequestMethod.POST
     )
     @ResponseBody
-    public ResponseEntity<ArticleDTO> addArticle(@RequestBody ArticleDTO articleDTO) {
-
+    public ResponseEntity<ArticleDTO> addArticle(@RequestBody ArticleDTO articleDTO,
+                                                 @RequestHeader("Authorization") String token) {
 
         try {
+            User requester = userService.getUserByUsername(getRequesterUsername(token))
+                    .orElseThrow(() -> new BusinessException(ExceptionCode.USERNAME_NOT_FOUND));
+            articleDTO.setUser(requester);
             articleService.save(articleDTO);
         } catch (BusinessException e) {
             e.printStackTrace();
         }
         return ResponseEntity.ok().body(articleDTO);
+    }
+
+    /**
+     * Method gets username of the requester from the request header
+     *
+     * @param token
+     * @return
+     */
+    private String getRequesterUsername(@RequestHeader("Authorization") String token) {
+
+        token = token.substring("Bearer".length()).trim();
+        String requesterUsername = JWT.decode(token).getClaim("username").asString();
+        return requesterUsername;
     }
 
     @RequestMapping(value = "/update-article",

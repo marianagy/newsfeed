@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Service
 public class CommentServiceImpl implements CommentService {
 
-    CommentDAO commentDAO;
+    private CommentDAO commentDAO;
 
     @Autowired
     public CommentServiceImpl(CommentDAO commentDAO) {
@@ -43,6 +43,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void save(CommentDTO commentDTO) throws BusinessException {
+
         commentDAO.save(CommentDTOHelper.toEntity(commentDTO));
     }
 

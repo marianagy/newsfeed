@@ -7,11 +7,13 @@ import {MatBadgeModule, MatButtonModule, MatIconModule, MatMenuModule, MatToolba
 import {UserModule} from "../user/user.module";
 import {RegisterComponent} from "../user/register/register.component";
 import {ProfileComponent} from "../user/profile/profile.component";
+import {LoginguardGuard} from "../user/loginguard.guard";
 
 const loginRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'profile', component: ProfileComponent}
+  {path: 'profile', component: ProfileComponent, canActivate: [LoginguardGuard]},
+  {path: '', pathMatch: 'full', redirectTo: '/login'}
 ];
 
 @NgModule({

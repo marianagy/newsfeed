@@ -6,6 +6,7 @@ import {AppComponent} from './app.component';
 import {NavigationModule} from "./navigation/navigation.module";
 import {MatButtonModule, MatCheckboxModule} from "@angular/material";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {LoginguardGuard} from "./user/loginguard.guard";
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [LoginguardGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

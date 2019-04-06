@@ -1,14 +1,16 @@
 <mat-toolbar class="menu" color="primary">
   <span style="margin-right: 20px">BeezKneez</span>
-  <button mat-button routerLink='/login' routerLinkActive="active">Login
+  <button *ngIf="!isLoggedIn()" mat-button routerLink='/login' routerLinkActive="active">Login
   </button>
   <button mat-button routerLink='/register' routerLinkActive="active">Sign Up
   </button>
-  <button mat-button routerLink='/profile' routerLinkActive="active">Profile
+  <button *ngIf="isLoggedIn()" mat-button routerLink='/profile'>
+    <i class="material-icons">account_circle</i>
   </button>
 
 
-  <button mat-button>Logout</button>
+  <button (click)="logout()" *ngIf="isLoggedIn()" mat-button>
+    <i class="material-icons">logout</i></button>
 
 
 </mat-toolbar>

@@ -1,5 +1,6 @@
 <mat-card class="login-component">
   <form
+    *ngIf="!isLoggedIn()"
     #formElement
     #loginForm="ngForm"
     (ngSubmit)="submitForm()"

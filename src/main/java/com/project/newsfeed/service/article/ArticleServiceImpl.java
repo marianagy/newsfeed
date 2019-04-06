@@ -1,7 +1,9 @@
 package com.project.newsfeed.service.article;
 
 import com.project.newsfeed.dao.article.ArticleDAO;
+import com.project.newsfeed.dao.article.TagDAO;
 import com.project.newsfeed.entity.article.Article;
+import com.project.newsfeed.entity.article.Tag;
 import com.project.newsfeed.exception.BusinessException;
 import com.project.newsfeed.exception.ExceptionCode;
 import com.project.newsfeed.service.article.dto.ArticleDTO;
@@ -17,10 +19,12 @@ import java.util.stream.Collectors;
 public class ArticleServiceImpl implements ArticleService {
 
     private ArticleDAO articleDAO;
+    private TagDAO tagDAO;
 
     @Autowired
-    public ArticleServiceImpl(ArticleDAO articleDAO) {
+    public ArticleServiceImpl(ArticleDAO articleDAO, TagDAO tagDAO) {
         this.articleDAO = articleDAO;
+        this.tagDAO = tagDAO;
     }
 
     @Override
@@ -43,7 +47,24 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public void save(ArticleDTO articleDTO) throws BusinessException {
-        articleDAO.save(ArticleDTOHelper.toEntity(articleDTO));
+
+        // testez daca tag-ul e deja in db, si sa il salvez daca nu e
+        List<Tag> tagList = articleDTO.getTagList();
+        List<Tag> dbTagList = tagDAO.findAll();
+        if (dbTagList.size() > 0) {
+            for (int i = 0; i <= tagList.size(); i++) {
+                for (int j = 0; j <= dbTagList.size(); j++) {
+                    if (!(tagList.get(i).getName().equals(dbTagList.get(j).getName()))) {
+                        tagDAO.save(tagList.get(i));
+                    }
+                }
+            }
+            articleDAO.save(ArticleDTOHelper.toEntity(articleDTO));
+        } else {
+            articleDAO.save(ArticleDTOHelper.toEntity(articleDTO));
+        }
+
+
     }
 
     @Override
