@@ -1,18 +1,20 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<mat-card class="article-card">
-  <h2>Articles</h2>
-  <ul class="articles">
-    <li>
+
+<h2>Articles</h2>
+<ul class="articles">
+  <li *ngFor="let article of articleList">
+    <mat-card class="article-card">
       <img mat-card-avatar
-           src={{articleData.photo}}>
+           src={{article.image}}>
 
-      <span class="badge">{{articleData.id}}</span>
-      <mat-card-title>{{articleData.title}}</mat-card-title>
-      <p>{{articleData.content}}</p>
-      <button (click)="addUpvote(articleData.id)" mat-button>Like</button>
+      <mat-card-title>{{article.title}}</mat-card-title>
+      <p>{{article.content}}</p>
+      <!--<button (click)="addUpvote(article.id)" mat-button>-->
+      <!--<i class="material-icons" *ngIf="!innerUpvoteCheck(article.id)">favorite_border</i>-->
+      <!--<i class="material-icons" *ngIf="innerUpvoteCheck(article.id)">favorite</i>-->
+      <!--</button>-->
 
+    </mat-card>
+  </li>
+</ul>
 
-    </li>
-  </ul>
-
-</mat-card>

@@ -31,6 +31,16 @@ export class ArticleService {
       });
   }
 
+  userHasUpvoted(articleId: any) {
+
+    return this.http.get(this.baseURL + '/user-upvoted/' + articleId);
+  }
+
+  getArticleById(id) {
+
+    return this.http.get(this.baseURL + '/articles/' + id);
+  }
+
 }
 
 

@@ -2,10 +2,14 @@ package com.project.newsfeed.service.upvote;
 
 import com.project.newsfeed.dao.upvote.UpvoteDAO;
 import com.project.newsfeed.entity.upvote.Upvote;
+import com.project.newsfeed.entity.user.User;
 import com.project.newsfeed.exception.BusinessException;
 import com.project.newsfeed.exception.ExceptionCode;
+import com.project.newsfeed.service.article.dto.ArticleDTO;
+import com.project.newsfeed.service.article.dto.ArticleDTOHelper;
 import com.project.newsfeed.service.upvote.dto.UpvoteDTO;
 import com.project.newsfeed.service.upvote.dto.UpvoteDTOHelper;
+import com.project.newsfeed.service.user.dto.UserDTOHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +49,9 @@ public class UpvoteServiceImpl implements UpvoteService {
     @Override
     public void save(UpvoteDTO upvoteDTO) throws BusinessException {
 
+        if (userHasUpvotedArticle(UserDTOHelper.toEntity(upvoteDTO.getUserDTO()), upvoteDTO.getArticleDTO())) {
+            throw new BusinessException(ExceptionCode.ALREADY_UPVOTED);
+        }
 
         upvoteDAO.save(UpvoteDTOHelper.toEntity(upvoteDTO));
     }
@@ -59,5 +66,9 @@ public class UpvoteServiceImpl implements UpvoteService {
         return upvoteDAO.getUpvoteNrForArticle(articleID);
     }
 
+    @Override
+    public Boolean userHasUpvotedArticle(User user, ArticleDTO article) {
+        return upvoteDAO.userHasUpvotedArticle(user, ArticleDTOHelper.toEntity(article)) > 0;
+    }
 
 }

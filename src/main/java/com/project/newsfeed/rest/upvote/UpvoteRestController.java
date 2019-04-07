@@ -55,8 +55,8 @@ public class UpvoteRestController {
             method = RequestMethod.POST
     )
     @ResponseBody
-    public ResponseEntity<UpvoteDTO> addUpvote(@RequestParam("article_id") String articleID,
-                                               @RequestHeader("Authorization") String token) {
+    public ResponseEntity addUpvote(@RequestParam("article_id") String articleID,
+                                    @RequestHeader("Authorization") String token) {
         UpvoteDTO upvoteDTO = new UpvoteDTO();
 
         try {
@@ -67,7 +67,7 @@ public class UpvoteRestController {
             upvoteDTO.setUserDTO(UserDTOHelper.fromEntity(requester));
             upvoteService.save(upvoteDTO);
         } catch (BusinessException e) {
-            e.printStackTrace();
+            return ResponseEntity.ok().body(e.getMessage());
         }
         return ResponseEntity.ok().body(upvoteDTO);
     }
@@ -81,4 +81,23 @@ public class UpvoteRestController {
 
         return ResponseEntity.ok().body(nuOfUpvotes);
     }
+
+    @RequestMapping(value = "/user-upvoted/{articleID}",
+            method = RequestMethod.GET
+    )
+    @ResponseBody
+    public ResponseEntity<String> userHasUpvotedArticle(@PathVariable int articleID,
+                                                        @RequestHeader("Authorization") String token) {
+
+        try {
+            ArticleDTO articleDTO = articleService.findById(articleID);
+            User requester = userService.getUserByUsername(RequestUtils.getRequesterUsername(token));
+            Boolean userHasUpvotedArt = upvoteService.userHasUpvotedArticle(requester, articleDTO);
+            return ResponseEntity.ok().body(userHasUpvotedArt.toString());
+        } catch (BusinessException e) {
+            return ResponseEntity.ok().body(e.getMessage());
+        }
+
+    }
+
 }
