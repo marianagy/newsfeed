@@ -2,6 +2,8 @@ package com.project.newsfeed.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.project.newsfeed.entity.profile.Profile;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -30,7 +32,7 @@ public class User {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "role_id")
-    // @OnDelete(action = OnDeleteAction.CASCADE)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     // @JsonIgnore
     private Role role;
 

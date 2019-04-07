@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -86,7 +85,7 @@ public class UserRestController{
     }
 
     @GetMapping("/get-user-by-username/{username}")
-    public Optional<User> getUserByUsername(@PathVariable String username){
+    public User getUserByUsername(@PathVariable String username) throws BusinessException {
         return userService.getUserByUsername(username);
     }
 

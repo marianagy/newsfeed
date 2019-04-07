@@ -17,9 +17,11 @@ export class TokenInterceptorService implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    console.log("Intercepting request...");
     if (localStorage.getItem(this.tokenField)) {
       request = request.clone({
         setHeaders: {
+          //asta apare si in backend
           Authorization: `Bearer ` + localStorage.getItem(this.tokenField)
         }
       });

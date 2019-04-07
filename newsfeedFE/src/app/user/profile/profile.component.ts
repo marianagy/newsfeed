@@ -1,10 +1,19 @@
 import {Component, OnInit} from '@angular/core';
-import {ProfileData, ProfileService} from "../profile.service";
+import {ProfileService} from "../profile.service";
 import {MatDialog} from "@angular/material";
 import {EditProfileComponent, ProfileDialogData} from "../edit-profile/edit-profile.component";
 import {EditBioComponent} from "../edit-bio/edit-bio.component";
 import {EditPhotoComponent} from "../edit-photo/edit-photo.component";
 
+export interface ProfileData {
+  id: any;
+  firstName: string;
+  lastName: string;
+  email: string;
+  photo: any;
+  bio: string;
+
+}
 
 @Component({
   selector: 'app-profile',

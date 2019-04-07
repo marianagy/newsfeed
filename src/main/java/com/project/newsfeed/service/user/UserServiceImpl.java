@@ -125,35 +125,34 @@ public class UserServiceImpl implements UserService {
         return matcher.find();
     }
 
-    public Optional<User> getUserByUsername(String username) {
+    public User getUserByUsername(String username) throws BusinessException {
 
         return userDAO.findAll()
                 .stream()
                 .filter(user -> user.getUsername().equals(username))
-                .findFirst();
+                .findFirst()
+                .orElseThrow(() -> new BusinessException(ExceptionCode.USERNAME_NOT_FOUND));
 
 
     }
 
     public void activateUser(String username) throws BusinessException {
-        Optional<User> userOptional = getUserByUsername(username);
-        User user = userOptional.orElseThrow(() -> new BusinessException(ExceptionCode.USERNAME_NOT_FOUND));
+        User user = getUserByUsername(username);
         user.setFlag(true);
         userDAO.save(user);
 
     }
 
     public void deactivateUser(String username) throws BusinessException {
-        Optional<User> userOptional = getUserByUsername(username);
-        User user = userOptional.orElseThrow(() -> new BusinessException(ExceptionCode.USERNAME_NOT_FOUND));
+        User user = getUserByUsername(username);
         user.setFlag(false);
         userDAO.save(user);
 
     }
 
-    private boolean usernameExist(String username) {
-        Optional<User> user = getUserByUsername(username);
-        return user.isPresent();
+    private boolean usernameExist(String username) throws BusinessException {
+        User user = getUserByUsername(username);
+        return user != null;
     }
 
     public void registerUser(String firstName, String lastName, String email, String username, String password) throws BusinessException {
@@ -196,45 +195,45 @@ public class UserServiceImpl implements UserService {
      * @throws BusinessException
      */
     public String loginUser(String username, String password) throws BusinessException {
-        Optional<User> userOptional = getUserByUsername(username);
-        if (!userOptional.isPresent()) {
+        User user = getUserByUsername(username);
+        if (username == null) {
             throw new BusinessException(ExceptionCode.USERNAME_NOT_FOUND);
         }
-        if (!userOptional.get().getFlag()) {
+        if (!user.getFlag()) {
             throw new BusinessException(ExceptionCode.USER_DEACTIVATED);
         }
         //String passwordDB=userOptional.get().getPassword();
         //password = Encryptor.encrypt(password);
-        if (!Encryptor.encrypt(password).equals(userOptional.get().getPassword())) {
+        if (!Encryptor.encrypt(password).equals(user.getPassword())) {
 
             throw new BusinessException(ExceptionCode.PASSWORD_NOT_VALID);
         }
-        return issueToken(userOptional.get());
+        return issueToken(user);
     }
 
-    private boolean validateFields(UserDTO userDTO) {
+    private boolean validateFields(User user) {
         return
-                userDTO.getUsername() != null;
+                user.getUsername() != null;
     }
 
-    private boolean isValidForCreation(UserDTO userDTO) throws BusinessException {
+    private boolean isValidForCreation(User user) throws BusinessException {
         //validate if email already exists
-        if (userDAO.findByUsername(userDTO.getUsername()) != null) {
+        if (userDAO.findByUsername(user.getUsername()) != null) {
             //Todo: username already exists
             throw new BusinessException(ExceptionCode.UNKNOWN_EXCEPTION);
         }
-        return validateFields(userDTO)
-                && userDTO.getPassword() != null;
+        return validateFields(user)
+                && user.getPassword() != null;
     }
 
     /**
-     * Validates the DTO. To use before sending it further.
+     * Validates the user. To use before sending it further.
      *
-     * @param userDTO
+     * @param user
      * @throws BusinessException
      */
-    private void validateUserForCreation(UserDTO userDTO) throws BusinessException {
-        if (!isValidForCreation(userDTO)) {
+    private void validateUserForCreation(User user) throws BusinessException {
+        if (!isValidForCreation(user)) {
             throw new BusinessException(ExceptionCode.USER_VALIDATION_EXCEPTION);
         }
 

@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
 
   submitForm() {
     console.log("Component here...");
-    this.authenticationService.validateUser(this.userLoginData.username, this.userLoginData.password)
+    this.authenticationService.loginUser(this.userLoginData.username, this.userLoginData.password)
       .subscribe(
         data => {
           this.error = false;

@@ -11,6 +11,7 @@ public class UserDTOHelper {
     public static UserDTO fromEntity(User user) {
         UserDTO userDTO = new UserDTO();
         userDTO.setUsername(user.getUsername());
+        userDTO.setId(user.getId());
         userDTO.setFlag(user.getFlag());
         return userDTO;
     }
@@ -18,7 +19,7 @@ public class UserDTOHelper {
     public static User toEntity(UserDTO userDTO) {
         User user = new User();
         user.setUsername(userDTO.getUsername());
-        user.setPassword(userDTO.getPassword());
+        user.setId(userDTO.getId());
         user.setFlag(userDTO.getFlag());
         return user;
     }

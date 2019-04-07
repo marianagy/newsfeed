@@ -1,0 +1,18 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<mat-card class="article-card">
+  <h2>Articles</h2>
+  <ul class="articles">
+    <li>
+      <img mat-card-avatar
+           src={{articleData.photo}}>
+
+      <span class="badge">{{articleData.id}}</span>
+      <mat-card-title>{{articleData.title}}</mat-card-title>
+      <p>{{articleData.content}}</p>
+      <button (click)="addUpvote(articleData.id)" mat-button>Like</button>
+
+
+    </li>
+  </ul>
+
+</mat-card>

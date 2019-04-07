@@ -5,8 +5,8 @@ import java.util.Objects;
 public class UserDTO {
 
     private String username;
-    private String password;
     private Boolean flag;
+    private Integer id;
 
     //Todo: sa pun si lista de notificari cand termin cu notificarile
 
@@ -19,12 +19,12 @@ public class UserDTO {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public Integer getId() {
+        return id;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Boolean getFlag() {
@@ -41,20 +41,19 @@ public class UserDTO {
         if (o == null || getClass() != o.getClass()) return false;
         UserDTO userDTO = (UserDTO) o;
         return Objects.equals(username, userDTO.username) &&
-                Objects.equals(password, userDTO.password) &&
                 Objects.equals(flag, userDTO.flag);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, password, flag);
+        return Objects.hash(username, flag);
     }
 
     @Override
     public String toString() {
         return "UserDTO{" +
                 "username='" + username + '\'' +
-                ", password='" + password + '\'' +
+
                 ", flag=" + flag +
                 '}';
     }

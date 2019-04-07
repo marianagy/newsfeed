@@ -1,12 +1,12 @@
 package com.project.newsfeed.rest.article;
 
-import com.auth0.jwt.JWT;
 import com.project.newsfeed.entity.user.User;
 import com.project.newsfeed.exception.BusinessException;
-import com.project.newsfeed.exception.ExceptionCode;
 import com.project.newsfeed.service.article.ArticleService;
 import com.project.newsfeed.service.article.dto.ArticleDTO;
 import com.project.newsfeed.service.user.UserService;
+import com.project.newsfeed.service.user.dto.UserDTOHelper;
+import com.project.newsfeed.utils.RequestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -55,9 +55,9 @@ public class ArticleRestController {
                                                  @RequestHeader("Authorization") String token) {
 
         try {
-            User requester = userService.getUserByUsername(getRequesterUsername(token))
-                    .orElseThrow(() -> new BusinessException(ExceptionCode.USERNAME_NOT_FOUND));
-            articleDTO.setUser(requester);
+            User requester = userService.getUserByUsername(RequestUtils.getRequesterUsername(token));
+
+            articleDTO.setUser(UserDTOHelper.fromEntity(requester));
             articleService.save(articleDTO);
         } catch (BusinessException e) {
             e.printStackTrace();
@@ -65,18 +65,7 @@ public class ArticleRestController {
         return ResponseEntity.ok().body(articleDTO);
     }
 
-    /**
-     * Method gets username of the requester from the request header
-     *
-     * @param token
-     * @return
-     */
-    private String getRequesterUsername(@RequestHeader("Authorization") String token) {
 
-        token = token.substring("Bearer".length()).trim();
-        String requesterUsername = JWT.decode(token).getClaim("username").asString();
-        return requesterUsername;
-    }
 
     @RequestMapping(value = "/update-article",
             method = RequestMethod.PUT

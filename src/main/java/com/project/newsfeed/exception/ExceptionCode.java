@@ -21,6 +21,7 @@ package com.project.newsfeed.exception;
         TAG_NOT_FOUND(1014, "Tag not found"),
         CATEGORY_NOT_FOUND(1015, "Category not found"),
         COMMENT_NOT_FOUND(1016, "Comment not found"),
+        UPVOTE_NOT_FOUND(1016, "Upvote not found"),
         USER_PERMISSION_VALIDATION(2001, "User does not have this permission"),
         ROLE_DOESNT_EXIST(2002, "User does not have this permission"),
         PROFILE_VALIDATION_EXCEPTION(5001, "Validation Exception"),

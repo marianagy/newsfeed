@@ -49,7 +49,7 @@ export class AuthenticationService {
     return localStorage.getItem('token');
   }
 
-  validateUser(username: string, password: string) {
+  loginUser(username: string, password: string) {
 
     let body = new URLSearchParams();
     body.set('username', username);

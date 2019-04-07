@@ -2,7 +2,8 @@ package com.project.newsfeed.service.article.dto;
 
 import com.project.newsfeed.entity.article.Category;
 import com.project.newsfeed.entity.article.Tag;
-import com.project.newsfeed.entity.user.User;
+import com.project.newsfeed.service.profile.dto.ProfileDTO;
+import com.project.newsfeed.service.user.dto.UserDTO;
 
 import java.util.List;
 import java.util.Objects;
@@ -13,10 +14,11 @@ public class ArticleDTO {
     private String title;
     private String content;
     private String image;
-    private User user;
+    private UserDTO user;
     private Integer nrUpvotes;
     private List<Tag> tagList;
     private List<Category> categoryList;
+    private ProfileDTO profileDTO;
 
     public ArticleDTO() {
     }
@@ -53,11 +55,11 @@ public class ArticleDTO {
         this.image = image;
     }
 
-    public User getUser() {
+    public UserDTO getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserDTO user) {
         this.user = user;
     }
 
@@ -85,6 +87,14 @@ public class ArticleDTO {
         this.categoryList = categoryList;
     }
 
+    public ProfileDTO getProfileDTO() {
+        return profileDTO;
+    }
+
+    public void setProfileDTO(ProfileDTO profileDTO) {
+        this.profileDTO = profileDTO;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -97,12 +107,13 @@ public class ArticleDTO {
                 Objects.equals(user, that.user) &&
                 Objects.equals(nrUpvotes, that.nrUpvotes) &&
                 Objects.equals(tagList, that.tagList) &&
-                Objects.equals(categoryList, that.categoryList);
+                Objects.equals(categoryList, that.categoryList) &&
+                Objects.equals(profileDTO, that.profileDTO);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, content, image, user, nrUpvotes, tagList, categoryList);
+        return Objects.hash(id, title, content, image, user, nrUpvotes, tagList, categoryList, profileDTO);
     }
 
     @Override
@@ -116,6 +127,7 @@ public class ArticleDTO {
                 ", nrUpvotes=" + nrUpvotes +
                 ", tagList=" + tagList +
                 ", categoryList=" + categoryList +
+                ", profileDTO=" + profileDTO +
                 '}';
     }
 }

@@ -26,6 +26,7 @@ import {ProfileComponent} from './profile/profile.component';
 import {EditProfileComponent} from './edit-profile/edit-profile.component';
 import {EditBioComponent} from './edit-bio/edit-bio.component';
 import {EditPhotoComponent} from './edit-photo/edit-photo.component';
+import {ArticleManagementModule} from "../article-management/article-management.module";
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import {EditPhotoComponent} from './edit-photo/edit-photo.component';
     MatDialogModule,
     MatSelectModule,
     ReactiveFormsModule,
-    BrowserModule
+    BrowserModule,
+    ArticleManagementModule
   ],
   exports: [LoginComponent, RouterModule],
   entryComponents: [EditProfileComponent, EditBioComponent, EditPhotoComponent],

@@ -7,6 +7,8 @@ import {NavigationModule} from "./navigation/navigation.module";
 import {MatButtonModule, MatCheckboxModule} from "@angular/material";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {LoginguardGuard} from "./user/loginguard.guard";
+import {TokenInterceptorService} from "./token-interceptor.service";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
 
 
 @NgModule({
@@ -25,7 +27,13 @@ import {LoginguardGuard} from "./user/loginguard.guard";
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [LoginguardGuard],
+  providers: [LoginguardGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

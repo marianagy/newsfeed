@@ -2,6 +2,8 @@ package com.project.newsfeed.entity.article;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.project.newsfeed.entity.user.User;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -30,11 +32,12 @@ public class Article {
     @Column(name = "image")
     @Lob
     private byte[] image;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.MERGE)
     @JoinColumn(name = "author_id")
-    // @OnDelete(action = OnDeleteAction.CASCADE)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     // @JsonIgnore
     private User user;
+
     @Column(name = "nr_upvotes")
     private Integer nrUpvotes;
 
