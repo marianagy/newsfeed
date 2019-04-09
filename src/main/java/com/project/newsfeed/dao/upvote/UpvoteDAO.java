@@ -14,4 +14,9 @@ public interface UpvoteDAO extends JpaRepository<Upvote, Integer> {
     @Query("Select Count(u) FROM Upvote u where u.user = ?1 and u.article=?2")
     Integer userHasUpvotedArticle(User user, Article article);
 
+    @Query("Select u FROM Upvote u where u.user = ?1 and u.article=?2")
+    Upvote getUpvoteForUserAndArticle(User user, Article article);
+
+
+
 }

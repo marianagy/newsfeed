@@ -27,6 +27,20 @@ public class ArticleRestController {
         this.userService = userService;
     }
 
+    @RequestMapping(value = "/get-user-articles",
+            method = RequestMethod.GET
+    )
+    @ResponseBody
+    public ResponseEntity<List<ArticleDTO>> getArticlesForUser(@RequestHeader("Authorization") String token) {
+        User requester = null;
+        try {
+            requester = userService.getUserByUsername(RequestUtils.getRequesterUsername(token));
+        } catch (BusinessException e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok().body(articleService.getArticlesForUser(requester));
+    }
+
     @RequestMapping(value = "/articles",
             method = RequestMethod.GET
     )

@@ -150,9 +150,13 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    private boolean usernameExist(String username) throws BusinessException {
-        User user = getUserByUsername(username);
-        return user != null;
+    private boolean usernameExist(String username) {
+        Optional<User> userOptional = userDAO.findAll()
+                .stream()
+                .filter(user -> user.getUsername().equals(username))
+                .findFirst();
+
+        return userOptional.isPresent();
     }
 
     public void registerUser(String firstName, String lastName, String email, String username, String password) throws BusinessException {

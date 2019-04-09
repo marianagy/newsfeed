@@ -8,11 +8,15 @@ import {UserModule} from "../user/user.module";
 import {RegisterComponent} from "../user/register/register.component";
 import {ProfileComponent} from "../user/profile/profile.component";
 import {LoginguardGuard} from "../user/loginguard.guard";
+import {HomePageManagementModule} from "../home-page-management/home-page-management.module";
+import {HomePageComponent} from "../home-page-management/home-page/home-page.component";
+
 
 const loginRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent, canActivate: [LoginguardGuard]},
+  {path: 'home-page', component: HomePageComponent, canActivate: [LoginguardGuard]},
   {path: '', pathMatch: 'full', redirectTo: '/login'}
 ];
 
@@ -35,7 +39,8 @@ const loginRoutes: Routes = [
     MatMenuModule,
     MatBadgeModule,
     MatIconModule,
-    UserModule
+    UserModule,
+    HomePageManagementModule
   ]
 })
 export class NavigationModule {

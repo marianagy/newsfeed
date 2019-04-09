@@ -12,9 +12,13 @@ export class ArticleService {
   }
 
 
-  getAllArticles() {
+  getAllArticles(articleFilter) {
+    if (articleFilter === undefined) {
 
-    return this.http.get(this.baseURL + '/articles');
+      return this.http.get(this.baseURL + '/articles');
+    } else {
+      return this.http.get(this.baseURL + '/get-user-articles')
+    }
   }
 
   addUpvote(articleId: any) {
@@ -39,6 +43,19 @@ export class ArticleService {
   getArticleById(id) {
 
     return this.http.get(this.baseURL + '/articles/' + id);
+  }
+
+  removeUpvote(articleId) {
+    let body = new URLSearchParams();
+    body.set('article_id', articleId);
+    console.log(body);
+    return this.http.post(this.baseURL + '/remove-upvote',
+      body.toString(),
+      {
+        headers: new HttpHeaders(
+          {'Content-Type': 'application/x-www-form-urlencoded'}
+        )
+      });
   }
 
 }

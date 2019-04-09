@@ -38,9 +38,17 @@ export class ArticleComponent implements OnInit {
       );
   }
 
+
   addUpvote(articleId) {
     if (this.articleUpvoted) {
-      //remove upvote
+      this.articleServie.removeUpvote(articleId).subscribe(
+        data => {
+          this.userHasUpvoted(articleId);
+        },
+        err => {
+          console.log(err);
+        }
+      );
     } else {
       this.articleServie.addUpvote(articleId).subscribe(
         data => {
@@ -53,6 +61,8 @@ export class ArticleComponent implements OnInit {
     }
   }
 
+
+  // todo: sa iau id-ul articolului pe care dau click (din url de exemplu)
   getArticle(id) {
     id = 1;
     this.articleServie.getArticleById(id).subscribe(

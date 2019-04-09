@@ -100,4 +100,25 @@ public class UpvoteRestController {
 
     }
 
+    @RequestMapping(value = "/remove-upvote",
+            method = RequestMethod.POST
+    )
+    @ResponseBody
+    public ResponseEntity removeUpvote(@RequestParam("article_id") String articleID,
+                                       @RequestHeader("Authorization") String token) {
+
+
+        try {
+            ArticleDTO article = articleService.findById(Integer.parseInt(articleID));
+
+            User requester = userService.getUserByUsername(RequestUtils.getRequesterUsername(token));
+
+            upvoteService.deleteUpvote(requester, article);
+        } catch (BusinessException e) {
+            return ResponseEntity.ok().body(e.getMessage());
+        }
+        return ResponseEntity.ok().body(articleID);
+    }
+
+
 }

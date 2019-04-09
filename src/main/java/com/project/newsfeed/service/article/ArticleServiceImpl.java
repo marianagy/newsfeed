@@ -4,6 +4,7 @@ import com.project.newsfeed.dao.article.ArticleDAO;
 import com.project.newsfeed.dao.article.TagDAO;
 import com.project.newsfeed.entity.article.Article;
 import com.project.newsfeed.entity.article.Tag;
+import com.project.newsfeed.entity.user.User;
 import com.project.newsfeed.exception.BusinessException;
 import com.project.newsfeed.exception.ExceptionCode;
 import com.project.newsfeed.service.article.dto.ArticleDTO;
@@ -72,5 +73,12 @@ public class ArticleServiceImpl implements ArticleService {
 
         articleDAO.deleteById(id);
 
+    }
+
+    @Override
+    public List<ArticleDTO> getArticlesForUser(User user) {
+        return articleDAO.getArticlesForUser(user).stream()
+                .map(ArticleDTOHelper::fromEntity)
+                .collect(Collectors.toList());
     }
 }

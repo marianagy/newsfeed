@@ -1,5 +1,6 @@
 package com.project.newsfeed.service.article;
 
+import com.project.newsfeed.entity.user.User;
 import com.project.newsfeed.exception.BusinessException;
 import com.project.newsfeed.service.article.dto.ArticleDTO;
 
@@ -14,5 +15,7 @@ public interface ArticleService {
     void save(ArticleDTO articleDTO) throws BusinessException;
 
     void deleteById(int id);
+
+    List<ArticleDTO> getArticlesForUser(User user);
 
 }

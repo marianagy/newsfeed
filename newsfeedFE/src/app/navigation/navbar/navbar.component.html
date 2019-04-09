@@ -7,6 +7,9 @@
   <button *ngIf="isLoggedIn()" mat-button routerLink='/profile'>
     <i class="material-icons">account_circle</i>
   </button>
+  <button *ngIf="isLoggedIn()" mat-button routerLink='/home-page'>
+    Home
+  </button>
 
 
   <button (click)="logout()" *ngIf="isLoggedIn()" mat-button>

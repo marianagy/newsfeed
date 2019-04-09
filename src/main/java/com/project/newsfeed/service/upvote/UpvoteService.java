@@ -15,9 +15,10 @@ public interface UpvoteService {
 
     void save(UpvoteDTO upvoteDTO) throws BusinessException;
 
-    void deleteById(int id);
 
     Integer getUpvoteNrForArticle(Integer articleID);
 
     Boolean userHasUpvotedArticle(User user, ArticleDTO articleDTO);
+
+    void deleteUpvote(User user, ArticleDTO article);
 }

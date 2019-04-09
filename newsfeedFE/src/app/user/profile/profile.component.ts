@@ -39,7 +39,9 @@ export class ProfileComponent implements OnInit {
     };
   }
 
+  username;
   ngOnInit() {
+    this.username = localStorage.getItem("username");
     this.loadProfileData();
   }
 
@@ -54,7 +56,13 @@ export class ProfileComponent implements OnInit {
           this.profileData.lastName = data["lastName"];
           this.profileData.email = data["email"];
           this.profileData.bio = data["bio"];
-          this.profileData.photo = data["photo"];
+          if (data["photo"] == "" || data["photo"] == undefined) {
+            this.profileData.photo = "https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg";
+          } else {
+            this.profileData.photo = data["photo"];
+          }
+
+
         }, error => {
           console.log("Error happened.");
           console.log(error);

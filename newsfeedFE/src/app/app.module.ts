@@ -10,7 +10,6 @@ import {LoginguardGuard} from "./user/loginguard.guard";
 import {TokenInterceptorService} from "./token-interceptor.service";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 
-
 @NgModule({
   declarations: [
     AppComponent,

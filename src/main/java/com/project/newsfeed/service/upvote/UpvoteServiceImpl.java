@@ -56,10 +56,14 @@ public class UpvoteServiceImpl implements UpvoteService {
         upvoteDAO.save(UpvoteDTOHelper.toEntity(upvoteDTO));
     }
 
+
     @Override
-    public void deleteById(int id) {
-        upvoteDAO.deleteById(id);
+    public void deleteUpvote(User user, ArticleDTO article) {
+        Upvote upvote = upvoteDAO.getUpvoteForUserAndArticle(user, ArticleDTOHelper.toEntity(article));
+
+        upvoteDAO.deleteById(upvote.getId());
     }
+
 
     @Override
     public Integer getUpvoteNrForArticle(Integer articleID) {

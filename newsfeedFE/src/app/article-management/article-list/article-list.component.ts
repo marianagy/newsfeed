@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ArticleService} from "../article.service";
 
 export interface ArticleData {
@@ -19,6 +19,8 @@ export interface ArticleData {
 })
 export class ArticleListComponent implements OnInit {
 
+  @Input() articleFilter: string;
+
   articleData: ArticleData;
 
   constructor(private articleServie: ArticleService) {
@@ -29,6 +31,7 @@ export class ArticleListComponent implements OnInit {
 
   ngOnInit() {
     this.loadArticles();
+    console.log(this.articleFilter);
   }
 
   innerUpvoteCheck(articleID) {
@@ -57,7 +60,7 @@ export class ArticleListComponent implements OnInit {
 
   loadArticles() {
 
-    this.articleServie.getAllArticles()
+    this.articleServie.getAllArticles(this.articleFilter)
       .subscribe(
         data => {
           console.log("Everything ok.");
