@@ -2,7 +2,7 @@
   <span style="margin-right: 20px">BeezKneez</span>
   <button *ngIf="!isLoggedIn()" mat-button routerLink='/login' routerLinkActive="active">Login
   </button>
-  <button mat-button routerLink='/register' routerLinkActive="active">Sign Up
+  <button *ngIf="!isLoggedIn()" mat-button routerLink='/register' routerLinkActive="active">Sign Up
   </button>
   <button *ngIf="isLoggedIn()" mat-button routerLink='/profile'>
     <i class="material-icons">account_circle</i>
