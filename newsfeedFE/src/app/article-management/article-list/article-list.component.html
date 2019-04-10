@@ -1,5 +1,3 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
 <h2>Articles</h2>
 <ul class="articles">
   <li *ngFor="let article of articleList">
@@ -7,7 +5,8 @@
       <img mat-card-avatar
            src={{article.image}}>
 
-      <mat-card-title>{{article.title}}</mat-card-title>
+      <!--<mat-card-title>{{article.title}}</mat-card-title>-->
+      <a [routerLink]="['/article/'+article.id]">{{article.title}}</a>
       <p>{{article.content}}</p>
       <!--<button (click)="addUpvote(article.id)" mat-button>-->
       <!--<i class="material-icons" *ngIf="!innerUpvoteCheck(article.id)">favorite_border</i>-->

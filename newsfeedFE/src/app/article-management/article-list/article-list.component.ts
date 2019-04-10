@@ -15,7 +15,8 @@ export interface ArticleData {
 @Component({
   selector: 'app-article-list',
   templateUrl: './article-list.component.html',
-  styleUrls: ['./article-list.component.scss']
+  styleUrls: ['./article-list.component.scss'],
+
 })
 export class ArticleListComponent implements OnInit {
 
@@ -23,8 +24,10 @@ export class ArticleListComponent implements OnInit {
 
   articleData: ArticleData;
 
+
   constructor(private articleServie: ArticleService) {
   }
+
 
   articleList: any;
   articleUpvotes: any;
@@ -74,6 +77,7 @@ export class ArticleListComponent implements OnInit {
           // this.articleData.nrUpvotes = data[0]["nrUpvotes"];
 
           this.articleList = data;
+
 
         }, error => {
           console.log("Error happened.");

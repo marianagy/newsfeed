@@ -25,9 +25,11 @@ import {RouterModule} from "@angular/router";
 import {AppRoutingModule} from "../app-routing.module";
 import {TokenInterceptorService} from "../token-interceptor.service";
 
+
 @NgModule({
   declarations: [ArticleComponent, ArticleListComponent],
   imports: [
+
     CommonModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
@@ -48,7 +50,8 @@ import {TokenInterceptorService} from "../token-interceptor.service";
     MatSelectModule,
     ReactiveFormsModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+
 
   ],
   exports: [
