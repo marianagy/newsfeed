@@ -24,10 +24,12 @@ import {BrowserModule} from "@angular/platform-browser";
 import {RouterModule} from "@angular/router";
 import {AppRoutingModule} from "../app-routing.module";
 import {TokenInterceptorService} from "../token-interceptor.service";
+import {AddArticleComponent} from './add-article/add-article.component';
+import {EditArticleComponent} from './edit-article/edit-article.component';
 
 
 @NgModule({
-  declarations: [ArticleComponent, ArticleListComponent],
+  declarations: [ArticleComponent, ArticleListComponent, AddArticleComponent, EditArticleComponent],
   imports: [
 
     CommonModule,

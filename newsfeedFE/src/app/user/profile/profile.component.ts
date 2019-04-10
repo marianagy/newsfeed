@@ -150,5 +150,8 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  addArticleDialog() {
+  }
+
 
 }

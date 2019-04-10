@@ -22,8 +22,9 @@ export class ArticleListComponent implements OnInit {
 
   @Input() articleFilter: string;
 
-  articleData: ArticleData;
 
+  articleData: ArticleData;
+  username: String;
 
   constructor(private articleServie: ArticleService) {
   }
@@ -32,17 +33,18 @@ export class ArticleListComponent implements OnInit {
   articleList: any;
   articleUpvotes: any;
 
+
   ngOnInit() {
     this.loadArticles();
     console.log(this.articleFilter);
   }
 
-  innerUpvoteCheck(articleID) {
+  innerUpvoteCheck(articleId) {
     console.log(this.articleUpvotes);
     if (this.articleUpvotes != undefined) {
-      if (this.articleUpvotes[articleID] != undefined && this.articleUpvotes[articleID] != null) {
+      if (this.articleUpvotes[articleId] != undefined && this.articleUpvotes[articleId] != null) {
 
-        return this.articleUpvotes[articleID];
+        return this.articleUpvotes[articleId];
       }
     }
     return false;
@@ -59,6 +61,11 @@ export class ArticleListComponent implements OnInit {
           console.log(err);
         }
       );
+  }
+
+  verifyUser(articleUserUsername: String) {
+    this.username = localStorage.getItem("username");
+    return this.username === articleUserUsername;
   }
 
   loadArticles() {
@@ -84,6 +91,12 @@ export class ArticleListComponent implements OnInit {
           console.log(error);
         }
       )
+  }
+
+  editArticleDialog(articleId: any) {
+  }
+
+  deleteArticle(articleId: any) {
   }
 
 }
