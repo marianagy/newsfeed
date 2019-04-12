@@ -35,7 +35,15 @@ export class ArticleService {
       });
   }
 
-  addArticle() {
+  addArticle(article) {
+    return this.http.post(this.baseURL + '/save-article',
+      article,
+      {
+        headers: new HttpHeaders(
+          {'Content-Type': 'application/json'}
+        )
+      });
+
   }
 
   userHasUpvoted(articleId: any) {

@@ -1,3 +1,53 @@
-<p>
-  add-article works!
-</p>
+<div class="pop-up" mat-dialog-content style="overflow: inherit">
+  <form
+    #addArticleControl="ngForm"
+    #formElement
+    (ngSubmit)="submitForm()"
+  >
+    <h1 mat-dialog-title>Add Article</h1>
+
+    <mat-form-field>
+      <input
+        #titleControl="ngModel"
+        #titleElement
+        [(ngModel)]="data.title"
+        matInput
+        name="title"
+        placeholder="Title"
+        required
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        #contentControl="ngModel"
+        #contentElement
+        [(ngModel)]="data.content"
+        matInput
+        name="content"
+        placeholder="Content"
+        required
+      >
+    </mat-form-field>
+
+    <button (click)="imgFileInput.click()" mat-button md-button type="button">Add Photo
+    </button>
+
+    <input #imgFileInput (change)="previewImage($event)" hidden type="file"/>
+    <div id="chosen_image" style="float:right" width="100px">
+
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-button type="submit">Submit</button>
+
+    </div>
+
+
+    <button (click)=this.dialogRef.close(this.data) class="cancel-button" class="cancel-button" color="warn"
+            mat-mini-fab>
+      X
+    </button>
+
+  </form>
+
+</div>

@@ -59,6 +59,8 @@ import {EditArticleComponent} from './edit-article/edit-article.component';
   exports: [
     ArticleListComponent,
     ArticleComponent,
+    AddArticleComponent,
+    EditArticleComponent,
     RouterModule
   ],
   providers: [TokenInterceptorService]

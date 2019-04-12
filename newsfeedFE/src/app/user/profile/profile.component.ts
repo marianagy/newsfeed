@@ -1,9 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ProfileService} from "../profile.service";
 import {MatDialog} from "@angular/material";
 import {EditProfileComponent, ProfileDialogData} from "../edit-profile/edit-profile.component";
 import {EditBioComponent} from "../edit-bio/edit-bio.component";
 import {EditPhotoComponent} from "../edit-photo/edit-photo.component";
+import {AddArticleComponent} from "../../article-management/add-article/add-article.component";
+import {ArticleService} from "../../article-management/article.service";
+import {ArticleListComponent} from "../../article-management/article-list/article-list.component";
 
 export interface ProfileData {
   id: any;
@@ -26,8 +29,13 @@ export class ProfileComponent implements OnInit {
   profileData: ProfileData;
   private new_profile: ProfileDialogData;
 
+
+  // child component
+  @ViewChild(ArticleListComponent) child: ArticleListComponent;
+
   constructor(private profileService: ProfileService,
               public dialog: MatDialog,
+              private articleService: ArticleService,
   ) {
     this.profileData = {
       id: "",
@@ -40,6 +48,7 @@ export class ProfileComponent implements OnInit {
   }
 
   username;
+
   ngOnInit() {
     this.username = localStorage.getItem("username");
     this.loadProfileData();
@@ -151,6 +160,19 @@ export class ProfileComponent implements OnInit {
   }
 
   addArticleDialog() {
+    const dialogRef = this.dialog.open(AddArticleComponent, {
+      width: '350px',
+      data: {"user": localStorage}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+
+      // call child component method
+      this.child.loadArticles();
+    });
+
   }
 
 

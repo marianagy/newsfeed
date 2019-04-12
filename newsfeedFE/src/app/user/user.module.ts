@@ -27,6 +27,7 @@ import {EditProfileComponent} from './edit-profile/edit-profile.component';
 import {EditBioComponent} from './edit-bio/edit-bio.component';
 import {EditPhotoComponent} from './edit-photo/edit-photo.component';
 import {ArticleManagementModule} from "../article-management/article-management.module";
+import {AddArticleComponent} from "../article-management/add-article/add-article.component";
 
 
 @NgModule({
@@ -55,7 +56,7 @@ import {ArticleManagementModule} from "../article-management/article-management.
     ArticleManagementModule
   ],
   exports: [LoginComponent, RouterModule],
-  entryComponents: [EditProfileComponent, EditBioComponent, EditPhotoComponent],
+  entryComponents: [EditProfileComponent, EditBioComponent, EditPhotoComponent, AddArticleComponent],
 
 
 })

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ArticleService} from "../article.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-article',
@@ -11,7 +12,8 @@ export class ArticleComponent implements OnInit {
   article;
   articleUpvoted;
 
-  constructor(private articleServie: ArticleService) {
+  constructor(private articleServie: ArticleService,
+              private activatedRoute: ActivatedRoute) {
     this.article = {
       id: "",
       title: "",
@@ -20,7 +22,8 @@ export class ArticleComponent implements OnInit {
       user: "",
       tags: "",
       categories: "",
-      nrUpvotes: ""
+      nrUpvotes: "",
+      profileDTO: ""
 
     };
   }
@@ -62,10 +65,9 @@ export class ArticleComponent implements OnInit {
   }
 
 
-  // todo: sa iau id-ul articolului pe care dau click (din url de exemplu)
-  getArticle(id) {
-    id = 1;
-    this.articleServie.getArticleById(id).subscribe(
+  getArticle(articleId) {
+
+    this.articleServie.getArticleById(articleId).subscribe(
       data => {
         this.article = data;
         console.log(this.article);
@@ -77,8 +79,13 @@ export class ArticleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getArticle(1);
-    this.userHasUpvoted(1);
+    // get param form url
+    let param: any = this.activatedRoute.snapshot.params;
+    console.log(param.id);
+    this.getArticle(param.id);
+    this.userHasUpvoted(param.id);
+
+
   }
 
   getUpvoteNrForArticle() {
