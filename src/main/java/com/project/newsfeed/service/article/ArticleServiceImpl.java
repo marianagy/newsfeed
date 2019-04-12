@@ -2,6 +2,7 @@ package com.project.newsfeed.service.article;
 
 import com.project.newsfeed.dao.article.ArticleDAO;
 import com.project.newsfeed.dao.article.TagDAO;
+import com.project.newsfeed.dao.user.UserDAO;
 import com.project.newsfeed.entity.article.Article;
 import com.project.newsfeed.entity.article.Tag;
 import com.project.newsfeed.entity.user.User;
@@ -21,11 +22,13 @@ public class ArticleServiceImpl implements ArticleService {
 
     private ArticleDAO articleDAO;
     private TagDAO tagDAO;
+    private UserDAO userDAO;
 
     @Autowired
-    public ArticleServiceImpl(ArticleDAO articleDAO, TagDAO tagDAO) {
+    public ArticleServiceImpl(ArticleDAO articleDAO, TagDAO tagDAO, UserDAO userDAO) {
         this.articleDAO = articleDAO;
         this.tagDAO = tagDAO;
+        this.userDAO = userDAO;
     }
 
     @Override
@@ -49,6 +52,10 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public void save(ArticleDTO articleDTO) throws BusinessException {
 
+        String username = articleDTO.getUser().getUsername();
+        User user = userDAO.findByUsername(username);
+        Article article = ArticleDTOHelper.toEntity(articleDTO);
+        article.setUser(user);
         // testez daca tag-ul e deja in db, si sa il salvez daca nu e
         List<Tag> tagList = articleDTO.getTagList();
         List<Tag> dbTagList = tagDAO.findAll();
@@ -60,9 +67,10 @@ public class ArticleServiceImpl implements ArticleService {
                     }
                 }
             }
-            articleDAO.save(ArticleDTOHelper.toEntity(articleDTO));
+
+            articleDAO.save(article);
         } else {
-            articleDAO.save(ArticleDTOHelper.toEntity(articleDTO));
+            articleDAO.save(article);
         }
 
 

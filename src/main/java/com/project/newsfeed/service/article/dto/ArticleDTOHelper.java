@@ -6,6 +6,7 @@ import com.project.newsfeed.service.user.dto.UserDTOHelper;
 
 public class ArticleDTOHelper {
 
+
     public ArticleDTOHelper() {
     }
 
@@ -35,6 +36,7 @@ public class ArticleDTOHelper {
             article.setImage(articleDTO.getImage().getBytes());
         }
         article.setUser(UserDTOHelper.toEntity(articleDTO.getUser()));
+
         article.setNrUpvotes(articleDTO.getNrUpvotes());
         article.setTagList(articleDTO.getTagList());
         article.setCategoryList(article.getCategoryList());
@@ -42,5 +44,6 @@ public class ArticleDTOHelper {
 
         return article;
     }
+
 
 }

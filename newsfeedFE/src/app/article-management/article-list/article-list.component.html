@@ -14,10 +14,12 @@
       <!--</button>-->
 
     </mat-card>
-    <button (click)="editArticleDialog()" *ngIf="verifyUser(article.user.username)" color="primary" mat-flat-button>
+    <button (click)="editArticleDialog(article.id)" *ngIf="verifyUser(article.user.username)" color="primary"
+            mat-flat-button>
       Edit
     </button>
-    <button (click)="deleteArticle()" *ngIf="verifyUser(article.user.username)" color="primary" mat-flat-button>Delete
+    <button (click)="deleteArticle(article.id)" *ngIf="verifyUser(article.user.username)" color="primary"
+            mat-flat-button>Delete
     </button>
   </li>
 </ul>

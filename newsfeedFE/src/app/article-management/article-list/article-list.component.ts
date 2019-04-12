@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ArticleService} from "../article.service";
+import {MatDialog} from "@angular/material";
+import {EditArticleComponent} from "../edit-article/edit-article.component";
 
 export interface ArticleData {
   id: any;
@@ -22,16 +24,16 @@ export class ArticleListComponent implements OnInit {
 
   @Input() articleFilter: string;
 
-
-  articleData: ArticleData;
   username: String;
-
-  constructor(private articleServie: ArticleService) {
-  }
-
-
   articleList: any;
   articleUpvotes: any;
+  article: any;
+  new_article: any;
+
+  constructor(private articleServie: ArticleService,
+              public dialog: MatDialog) {
+
+  }
 
 
   ngOnInit() {
@@ -93,10 +95,53 @@ export class ArticleListComponent implements OnInit {
       )
   }
 
-  editArticleDialog(articleId: any) {
+  editArticleDialog(articleId) {
+    this.articleServie.getArticleById(articleId).subscribe(
+      data => {
+        this.article = data;
+        console.log(this.article);
+        const dialogRef = this.dialog.open(EditArticleComponent, {
+          width: '350px',
+          data: {
+            "id": this.article.id,
+            "title": this.article.title,
+            "content": this.article.content,
+            "image": this.article.image,
+            "user": this.article.user,
+            "tags": this.article.tags,
+            "categories": this.article.categories,
+            "nrUpvotes": this.article.nrUpvotes,
+            "profileDTO": this.article.profileDTO,
+          }
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+            console.log(result);
+            this.new_article = result;
+            this.article.title = this.new_article.title;
+            this.article.content = this.new_article.content;
+            this.article.image = this.new_article.image;
+            this.loadArticles();
+          },
+          err => {
+            console.log(err);
+          }
+        );
+      });
   }
 
-  deleteArticle(articleId: any) {
+  deleteArticle(articleId) {
+    this.articleServie.deleteArticle(articleId).subscribe(
+      data => {
+        console.log(data);
+        this.loadArticles();
+      },
+      err => {
+        console.log(err);
+      }
+    );
+
   }
+
 
 }

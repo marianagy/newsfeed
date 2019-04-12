@@ -65,8 +65,8 @@ public class ArticleRestController {
             method = RequestMethod.POST
     )
     @ResponseBody
-    public ResponseEntity<ArticleDTO> addArticle(@RequestBody ArticleDTO articleDTO,
-                                                 @RequestHeader("Authorization") String token) {
+    public ResponseEntity addArticle(@RequestBody ArticleDTO articleDTO,
+                                     @RequestHeader("Authorization") String token) {
 
         try {
             User requester = userService.getUserByUsername(RequestUtils.getRequesterUsername(token));
@@ -74,7 +74,7 @@ public class ArticleRestController {
             articleDTO.setUser(UserDTOHelper.fromEntity(requester));
             articleService.save(articleDTO);
         } catch (BusinessException e) {
-            e.printStackTrace();
+            return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok().body(articleDTO);
     }
@@ -83,16 +83,21 @@ public class ArticleRestController {
 
     @RequestMapping(value = "/update-article",
             method = RequestMethod.PUT
+
     )
     @ResponseBody
-    public ResponseEntity<ArticleDTO> updateArticle(@RequestBody ArticleDTO articleDTO) {
+    public ResponseEntity updateArticle(@RequestBody ArticleDTO articleDTO,
+                                        @RequestHeader("Authorization") String token) {
 
 
         try {
+            User requester = userService.getUserByUsername(RequestUtils.getRequesterUsername(token));
+
+            articleDTO.setUser(UserDTOHelper.fromEntity(requester));
             articleService.save(articleDTO);
         } catch (BusinessException e) {
-            //todo : fa-l bine
-            e.printStackTrace();
+
+            return ResponseEntity.badRequest().build();
         }
 
         return ResponseEntity.ok().body(articleDTO);

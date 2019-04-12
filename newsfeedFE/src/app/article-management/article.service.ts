@@ -46,6 +46,27 @@ export class ArticleService {
 
   }
 
+  editArticle(article) {
+    return this.http.put(this.baseURL + '/update-article',
+      article,
+      {
+        headers: new HttpHeaders(
+          {'Content-Type': 'application/json'}
+        )
+      });
+  }
+
+  deleteArticle(articleId) {
+
+    return this.http.post(this.baseURL + '/delete-article/' + articleId,
+
+      {
+        headers: new HttpHeaders(
+          {'Content-Type': 'application/x-www-form-urlencoded'}
+        )
+      });
+  }
+
   userHasUpvoted(articleId: any) {
 
     return this.http.get(this.baseURL + '/user-upvoted/' + articleId);
