@@ -1,8 +1,14 @@
 package com.project.newsfeed.rest.article;
 
+import com.project.newsfeed.entity.user.User;
 import com.project.newsfeed.exception.BusinessException;
+import com.project.newsfeed.service.article.ArticleService;
 import com.project.newsfeed.service.article.CommentService;
+import com.project.newsfeed.service.article.dto.ArticleDTO;
 import com.project.newsfeed.service.article.dto.CommentDTO;
+import com.project.newsfeed.service.user.UserService;
+import com.project.newsfeed.service.user.dto.UserDTOHelper;
+import com.project.newsfeed.utils.RequestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +21,14 @@ import java.util.List;
 public class CommentRestController {
 
     private CommentService commentService;
+    private UserService userService;
+    private ArticleService articleService;
 
     @Autowired
-    public CommentRestController(CommentService commentService) {
+    public CommentRestController(CommentService commentService, UserService userService, ArticleService articleService) {
         this.commentService = commentService;
+        this.userService = userService;
+        this.articleService = articleService;
     }
 
     @RequestMapping(value = "/comments",
@@ -41,17 +51,36 @@ public class CommentRestController {
         return ResponseEntity.ok().body(commentDTO);
     }
 
+    @RequestMapping(value = "/get-article-comments/{articleId}",
+            method = RequestMethod.GET
+    )
+    @ResponseBody
+    public ResponseEntity<List<CommentDTO>> getCommentsForArticle(
+            @PathVariable String articleId) {
+        ArticleDTO article = null;
+        try {
+            article = articleService.findById(Integer.parseInt(articleId));
+
+        } catch (BusinessException e) {
+            ResponseEntity.badRequest().body(e.getMessage());
+        }
+        return ResponseEntity.ok().body(commentService.getCommentsForArticle(article));
+    }
+
+
     @RequestMapping(value = "/save-comment",
             method = RequestMethod.POST
     )
     @ResponseBody
-    public ResponseEntity<CommentDTO> addComment(@RequestBody CommentDTO commentDTO) {
-
-
+    public ResponseEntity addComment(@RequestBody CommentDTO commentDTO,
+                                     @RequestHeader("Authorization") String token) {
         try {
+
+            User requester = userService.getUserByUsername(RequestUtils.getRequesterUsername(token));
+            commentDTO.setUser(UserDTOHelper.fromEntity(requester));
             commentService.save(commentDTO);
         } catch (BusinessException e) {
-            e.printStackTrace();
+            ResponseEntity.badRequest().body(e.getMessage());
         }
         return ResponseEntity.ok().body(commentDTO);
     }
@@ -60,14 +89,17 @@ public class CommentRestController {
             method = RequestMethod.PUT
     )
     @ResponseBody
-    public ResponseEntity<CommentDTO> updateComment(@RequestBody CommentDTO commentDTO) {
+    public ResponseEntity updateComment(@RequestBody CommentDTO commentDTO,
+                                        @RequestHeader("Authorization") String token) {
 
 
         try {
+            User requester = userService.getUserByUsername(RequestUtils.getRequesterUsername(token));
+            commentDTO.setUser(UserDTOHelper.fromEntity(requester));
             commentService.save(commentDTO);
         } catch (BusinessException e) {
-            //todo : fa-l bine
-            e.printStackTrace();
+            //todo : sa fac sa afiseze eroarea
+            ResponseEntity.badRequest().body(e.getMessage());
         }
 
         return ResponseEntity.ok().body(commentDTO);

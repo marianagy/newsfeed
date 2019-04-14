@@ -26,10 +26,11 @@ import {AppRoutingModule} from "../app-routing.module";
 import {TokenInterceptorService} from "../token-interceptor.service";
 import {AddArticleComponent} from './add-article/add-article.component';
 import {EditArticleComponent} from './edit-article/edit-article.component';
+import {AddCommentComponent} from './add-comment/add-comment.component';
 
 
 @NgModule({
-  declarations: [ArticleComponent, ArticleListComponent, AddArticleComponent, EditArticleComponent],
+  declarations: [ArticleComponent, ArticleListComponent, AddArticleComponent, EditArticleComponent, AddCommentComponent],
   imports: [
 
     CommonModule,
@@ -61,7 +62,9 @@ import {EditArticleComponent} from './edit-article/edit-article.component';
     ArticleComponent,
     AddArticleComponent,
     EditArticleComponent,
+    AddCommentComponent,
     RouterModule
+
   ],
   providers: [TokenInterceptorService]
 })

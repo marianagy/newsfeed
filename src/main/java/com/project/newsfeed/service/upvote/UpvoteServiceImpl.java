@@ -67,6 +67,7 @@ public class UpvoteServiceImpl implements UpvoteService {
 
     @Override
     public Integer getUpvoteNrForArticle(Integer articleID) {
+
         return upvoteDAO.getUpvoteNrForArticle(articleID);
     }
 

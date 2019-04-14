@@ -21,6 +21,17 @@ export class ArticleService {
     }
   }
 
+  getCommentsForArticle(articleId) {
+
+    return this.http.get(this.baseURL + '/get-article-comments/' + articleId,
+      {
+        headers: new HttpHeaders(
+          {'Content-Type': 'application/x-www-form-urlencoded'}
+        )
+      }
+    );
+  }
+
   addUpvote(articleId: any) {
     let body = new URLSearchParams();
     body.set('article_id', articleId);
@@ -31,6 +42,16 @@ export class ArticleService {
       {
         headers: new HttpHeaders(
           {'Content-Type': 'application/x-www-form-urlencoded'}
+        )
+      });
+  }
+
+  addComment(comment) {
+    return this.http.post(this.baseURL + '/save-comment',
+      comment,
+      {
+        headers: new HttpHeaders(
+          {'Content-Type': 'application/json'}
         )
       });
   }
@@ -46,6 +67,16 @@ export class ArticleService {
 
   }
 
+  editComment(comment) {
+    return this.http.put(this.baseURL + '/update-comment',
+      comment,
+      {
+        headers: new HttpHeaders(
+          {'Content-Type': 'application/json'}
+        )
+      });
+  }
+
   editArticle(article) {
     return this.http.put(this.baseURL + '/update-article',
       article,
@@ -59,6 +90,16 @@ export class ArticleService {
   deleteArticle(articleId) {
 
     return this.http.post(this.baseURL + '/delete-article/' + articleId,
+
+      {
+        headers: new HttpHeaders(
+          {'Content-Type': 'application/x-www-form-urlencoded'}
+        )
+      });
+  }
+
+  deleteComment(commentId) {
+    return this.http.post(this.baseURL + '/delete-comment/' + commentId,
 
       {
         headers: new HttpHeaders(

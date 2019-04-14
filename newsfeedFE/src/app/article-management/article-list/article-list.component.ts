@@ -55,6 +55,7 @@ export class ArticleListComponent implements OnInit {
   userHasUpvoted(articleId) {
     this.articleServie.userHasUpvoted(articleId)
       .subscribe(
+        // data = true or false
         data => {
           this.articleUpvotes[articleId] = data;
 
@@ -88,9 +89,9 @@ export class ArticleListComponent implements OnInit {
           this.articleList = data;
 
 
-        }, error => {
+        }, err => {
           console.log("Error happened.");
-          console.log(error);
+          console.log(err);
         }
       )
   }

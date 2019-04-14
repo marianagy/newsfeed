@@ -1,7 +1,6 @@
 package com.project.newsfeed.service.article.dto;
 
-import com.project.newsfeed.entity.article.Article;
-import com.project.newsfeed.entity.user.User;
+import com.project.newsfeed.service.user.dto.UserDTO;
 
 import java.util.Date;
 import java.util.Objects;
@@ -11,8 +10,8 @@ public class CommentDTO {
     private Integer id;
     private String content;
     private Date date;
-    private User user;
-    private Article article;
+    private UserDTO user;
+    private ArticleDTO article;
 
     public CommentDTO() {
     }
@@ -41,19 +40,19 @@ public class CommentDTO {
         this.date = date;
     }
 
-    public User getUser() {
+    public UserDTO getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserDTO user) {
         this.user = user;
     }
 
-    public Article getArticle() {
+    public ArticleDTO getArticle() {
         return article;
     }
 
-    public void setArticle(Article article) {
+    public void setArticle(ArticleDTO article) {
         this.article = article;
     }
 

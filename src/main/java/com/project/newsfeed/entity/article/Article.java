@@ -32,6 +32,7 @@ public class Article {
     @Column(name = "image")
     @Lob
     private byte[] image;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.MERGE)
     @JoinColumn(name = "author_id")
     @OnDelete(action = OnDeleteAction.CASCADE)

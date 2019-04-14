@@ -1,6 +1,7 @@
 package com.project.newsfeed.service.article.dto;
 
 import com.project.newsfeed.entity.article.Comment;
+import com.project.newsfeed.service.user.dto.UserDTOHelper;
 
 public class CommentDTOHelper {
 
@@ -12,8 +13,8 @@ public class CommentDTOHelper {
         commentDTO.setId(comment.getId());
         commentDTO.setContent(comment.getContent());
         commentDTO.setDate(comment.getDate());
-        commentDTO.setUser(comment.getUser());
-        commentDTO.setArticle(comment.getArticle());
+        commentDTO.setUser((UserDTOHelper.fromEntity(comment.getUser())));
+        commentDTO.setArticle(ArticleDTOHelper.fromEntity(comment.getArticle()));
 
         return commentDTO;
     }
@@ -23,8 +24,8 @@ public class CommentDTOHelper {
         comment.setId(commentDTO.getId());
         comment.setContent(commentDTO.getContent());
         comment.setDate(commentDTO.getDate());
-        comment.setUser(commentDTO.getUser());
-        comment.setArticle(comment.getArticle());
+        comment.setUser(UserDTOHelper.toEntity(commentDTO.getUser()));
+        comment.setArticle(ArticleDTOHelper.toEntity(commentDTO.getArticle()));
 
         return comment;
     }
