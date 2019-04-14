@@ -23,8 +23,9 @@
   <li *ngFor="let comment of commentList">
     <mat-card class="article-card">
 
+      <h4>{{comment.user.username}}:</h4>
       <p>{{comment.content}}</p>
-      <h4>{{comment.user.username}}</h4>
+
       <h4>{{comment.date | date: 'dd/MM/yyyy'}}</h4>
 
     </mat-card>

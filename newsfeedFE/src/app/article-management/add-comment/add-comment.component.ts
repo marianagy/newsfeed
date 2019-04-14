@@ -3,6 +3,8 @@ import {ArticleService} from "../article.service";
 import {ActivatedRoute} from "@angular/router";
 import {AuthenticationService} from "../../user/authentication.service";
 import {DatePipe} from "@angular/common";
+import {MatDialog} from "@angular/material";
+import {EditCommentComponent} from "../edit-comment/edit-comment.component";
 
 @Component({
   selector: 'app-add-comment',
@@ -16,12 +18,14 @@ export class AddCommentComponent implements OnInit {
   commentList: any;
   articleId: any;
   comment: any;
-  currentDate;
+  username;
+  new_comment;
 
 
   constructor(private articleService: ArticleService,
               private authenticationService: AuthenticationService,
-              private activatedRoute: ActivatedRoute
+              private activatedRoute: ActivatedRoute,
+              public dialog: MatDialog
   ) {
     this.comment = {
       id: "",
@@ -80,12 +84,57 @@ export class AddCommentComponent implements OnInit {
       )
   }
 
-  editCommentDialog() {
+  editCommentDialog(commentId) {
+    this.articleService.getCommentById(commentId)
+      .subscribe(
+        data => {
+          this.comment = data;
+          console.log(this.comment);
+          const dialogRef = this.dialog.open(EditCommentComponent, {
+            width: '350px',
+            data: {
+              "id": this.comment.id,
+              "content": this.comment.content,
+              "user": this.comment.user,
+              "article": this.comment.article,
+              "date": this.comment.date
+            }
+          });
+          dialogRef.afterClosed().subscribe(result => {
+              console.log('The dialog was closed');
+              console.log(result);
+              this.new_comment = result;
+              this.comment.content = this.new_comment.content;
+              this.comment.date = new Date();
+              this.loadComments();
+            },
+            err => {
+              console.log(err);
+            }
+          );
+        }
+      )
+
   }
 
-  deleteComment() {
+  deleteComment(commentId) {
+
+    this.articleService.deleteComment(commentId)
+      .subscribe(
+        data => {
+          console.log(data);
+          this.loadComments();
+        },
+        err => {
+          console.log(err);
+        }
+      );
+
   }
 
-  verifyUser() {
+  verifyUser(username: String) {
+
+    this.username = localStorage.getItem("username");
+    return this.username === username;
   }
 }

@@ -29,6 +29,8 @@ import {EditPhotoComponent} from './edit-photo/edit-photo.component';
 import {ArticleManagementModule} from "../article-management/article-management.module";
 import {AddArticleComponent} from "../article-management/add-article/add-article.component";
 import {EditArticleComponent} from "../article-management/edit-article/edit-article.component";
+import {EditCommentComponent} from "../article-management/edit-comment/edit-comment.component";
+import {AddCommentComponent} from "../article-management/add-comment/add-comment.component";
 
 
 @NgModule({
@@ -61,7 +63,9 @@ import {EditArticleComponent} from "../article-management/edit-article/edit-arti
     EditBioComponent,
     EditPhotoComponent,
     AddArticleComponent,
-    EditArticleComponent],
+    EditArticleComponent,
+    EditCommentComponent,
+    AddCommentComponent],
 
 
 })

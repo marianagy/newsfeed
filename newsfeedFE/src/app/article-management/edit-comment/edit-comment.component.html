@@ -1,0 +1,31 @@
+<div class="pop-up" mat-dialog-content style="overflow: inherit">
+  <form
+    #addCommentControl="ngForm"
+    #formElement
+    (ngSubmit)="submitForm()"
+  >
+    <h1 mat-dialog-title>Edit Comment</h1>
+
+    <mat-form-field>
+      <input
+        #titleControl="ngModel"
+        #titleElement
+        [(ngModel)]="data.content"
+        matInput
+        name="comment"
+        placeholder="comment"
+        required
+      >
+    </mat-form-field>
+    <div mat-dialog-actions>
+      <button mat-button type="submit">Submit</button>
+
+    </div>
+
+
+  </form>
+  <button (click)=this.dialogRef.close(this.data) class="cancel-button" color="warn"
+          mat-mini-fab>
+    X
+  </button>
+</div>

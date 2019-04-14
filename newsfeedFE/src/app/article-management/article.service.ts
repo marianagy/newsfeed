@@ -118,6 +118,10 @@ export class ArticleService {
     return this.http.get(this.baseURL + '/articles/' + id);
   }
 
+  getCommentById(id) {
+    return this.http.get(this.baseURL + '/comments/' + id);
+  }
+
   removeUpvote(articleId) {
     let body = new URLSearchParams();
     body.set('article_id', articleId);
