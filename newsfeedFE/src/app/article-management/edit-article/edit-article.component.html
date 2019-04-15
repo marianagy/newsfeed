@@ -1,4 +1,4 @@
-<div class="pop-up" mat-dialog-content style="overflow: inherit">
+<div (clickOutside)="onNoClick()" class="pop-up" mat-dialog-content style="overflow: inherit">
   <form
     #addArticleControl="ngForm"
     #formElement

@@ -1,7 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
-import {ProfileComponent} from "../../user/profile/profile.component";
 import {ArticleService} from "../article.service";
+import {AddCommentComponent} from "../add-comment/add-comment.component";
+
 
 @Component({
   selector: 'app-edit-comment',
@@ -10,7 +11,7 @@ import {ArticleService} from "../article.service";
 })
 export class EditCommentComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<ProfileComponent>,
+  constructor(public dialogRef: MatDialogRef<AddCommentComponent>,
               private articleService: ArticleService,
               @Inject(MAT_DIALOG_DATA) public data) {
   }

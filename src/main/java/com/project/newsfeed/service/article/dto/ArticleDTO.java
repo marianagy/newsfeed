@@ -1,7 +1,5 @@
 package com.project.newsfeed.service.article.dto;
 
-import com.project.newsfeed.entity.article.Category;
-import com.project.newsfeed.entity.article.Tag;
 import com.project.newsfeed.service.profile.dto.ProfileDTO;
 import com.project.newsfeed.service.user.dto.UserDTO;
 
@@ -16,8 +14,8 @@ public class ArticleDTO {
     private String image;
     private UserDTO user;
     private Integer nrUpvotes;
-    private List<Tag> tagList;
-    private List<Category> categoryList;
+    private List<String> tagList;
+    private List<String> categoryList;
     private ProfileDTO profileDTO;
 
     public ArticleDTO() {
@@ -71,19 +69,19 @@ public class ArticleDTO {
         this.nrUpvotes = nrUpvotes;
     }
 
-    public List<Tag> getTagList() {
+    public List<String> getTagList() {
         return tagList;
     }
 
-    public void setTagList(List<Tag> tagList) {
+    public void setTagList(List<String> tagList) {
         this.tagList = tagList;
     }
 
-    public List<Category> getCategoryList() {
+    public List<String> getCategoryList() {
         return categoryList;
     }
 
-    public void setCategoryList(List<Category> categoryList) {
+    public void setCategoryList(List<String> categoryList) {
         this.categoryList = categoryList;
     }
 

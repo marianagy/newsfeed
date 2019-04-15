@@ -59,7 +59,8 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
-  onClick(): void {
+  onNoClick(): void {
+    console.log("ldguwcfevbsdcakmx");
     this.dialogRef.close(this.data);
   }
 

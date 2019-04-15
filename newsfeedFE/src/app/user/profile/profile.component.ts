@@ -93,15 +93,16 @@ export class ProfileComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
-      this.new_profile = result;
-      this.profileData.firstName = this.new_profile.firstName;
-      this.profileData.lastName = this.new_profile.lastName;
-      this.profileData.email = this.new_profile.email;
+      if (result != undefined) {
+        console.log('The dialog was closed');
+        console.log(result);
+        this.new_profile = result;
+        this.profileData.firstName = this.new_profile.firstName;
+        this.profileData.lastName = this.new_profile.lastName;
+        this.profileData.email = this.new_profile.email;
 
-      // @ts-ignore
 
+      }
     });
   }
 
@@ -122,13 +123,12 @@ export class ProfileComponent implements OnInit {
 
     // result va contine this.data
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
-      this.new_profile = result;
-      this.profileData.bio = this.new_profile.bio;
-
-      // @ts-ignore
-
+      if (result != undefined) {
+        console.log('The dialog was closed');
+        console.log(result);
+        this.new_profile = result;
+        this.profileData.bio = this.new_profile.bio;
+      }
     });
   }
 
@@ -146,16 +146,17 @@ export class ProfileComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
-      this.new_profile = result;
-      if (this.new_profile.photo != undefined) {
-        this.profileData.photo = this.new_profile.photo;
+      if (result != undefined) {
+        console.log('The dialog was closed');
+        console.log(result);
+        this.new_profile = result;
+        if (this.new_profile.photo != undefined) {
+          this.profileData.photo = this.new_profile.photo;
+        }
+
+        // @ts-ignore
+        this.profileService.updateProfileInfo(this.new_profile).subscribe(res => this.profile = res);
       }
-
-
-      // @ts-ignore
-      this.profileService.updateProfileInfo(this.new_profile).subscribe(res => this.profile = res);
     });
   }
 

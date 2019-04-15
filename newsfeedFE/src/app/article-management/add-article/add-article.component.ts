@@ -16,7 +16,35 @@ export class AddArticleComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data) {
   }
 
+  categories;
+
+  checkedValue(event) {
+    console.log("Checked: " + event.checked);
+    console.log("Data: ");
+    console.log(event);
+
+    if (this.data.categoryList === undefined) {
+      this.data.categoryList = [];
+    }
+    if (event.checked) {
+      this.data.categoryList.push(event.source.name);
+    } else {
+      var index = this.data.categoryList.indexOf(event.source.name);
+      if (index !== -1) this.data.categoryList.splice(index, 1);
+    }
+    console.log(this.data.categoryList);
+  }
+
   ngOnInit() {
+    this.articleService.getAllCategories().subscribe(
+      data => {
+        console.log(data);
+        this.categories = data;
+      }, err => {
+        console.log(err);
+      }
+    );
+
   }
 
   onNoClick(): void {
@@ -44,7 +72,7 @@ export class AddArticleComponent implements OnInit {
 
   submitForm() {
     console.log("Submit data");
-    console.log(this.data);
+    console.log("Data: " + this.data);
 
     this.articleService.addArticle(this.data).subscribe(
       data => {

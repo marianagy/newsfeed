@@ -11,7 +11,6 @@ public class TagDTOHelper {
         TagDTO tagDTO = new TagDTO();
         tagDTO.setId(tag.getId());
         tagDTO.setName(tag.getName());
-        tagDTO.setTaggedArticleList(tag.getTaggedArticleList());
 
         return tagDTO;
     }
@@ -20,7 +19,6 @@ public class TagDTOHelper {
         Tag tag = new Tag();
         tag.setId(tagDTO.getId());
         tag.setName(tag.getName());
-        tag.setTaggedArticleList(tagDTO.getTaggedArticleList());
 
         return tag;
     }

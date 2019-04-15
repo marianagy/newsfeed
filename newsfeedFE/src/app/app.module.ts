@@ -25,6 +25,7 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
     BrowserModule,
     FormsModule,
     ReactiveFormsModule
+
   ],
   providers: [LoginguardGuard,
     {

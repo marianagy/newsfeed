@@ -18,6 +18,7 @@ export class AddCommentComponent implements OnInit {
   commentList: any;
   articleId: any;
   comment: any;
+  editComment: any;
   username;
   new_comment;
 
@@ -88,24 +89,24 @@ export class AddCommentComponent implements OnInit {
     this.articleService.getCommentById(commentId)
       .subscribe(
         data => {
-          this.comment = data;
-          console.log(this.comment);
+          this.editComment = data;
+          console.log(this.editComment);
           const dialogRef = this.dialog.open(EditCommentComponent, {
             width: '350px',
             data: {
-              "id": this.comment.id,
-              "content": this.comment.content,
-              "user": this.comment.user,
-              "article": this.comment.article,
-              "date": this.comment.date
+              "id": this.editComment.id,
+              "content": this.editComment.content,
+              "user": this.editComment.user,
+              "article": this.editComment.article,
+              "date": this.editComment.date
             }
           });
           dialogRef.afterClosed().subscribe(result => {
               console.log('The dialog was closed');
               console.log(result);
               this.new_comment = result;
-              this.comment.content = this.new_comment.content;
-              this.comment.date = new Date();
+              this.editComment.content = this.new_comment.content;
+              this.editComment.date = new Date();
               this.loadComments();
             },
             err => {

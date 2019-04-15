@@ -6,6 +6,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {
   MatButtonModule,
   MatCardModule,
+  MatCheckboxModule,
   MatChipsModule,
   MatDatepickerModule,
   MatDialogModule,
@@ -28,6 +29,7 @@ import {AddArticleComponent} from './add-article/add-article.component';
 import {EditArticleComponent} from './edit-article/edit-article.component';
 import {AddCommentComponent} from './add-comment/add-comment.component';
 import {EditCommentComponent} from './edit-comment/edit-comment.component';
+import {ClickOutsideModule} from "ng-click-outside";
 
 
 @NgModule({
@@ -55,6 +57,8 @@ import {EditCommentComponent} from './edit-comment/edit-comment.component';
     ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
+    ClickOutsideModule,
+    MatCheckboxModule
 
 
   ],

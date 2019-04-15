@@ -1,9 +1,11 @@
 package com.project.newsfeed.service.article;
 
 import com.project.newsfeed.dao.article.ArticleDAO;
+import com.project.newsfeed.dao.article.CategoryDAO;
 import com.project.newsfeed.dao.article.TagDAO;
 import com.project.newsfeed.dao.user.UserDAO;
 import com.project.newsfeed.entity.article.Article;
+import com.project.newsfeed.entity.article.Category;
 import com.project.newsfeed.entity.article.Tag;
 import com.project.newsfeed.entity.user.User;
 import com.project.newsfeed.exception.BusinessException;
@@ -13,6 +15,7 @@ import com.project.newsfeed.service.article.dto.ArticleDTOHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -22,13 +25,15 @@ public class ArticleServiceImpl implements ArticleService {
 
     private ArticleDAO articleDAO;
     private TagDAO tagDAO;
+    private CategoryDAO categoryDAO;
     private UserDAO userDAO;
 
     @Autowired
-    public ArticleServiceImpl(ArticleDAO articleDAO, TagDAO tagDAO, UserDAO userDAO) {
+    public ArticleServiceImpl(ArticleDAO articleDAO, TagDAO tagDAO, UserDAO userDAO, CategoryDAO categoryDAO) {
         this.articleDAO = articleDAO;
         this.tagDAO = tagDAO;
         this.userDAO = userDAO;
+        this.categoryDAO = categoryDAO;
     }
 
     @Override
@@ -56,24 +61,53 @@ public class ArticleServiceImpl implements ArticleService {
         User user = userDAO.findByUsername(username);
         Article article = ArticleDTOHelper.toEntity(articleDTO);
         article.setUser(user);
-        // testez daca tag-ul e deja in db, si sa il salvez daca nu e
-        List<Tag> tagList = articleDTO.getTagList();
-        List<Tag> dbTagList = tagDAO.findAll();
-        if (dbTagList.size() > 0) {
-            for (int i = 0; i <= tagList.size(); i++) {
-                for (int j = 0; j <= dbTagList.size(); j++) {
-                    if (!(tagList.get(i).getName().equals(dbTagList.get(j).getName()))) {
-                        tagDAO.save(tagList.get(i));
-                    }
-                }
-            }
 
-            articleDAO.save(article);
-        } else {
-            articleDAO.save(article);
+        List<Tag> tags = getTagsFromDTO(articleDTO);
+
+        List<Category> categories = getCategoriesFromDTO(articleDTO);
+
+        categories.forEach(category -> category.getCategoryArticleList().add(article));
+        tags.forEach(tag -> tag.getTaggedArticleList().add(article));
+
+        article.setTagList(tags);
+        article.setCategoryList(categories);
+        articleDAO.save(article);
+
+
+    }
+
+    private List<Tag> getTagsFromDTO(ArticleDTO articleDTO) {
+        List<String> tagList = articleDTO.getTagList();
+        if (tagList == null) {
+            tagList = new ArrayList<>();
         }
+        return tagList.stream()
+                .map(tagName -> {
+                    Tag tag = tagDAO.findByName(tagName);
+                    if (tag == null) {
+                        tag = new Tag();
+                        tag.setName(tagName);
+                        tagDAO.save(tag);
 
+                    }
+                    return tag;
+                })
+                .collect(Collectors.toList());
+    }
 
+    private List<Category> getCategoriesFromDTO(ArticleDTO articleDTO) throws BusinessException {
+        //la fel categorii (aproape)
+        List<String> categoryList = articleDTO.getCategoryList();
+        if (categoryList == null) {
+            categoryList = new ArrayList<>();
+        }
+        List<Category> categories = categoryList.stream()
+                .map(categoryName -> categoryDAO.findByName(categoryName))
+                .collect(Collectors.toList());
+        if (categoryList.contains(null)) {
+            throw new BusinessException(ExceptionCode.CATEGORY_NOT_FOUND);
+        }
+        return categories;
     }
 
     @Override

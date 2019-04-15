@@ -29,6 +29,7 @@
       >
     </mat-form-field>
 
+
     <button (click)="imgFileInput.click()" mat-button md-button type="button">Add Photo
     </button>
 
@@ -36,13 +37,21 @@
     <div id="chosen_image" style="float:right" width="100px">
 
     </div>
+    <mat-nav-list *ngFor="let category of categories"
 
+    >
+      <mat-checkbox
+        (change)="checkedValue($event)"
+        name="{{category.name}}">{{category.name}}</mat-checkbox>
+    </mat-nav-list>
     <div mat-dialog-actions>
       <button mat-button type="submit">Submit</button>
 
     </div>
 
+
   </form>
+
 
   <button (click)=this.dialogRef.close(this.data) class="cancel-button" color="warn"
           mat-mini-fab>

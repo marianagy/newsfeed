@@ -109,8 +109,8 @@ export class ArticleListComponent implements OnInit {
             "content": this.article.content,
             "image": this.article.image,
             "user": this.article.user,
-            "tags": this.article.tags,
-            "categories": this.article.categories,
+            "tagList": this.article.tagList,
+            "categoryList": this.article.categoryList,
             "nrUpvotes": this.article.nrUpvotes,
             "profileDTO": this.article.profileDTO,
           }

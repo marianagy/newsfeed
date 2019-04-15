@@ -1,15 +1,12 @@
 package com.project.newsfeed.service.article.dto;
 
-import com.project.newsfeed.entity.article.Article;
-
-import java.util.List;
 import java.util.Objects;
 
 public class CategoryDTO {
 
     private Integer id;
     private String name;
-    private List<Article> categoryArticleList;
+//    private List<ArticleDTO> categoryArticleList;
 
     public CategoryDTO() {
     }
@@ -30,13 +27,13 @@ public class CategoryDTO {
         this.name = name;
     }
 
-    public List<Article> getCategoryArticleList() {
-        return categoryArticleList;
-    }
-
-    public void setCategoryArticleList(List<Article> categoryArticleList) {
-        this.categoryArticleList = categoryArticleList;
-    }
+//    public List<ArticleDTO> getCategoryArticleList() {
+//        return categoryArticleList;
+//    }
+//
+//    public void setCategoryArticleList(List<ArticleDTO> categoryArticleList) {
+//        this.categoryArticleList = categoryArticleList;
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -44,13 +41,12 @@ public class CategoryDTO {
         if (o == null || getClass() != o.getClass()) return false;
         CategoryDTO that = (CategoryDTO) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(categoryArticleList, that.categoryArticleList);
+                Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, categoryArticleList);
+        return Objects.hash(id, name);
     }
 
     @Override
@@ -58,7 +54,6 @@ public class CategoryDTO {
         return "CategoryDTO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", categoryArticleList=" + categoryArticleList +
                 '}';
     }
 }

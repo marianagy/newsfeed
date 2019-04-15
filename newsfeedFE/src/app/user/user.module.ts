@@ -56,7 +56,7 @@ import {AddCommentComponent} from "../article-management/add-comment/add-comment
     MatSelectModule,
     ReactiveFormsModule,
     BrowserModule,
-    ArticleManagementModule
+    ArticleManagementModule,
   ],
   exports: [LoginComponent, RouterModule],
   entryComponents: [EditProfileComponent,

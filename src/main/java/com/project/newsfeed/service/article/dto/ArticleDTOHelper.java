@@ -20,8 +20,7 @@ public class ArticleDTOHelper {
         }
         articleDTO.setUser((UserDTOHelper.fromEntity(article.getUser())));
         articleDTO.setNrUpvotes(article.getNrUpvotes());
-        articleDTO.setTagList(article.getTagList());
-        articleDTO.setCategoryList(article.getCategoryList());
+
         articleDTO.setProfileDTO(ProfileDTOHelper.fromEntity(article.getUser().getProfile()));
 
         return articleDTO;
@@ -38,8 +37,6 @@ public class ArticleDTOHelper {
         article.setUser(UserDTOHelper.toEntity(articleDTO.getUser()));
 
         article.setNrUpvotes(articleDTO.getNrUpvotes());
-        article.setTagList(articleDTO.getTagList());
-        article.setCategoryList(article.getCategoryList());
 
 
         return article;

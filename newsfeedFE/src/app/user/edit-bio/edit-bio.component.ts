@@ -28,7 +28,7 @@ export class EditBioComponent implements OnInit {
   }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(this.data);
   }
 
   submitForm() {

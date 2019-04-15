@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-    CategoryDAO categoryDAO;
+    private CategoryDAO categoryDAO;
 
     @Autowired
     public CategoryServiceImpl(CategoryDAO categoryDAO) {

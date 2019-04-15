@@ -11,7 +11,6 @@ public class CategoryDTOHelper {
         CategoryDTO categoryDTO = new CategoryDTO();
         categoryDTO.setId(category.getId());
         categoryDTO.setName(category.getName());
-        categoryDTO.setCategoryArticleList(category.getCategoryArticleList());
 
         return categoryDTO;
     }
@@ -20,7 +19,6 @@ public class CategoryDTOHelper {
         Category category = new Category();
         category.setId(categoryDTO.getId());
         category.setName(categoryDTO.getName());
-        category.setCategoryArticleList(category.getCategoryArticleList());
 
         return category;
     }

@@ -11,6 +11,9 @@ export class ArticleService {
   constructor(private http: HttpClient) {
   }
 
+  getAllCategories() {
+    return this.http.get(this.baseURL + '/categories');
+  }
 
   getAllArticles(articleFilter) {
     if (articleFilter === undefined) {
