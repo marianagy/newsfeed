@@ -29,7 +29,6 @@
       >
     </mat-form-field>
 
-
     <button (click)="imgFileInput.click()" mat-button md-button type="button">Add Photo
     </button>
 
@@ -44,6 +43,15 @@
         (change)="checkedValue($event)"
         name="{{category.name}}">{{category.name}}</mat-checkbox>
     </mat-nav-list>
+    <textarea #tagControl="ngModel"
+              #tagElement
+              [(ngModel)]="tagString"
+              matInput
+              name="content"
+              placeholder="Leave a comment">
+
+    </textarea>
+
     <div mat-dialog-actions>
       <button mat-button type="submit">Submit</button>
 

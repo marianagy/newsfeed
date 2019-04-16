@@ -17,6 +17,7 @@ export class AddArticleComponent implements OnInit {
   }
 
   categories;
+  tagString;
 
   checkedValue(event) {
     console.log("Checked: " + event.checked);
@@ -32,7 +33,7 @@ export class AddArticleComponent implements OnInit {
       var index = this.data.categoryList.indexOf(event.source.name);
       if (index !== -1) this.data.categoryList.splice(index, 1);
     }
-    console.log(this.data.categoryList);
+    console.log("Category list: " + this.data.categoryList);
   }
 
   ngOnInit() {
@@ -73,7 +74,9 @@ export class AddArticleComponent implements OnInit {
   submitForm() {
     console.log("Submit data");
     console.log("Data: " + this.data);
-
+    this.data.tagList = this.tagString.split(" ");
+    console.log("Data tag list: " + this.data.tagList);
+    console.log("Tag string: " + this.tagString);
     this.articleService.addArticle(this.data).subscribe(
       data => {
         this.dialogRef.close(this.data);

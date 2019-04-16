@@ -66,9 +66,24 @@ public class ArticleServiceImpl implements ArticleService {
 
         List<Category> categories = getCategoriesFromDTO(articleDTO);
 
-        categories.forEach(category -> category.getCategoryArticleList().add(article));
-        tags.forEach(tag -> tag.getTaggedArticleList().add(article));
+        if (categories.size() > 0) {
+            categories.forEach(category -> {
+                if (category.getCategoryArticleList() == null) {
+                    category.setCategoryArticleList(new ArrayList<>());
 
+                }
+                category.getCategoryArticleList().add(article);
+            });
+        }
+        if (tags.size() > 0) {
+            tags.forEach(tag -> {
+                if (tag.getTaggedArticleList() == null) {
+                    tag.setTaggedArticleList(new ArrayList<>());
+
+                }
+                tag.getTaggedArticleList().add(article);
+            });
+        }
         article.setTagList(tags);
         article.setCategoryList(categories);
         articleDAO.save(article);
@@ -76,6 +91,13 @@ public class ArticleServiceImpl implements ArticleService {
 
     }
 
+//    public List<String> parseTagString(String tagString){
+//
+//        return Arrays.stream(tagString.split(" ")).collect(Collectors.toList());
+//
+//    }
+
+    // save tag
     private List<Tag> getTagsFromDTO(ArticleDTO articleDTO) {
         List<String> tagList = articleDTO.getTagList();
         if (tagList == null) {
@@ -95,6 +117,7 @@ public class ArticleServiceImpl implements ArticleService {
                 .collect(Collectors.toList());
     }
 
+    // save category
     private List<Category> getCategoriesFromDTO(ArticleDTO articleDTO) throws BusinessException {
         //la fel categorii (aproape)
         List<String> categoryList = articleDTO.getCategoryList();
