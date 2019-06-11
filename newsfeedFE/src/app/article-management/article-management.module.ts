@@ -16,6 +16,7 @@ import {
   MatInputModule,
   MatListModule,
   MatNativeDateModule,
+  MatPaginatorModule,
   MatSelectModule,
   MatSnackBarModule
 } from "@angular/material";
@@ -58,7 +59,8 @@ import {ClickOutsideModule} from "ng-click-outside";
     BrowserModule,
     AppRoutingModule,
     ClickOutsideModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatPaginatorModule
 
 
   ],

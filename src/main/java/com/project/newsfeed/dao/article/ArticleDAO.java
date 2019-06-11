@@ -11,4 +11,11 @@ public interface ArticleDAO extends JpaRepository<Article, Integer> {
 
     @Query("Select a FROM Article a where a.user = ?1")
     List<Article> getArticlesForUser(User user);
+
+    @Query("Select count(a) from Article a")
+    Integer countAllArticles();
+
+    @Query("Select count(a) from Article a where a.user=?1")
+    Integer countAllUserArticles(User user);
+
 }

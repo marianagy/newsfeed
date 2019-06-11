@@ -30,6 +30,7 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    // from child to parent
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "role_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -43,6 +44,8 @@ public class User {
 //    @OneToOne(fetch = FetchType.LAZY,
 //            cascade =  CascadeType.ALL,
 //            mappedBy = "user")
+
+    // from child to parent
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "profile_id", nullable = false)
     private Profile profile;

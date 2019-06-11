@@ -15,15 +15,22 @@ export class ArticleService {
     return this.http.get(this.baseURL + '/categories');
   }
 
-  getAllArticles(articleFilter) {
-    if (articleFilter === undefined) {
+  // getAllArticles(articleFilter) {
+  //   if (articleFilter === undefined) {
+  //
+  //     return this.http.get(this.baseURL + '/articles');
+  //   } else {
+  //     return this.http.get(this.baseURL + '/get-user-articles')
+  //   }
+  // }
 
-      return this.http.get(this.baseURL + '/articles');
+  getFilteredArticles(articleFilter, pageIndex, pageSize) {
+    if (articleFilter === undefined) {
+      return this.http.get(this.baseURL + '/get-filtered/' + pageIndex + "/" + pageSize);
     } else {
-      return this.http.get(this.baseURL + '/get-user-articles')
+      return this.http.get(this.baseURL + '/get-user-articles/' + pageIndex + "/" + pageSize);
     }
   }
-
   getCommentsForArticle(articleId) {
 
     return this.http.get(this.baseURL + '/get-article-comments/' + articleId,

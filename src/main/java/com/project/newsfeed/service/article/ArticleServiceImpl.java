@@ -12,7 +12,10 @@ import com.project.newsfeed.exception.BusinessException;
 import com.project.newsfeed.exception.ExceptionCode;
 import com.project.newsfeed.service.article.dto.ArticleDTO;
 import com.project.newsfeed.service.article.dto.ArticleDTOHelper;
+import com.project.newsfeed.service.article.dto.ArticleListDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,13 +30,15 @@ public class ArticleServiceImpl implements ArticleService {
     private TagDAO tagDAO;
     private CategoryDAO categoryDAO;
     private UserDAO userDAO;
+    private FilterArticle filterArticle;
 
     @Autowired
-    public ArticleServiceImpl(ArticleDAO articleDAO, TagDAO tagDAO, UserDAO userDAO, CategoryDAO categoryDAO) {
+    public ArticleServiceImpl(ArticleDAO articleDAO, TagDAO tagDAO, UserDAO userDAO, CategoryDAO categoryDAO, FilterArticle filterArticle) {
         this.articleDAO = articleDAO;
         this.tagDAO = tagDAO;
         this.userDAO = userDAO;
         this.categoryDAO = categoryDAO;
+        this.filterArticle = filterArticle;
     }
 
     @Override
@@ -146,4 +151,41 @@ public class ArticleServiceImpl implements ArticleService {
                 .map(ArticleDTOHelper::fromEntity)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public ArticleListDTO getFilteredArticles(Integer pageIndex, Integer pageSize) {
+
+
+        Pageable page = PageRequest.of(pageIndex, pageSize);
+        Integer amount = articleDAO.countAllArticles();
+        List<ArticleDTO> articleDTOList = filterArticle.findAll(page).stream()
+                .map(ArticleDTOHelper::fromEntity)
+                .collect(Collectors.toList());
+        return new ArticleListDTO(articleDTOList, amount);
+
+    }
+
+    /**
+     * Get filtered articles for a user
+     *
+     * @param user
+     * @param pageIndex
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public ArticleListDTO getfilteredArticlesForUser(User user, Integer pageIndex, Integer pageSize) {
+        Pageable page = PageRequest.of(pageIndex, pageSize);
+
+        Integer amount = articleDAO.countAllUserArticles(user);
+
+        List<ArticleDTO> articleDTOS = filterArticle.filteredArticlesForUser(user, page).stream()
+                .map(ArticleDTOHelper::fromEntity)
+                .collect(Collectors.toList());
+
+        return new ArticleListDTO(articleDTOS, amount);
+
+    }
+
+
 }

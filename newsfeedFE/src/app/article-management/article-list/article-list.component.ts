@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {ArticleService} from "../article.service";
-import {MatDialog} from "@angular/material";
+import {MatDialog, MatPaginator, PageEvent} from "@angular/material";
 import {EditArticleComponent} from "../edit-article/edit-article.component";
+import {ActivatedRoute} from "@angular/router";
 
 export interface ArticleData {
   id: any;
@@ -22,23 +23,55 @@ export interface ArticleData {
 })
 export class ArticleListComponent implements OnInit {
 
+  // daca sunt articolele unui user sau sau toate articolele
   @Input() articleFilter: string;
 
   username: String;
-  articleList: any;
+  // articleList: any;
+  articleList: any[];
   articleUpvotes: any;
   article: any;
+  articles: any;
   new_article: any;
+  // MatPaginator Inputs
+  pageSize = 2;
+  length = 100;
+  pageIndex = 0;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageEvent: PageEvent;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  private sub: any;
 
   constructor(private articleServie: ArticleService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private route: ActivatedRoute) {
 
   }
 
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+  }
+
+
+  // loadData(pageIndex, pageSize){
+  //
+  //   this.articles.forEach(function (entity) {
+  //
+  //   });
+  //   console.log("Article list "+this.articleList);
+  // }
 
   ngOnInit() {
     this.loadArticles();
-    console.log(this.articleFilter);
+    console.log("Article filter " + this.articleFilter);
+    //this.loadData(0,this.pageSize)
+    // this.filter(this.pageIndex, this.pageSize, this.article.id);
+    // this.sub = this.route.params.subscribe(params => {
+    //   this.article.id = +params['id'];
+    // });
+    // if (this.article.id) {
+    //   this.filter(0, 1, this.article.id);
+    // }
   }
 
   innerUpvoteCheck(articleId) {
@@ -71,13 +104,22 @@ export class ArticleListComponent implements OnInit {
     return this.username === articleUserUsername;
   }
 
+  onPageChange(event) {
+    console.log(event);
+
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.loadArticles();
+  }
+
   loadArticles() {
 
-    this.articleServie.getAllArticles(this.articleFilter)
+    this.articleServie.getFilteredArticles(this.articleFilter, this.pageIndex, this.pageSize)
       .subscribe(
         data => {
-          console.log("Everything ok.");
           console.log(data);
+          this.articleList = (Object.values(data['articleDTOList']));
+          this.length = data['amount'];
           // this.articleData.id = data[0]["id"];
           // this.articleData.title = data[0]["title"];
           // this.articleData.content = data[0]["content"];
@@ -86,14 +128,16 @@ export class ArticleListComponent implements OnInit {
           // this.articleData.categories = data[0]["categories"];
           // this.articleData.nrUpvotes = data[0]["nrUpvotes"];
 
-          this.articleList = data;
-
+          // this.articles = data;
+          // console.log("Articles: ");
+          // console.log(this.articles);
 
         }, err => {
           console.log("Error happened.");
           console.log(err);
         }
       )
+
   }
 
   editArticleDialog(articleId) {
@@ -143,6 +187,20 @@ export class ArticleListComponent implements OnInit {
     );
 
   }
+
+  // filter(pageIndex = 0, pageSize = this.pageSize, id: number) {
+  //   this.pageIndex = pageIndex;
+  //   this.filter(pageIndex, pageSize, id).subscribe(
+  //     {
+  //       next: (value: any[]) => {
+  //         console.log(value);
+  //         this.articleList = new MatTableDataSource<ArticleData[]>(value['filteredList']);
+  //         this.length = value['actualListSize'];
+  //         //this.sortDataSource();
+  //       }
+  //     }
+  //   );
+  // }
 
 
 }

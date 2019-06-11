@@ -4,6 +4,7 @@ import com.project.newsfeed.entity.user.User;
 import com.project.newsfeed.exception.BusinessException;
 import com.project.newsfeed.service.article.ArticleService;
 import com.project.newsfeed.service.article.dto.ArticleDTO;
+import com.project.newsfeed.service.article.dto.ArticleListDTO;
 import com.project.newsfeed.service.user.UserService;
 import com.project.newsfeed.service.user.dto.UserDTOHelper;
 import com.project.newsfeed.utils.RequestUtils;
@@ -27,19 +28,19 @@ public class ArticleRestController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/get-user-articles",
-            method = RequestMethod.GET
-    )
-    @ResponseBody
-    public ResponseEntity<List<ArticleDTO>> getArticlesForUser(@RequestHeader("Authorization") String token) {
-        User requester = null;
-        try {
-            requester = userService.getUserByUsername(RequestUtils.getRequesterUsername(token));
-        } catch (BusinessException e) {
-            e.printStackTrace();
-        }
-        return ResponseEntity.ok().body(articleService.getArticlesForUser(requester));
-    }
+//    @RequestMapping(value = "/get-user-articles",
+//            method = RequestMethod.GET
+//    )
+//    @ResponseBody
+//    public ResponseEntity<List<ArticleDTO>> getArticlesForUser(@RequestHeader("Authorization") String token) {
+//        User requester = null;
+//        try {
+//            requester = userService.getUserByUsername(RequestUtils.getRequesterUsername(token));
+//        } catch (BusinessException e) {
+//            e.printStackTrace();
+//        }
+//        return ResponseEntity.ok().body(articleService.getArticlesForUser(requester));
+//    }
 
     @RequestMapping(value = "/articles",
             method = RequestMethod.GET
@@ -121,5 +122,29 @@ public class ArticleRestController {
         return ResponseEntity.ok().build();
     }
 
+    @RequestMapping(value = "/get-filtered/{pageIndex}/{pageSize}",
+            method = RequestMethod.GET
+    )
+    @ResponseBody
+    public ResponseEntity<ArticleListDTO> getFilteredArticles(@PathVariable Integer pageIndex,
+                                                              @PathVariable Integer pageSize) {
+        return ResponseEntity.ok().body(articleService.getFilteredArticles(pageIndex, pageSize));
+    }
+
+    @RequestMapping(value = "/get-user-articles/{pageIndex}/{pageSize}",
+            method = RequestMethod.GET
+    )
+    @ResponseBody
+    public ResponseEntity<ArticleListDTO> getfilteredArticlesForUser(@RequestHeader("Authorization") String token,
+                                                                     @PathVariable Integer pageIndex,
+                                                                     @PathVariable Integer pageSize) {
+        User requester = null;
+        try {
+            requester = userService.getUserByUsername(RequestUtils.getRequesterUsername(token));
+        } catch (BusinessException e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok().body(articleService.getfilteredArticlesForUser(requester, pageIndex, pageSize));
+    }
 
 }
