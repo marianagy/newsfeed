@@ -1,8 +1,9 @@
-<h2>Articles</h2>
-<ul class="articles">
+<!--<h2>Articles</h2>-->
+<div class="article-list">
+  <ul class="articles">
   <li *ngFor="let article of articleList">
     <mat-card class="article-card">
-      <img mat-card-avatar
+      <img id="image" mat-card-avatar
            src={{article.image}}>
 
       <!--<mat-card-title>{{article.title}}</mat-card-title>-->
@@ -14,19 +15,20 @@
       <!--</button>-->
 
     </mat-card>
-    <button (click)="editArticleDialog(article.id)" *ngIf="verifyUser(article.user.username)" color="primary"
-            mat-flat-button>
+    <button (click)="editArticleDialog(article.id)" *ngIf="verifyUser(article.user.username)"
+            mat-raised-button>
       Edit
     </button>
-    <button (click)="deleteArticle(article.id)" *ngIf="verifyUser(article.user.username)" color="primary"
-            mat-flat-button>Delete
+    <button (click)="deleteArticle(article.id)" *ngIf="verifyUser(article.user.username)"
+            mat-raised-button>Delete
     </button>
   </li>
 
 
 </ul>
-
-<mat-paginator
+</div>
+<div class="paginator">
+  <mat-paginator
   [length]="length"
   [pageSize]="pageSize"
   [pageSizeOptions]="pageSizeOptions"
@@ -36,6 +38,7 @@
 >
 
 </mat-paginator>
+</div>
 <!--<mat-paginator-->
 <!--[length]="length"-->
 <!--[pageSize]="pageSize"-->

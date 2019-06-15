@@ -1,0 +1,15 @@
+.article-list {
+  padding: 100px;
+
+  .articles {
+    list-style-type: none;
+  }
+}
+
+.article-list #image {
+  height: 130px;
+  width: 180px;
+  border-radius: 0;
+  flex-shrink: 0;
+  object-fit: cover;
+}

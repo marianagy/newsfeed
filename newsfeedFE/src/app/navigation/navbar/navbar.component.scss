@@ -3,6 +3,8 @@
   flex-flow: row;
   justify-content: flex-start;
 
+  margin: 0 0 30px;
+  box-shadow: 1px 1px 5px grey;
   .align-right {
     margin-left: auto;
 
@@ -12,8 +14,7 @@
   }
 }
 
-.menu {
-}
-
-.menu .logout {
+.mat-toolbar.mat-primary {
+  background: #ffffff;
+  color: #000;
 }

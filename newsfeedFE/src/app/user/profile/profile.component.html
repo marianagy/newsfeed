@@ -5,7 +5,7 @@
 
       <img mat-card-avatar
            src={{profileData.photo}}>
-      <button (click)="editPhotoDialog()" class="edit-photo" color="primary" mat-button>
+      <button (click)="editPhotoDialog()" class="edit-photo" mat-button>
         <i class="material-icons">edit</i>
       </button>
 
@@ -34,7 +34,7 @@
 </mat-card>
 
 <!-- Articole -->
-<button (click)="addArticleDialog()" color="primary" mat-flat-button>
+<button (click)="addArticleDialog()" color="primary" mat-raised-button>
   Add Article
 </button>
 <app-article-list [articleFilter]="username"></app-article-list>

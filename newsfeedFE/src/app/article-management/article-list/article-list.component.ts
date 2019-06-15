@@ -34,7 +34,7 @@ export class ArticleListComponent implements OnInit {
   articles: any;
   new_article: any;
   // MatPaginator Inputs
-  pageSize = 2;
+  pageSize = 3;
   length = 100;
   pageIndex = 0;
   pageSizeOptions: number[] = [5, 10, 25, 100];
