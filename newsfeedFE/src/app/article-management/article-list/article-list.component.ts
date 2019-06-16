@@ -113,7 +113,7 @@ export class ArticleListComponent implements OnInit {
   }
 
   loadArticles() {
-
+    console.log("I am in load articles");
     this.articleServie.getFilteredArticles(this.articleFilter, this.pageIndex, this.pageSize)
       .subscribe(
         data => {

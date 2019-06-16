@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Service
 public class TagServiceImpl implements TagService {
 
-    TagDAO tagDAO;
+    private TagDAO tagDAO;
 
     @Autowired
     public TagServiceImpl(TagDAO tagDAO) {

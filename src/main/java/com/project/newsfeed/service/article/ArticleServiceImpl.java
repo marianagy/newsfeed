@@ -13,6 +13,9 @@ import com.project.newsfeed.exception.ExceptionCode;
 import com.project.newsfeed.service.article.dto.ArticleDTO;
 import com.project.newsfeed.service.article.dto.ArticleDTOHelper;
 import com.project.newsfeed.service.article.dto.ArticleListDTO;
+import com.project.newsfeed.service.article.dto.TagDTOHelper;
+import com.project.newsfeed.service.upvote.TagLikeService;
+import com.project.newsfeed.service.upvote.dto.TagLikeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -31,6 +34,18 @@ public class ArticleServiceImpl implements ArticleService {
     private CategoryDAO categoryDAO;
     private UserDAO userDAO;
     private FilterArticle filterArticle;
+    private TagLikeService tagLikeService;
+    private TagService tagService;
+
+    @Autowired
+    public void setTagLikeService(TagLikeService tagLikeService) {
+        this.tagLikeService = tagLikeService;
+    }
+
+    @Autowired
+    public void setTagService(TagService tagService) {
+        this.tagService = tagService;
+    }
 
     @Autowired
     public ArticleServiceImpl(ArticleDAO articleDAO, TagDAO tagDAO, UserDAO userDAO, CategoryDAO categoryDAO, FilterArticle filterArticle) {
@@ -102,8 +117,13 @@ public class ArticleServiceImpl implements ArticleService {
 //
 //    }
 
-    // save tag
-    private List<Tag> getTagsFromDTO(ArticleDTO articleDTO) {
+    /**
+     * Methid saves tags in db
+     *
+     * @param articleDTO
+     * @return list of tags
+     */
+    public List<Tag> getTagsFromDTO(ArticleDTO articleDTO) {
         List<String> tagList = articleDTO.getTagList();
         if (tagList == null) {
             tagList = new ArrayList<>();
@@ -122,7 +142,13 @@ public class ArticleServiceImpl implements ArticleService {
                 .collect(Collectors.toList());
     }
 
-    // save category
+
+    /**
+     * Method saves categories in db
+     * @param articleDTO
+     * @return list of categories
+     * @throws BusinessException
+     */
     private List<Category> getCategoriesFromDTO(ArticleDTO articleDTO) throws BusinessException {
         //la fel categorii (aproape)
         List<String> categoryList = articleDTO.getCategoryList();
@@ -185,6 +211,50 @@ public class ArticleServiceImpl implements ArticleService {
 
         return new ArticleListDTO(articleDTOS, amount);
 
+    }
+
+    /**
+     * Methid gets the articles that a specifid user would be interested in
+     *
+     * @param user
+     * @return
+     */
+    @Override
+    public ArticleListDTO getRecommendedArticlesForUser(User user, Integer pageIndex, Integer pageSize) {
+
+        // get taglike list
+        List<TagLikeDTO> tagLikeDTOList = tagLikeService.findTagLikeByUserId(user.getId());
+
+        // form tag list
+        List<Tag> tagList = tagLikeDTOList.stream()
+                .map(tagLikeDTO -> {
+                    try {
+                        return TagDTOHelper.toEntity(tagService.findById(tagLikeDTO.getTagId()));
+                    } catch (BusinessException e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }).collect(Collectors.toList());
+
+
+        Pageable page = PageRequest.of(pageIndex, pageSize);
+        // for each tag in tag list, get article list
+        List<ArticleDTO> articleDTOList = new ArrayList<>();
+        for (Tag tag : tagList) {
+
+            articleDAO.findArticleByTag(tag, page)
+                    .forEach(article -> {
+                        if (article != null && !articleDTOList.contains(ArticleDTOHelper.fromEntity(article))) {
+                            articleDTOList.add(ArticleDTOHelper.fromEntity(article));
+                        }
+                    });
+        }
+
+
+        Integer amount = articleDAO.countAllArticles();
+
+
+        return new ArticleListDTO(articleDTOList, amount);
     }
 
 

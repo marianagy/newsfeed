@@ -25,8 +25,11 @@ export class ArticleService {
   // }
 
   getFilteredArticles(articleFilter, pageIndex, pageSize) {
+
     if (articleFilter === undefined) {
-      return this.http.get(this.baseURL + '/get-filtered/' + pageIndex + "/" + pageSize);
+      console.log("I am in article service getFilteredArticles");
+      // return this.http.get(this.baseURL + '/get-filtered/' + pageIndex + "/" + pageSize);
+      return this.http.get(this.baseURL + '/recommended-articles/' + pageIndex + "/" + pageSize);
     } else {
       return this.http.get(this.baseURL + '/get-user-articles/' + pageIndex + "/" + pageSize);
     }

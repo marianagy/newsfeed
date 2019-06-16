@@ -147,4 +147,24 @@ public class ArticleRestController {
         return ResponseEntity.ok().body(articleService.getfilteredArticlesForUser(requester, pageIndex, pageSize));
     }
 
+
+    @RequestMapping(value = "/recommended-articles/{pageIndex}/{pageSize}",
+            method = RequestMethod.GET
+    )
+    @ResponseBody
+    public ResponseEntity<ArticleListDTO> getRecommendedArticlesForUser(@RequestHeader("Authorization") String token,
+                                                                        @PathVariable Integer pageIndex,
+                                                                        @PathVariable Integer pageSize) {
+        User requester = null;
+        try {
+            requester = userService.getUserByUsername(RequestUtils.getRequesterUsername(token));
+            System.out.println("I am here");
+        } catch (BusinessException e) {
+            System.out.println("I am here");
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok().body(articleService.getRecommendedArticlesForUser(requester, pageIndex, pageSize));
+
+    }
+
 }

@@ -1,6 +1,8 @@
 package com.project.newsfeed.service.upvote;
 
+import com.project.newsfeed.dao.article.ArticleDAO;
 import com.project.newsfeed.dao.upvote.UpvoteDAO;
+import com.project.newsfeed.entity.article.Tag;
 import com.project.newsfeed.entity.upvote.Upvote;
 import com.project.newsfeed.entity.user.User;
 import com.project.newsfeed.exception.BusinessException;
@@ -21,10 +23,28 @@ import java.util.stream.Collectors;
 public class UpvoteServiceImpl implements UpvoteService {
 
     private UpvoteDAO upvoteDAO;
-
+    //    private ArticleService articleService;
+    private TagLikeService tagLikeService;
+    private ArticleDAO articleDAO;
     @Autowired
     public UpvoteServiceImpl(UpvoteDAO upvoteDAO) {
         this.upvoteDAO = upvoteDAO;
+//        this.articleService = articleService;
+//        this.tagLikeService = tagLikeService;
+    }
+
+    //    @Autowired
+//    public void setArticleService(ArticleService articleService) {
+//        this.articleService = articleService;
+//    }
+    @Autowired
+    public void setTagLikeService(TagLikeService tagLikeService) {
+        this.tagLikeService = tagLikeService;
+    }
+
+    @Autowired
+    public void setArticleDAO(ArticleDAO articleDAO) {
+        this.articleDAO = articleDAO;
     }
 
     @Override
@@ -53,6 +73,13 @@ public class UpvoteServiceImpl implements UpvoteService {
             throw new BusinessException(ExceptionCode.ALREADY_UPVOTED);
         }
 
+        Integer userId = upvoteDTO.getUserDTO().getId();
+        List<Tag> tagList = articleDAO.getTagsForArticle(upvoteDTO.getArticleDTO().getId());
+
+        System.out.println("Hello");
+
+        tagLikeService.save(tagList, userId);
+        System.out.println("Hello save");
         upvoteDAO.save(UpvoteDTOHelper.toEntity(upvoteDTO));
     }
 

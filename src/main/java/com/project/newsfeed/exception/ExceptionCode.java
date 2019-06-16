@@ -23,6 +23,7 @@ package com.project.newsfeed.exception;
         COMMENT_NOT_FOUND(4016, "Comment not found"),
         UPVOTE_NOT_FOUND(4017, "Upvote not found"),
         ALREADY_UPVOTED(4018, "User already upvoted"),
+        TAGLIKE_NOT_FOUND(4019, "TagLike not found"),
         USER_PERMISSION_VALIDATION(2001, "User does not have this permission"),
         ROLE_DOESNT_EXIST(2002, "User does not have this permission"),
         PROFILE_VALIDATION_EXCEPTION(5001, "Validation Exception"),
