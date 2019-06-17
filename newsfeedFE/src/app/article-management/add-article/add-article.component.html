@@ -17,8 +17,8 @@
         required
       >
     </mat-form-field>
-    <mat-form-field>
-      <input
+    <textarea
+
         #contentControl="ngModel"
         #contentElement
         [(ngModel)]="data.content"
@@ -27,7 +27,7 @@
         placeholder="Content"
         required
       >
-    </mat-form-field>
+    </textarea>
 
     <button (click)="imgFileInput.click()" mat-button md-button type="button">Add Photo
     </button>

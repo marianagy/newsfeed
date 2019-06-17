@@ -24,12 +24,24 @@ export class ArticleService {
   //   }
   // }
 
-  getFilteredArticles(articleFilter, pageIndex, pageSize) {
+  getTagLike() {
+    return this.http.get(this.baseURL + '/get-taglike');
+  }
 
+
+  getArticles(pageIndex, pageSize) {
+
+    return this.http.get(this.baseURL + '/get-filtered/' + pageIndex + "/" + pageSize);
+  }
+
+  getFilteredArticles(articleFilter, pageIndex, pageSize) {
+    console.log(this.getTagLike());
     if (articleFilter === undefined) {
       console.log("I am in article service getFilteredArticles");
+
       // return this.http.get(this.baseURL + '/get-filtered/' + pageIndex + "/" + pageSize);
       return this.http.get(this.baseURL + '/recommended-articles/' + pageIndex + "/" + pageSize);
+
     } else {
       return this.http.get(this.baseURL + '/get-user-articles/' + pageIndex + "/" + pageSize);
     }
