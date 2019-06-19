@@ -1,14 +1,21 @@
-<mat-card class="article-card">
-  <img alt="featured-image"
-       src={{article.image}}>
+<div class="article-card-single">
+  <div [ngStyle]="{ 'background-image': 'url(' + article.image + ')'}"
+       class="featured-img-wrapper">>
+    <!--<img alt="featured-image"-->
+    <!--src={{article.image}}>-->
+  </div>
 
-  <mat-card-title>{{article.title}}</mat-card-title>
-  <div [innerHTML]="article.content" class="article-content"></div>
-  <button (click)="addUpvote(article.id)" mat-button>
-    <i *ngIf="!articleUpvoted" class="material-icons">favorite_border</i>
-    <i *ngIf="articleUpvoted" class="material-icons">favorite</i>
-  </button>
-  <h4>by {{article.profileDTO.firstName}} {{article.profileDTO.lastName}}</h4>
+  <div class="article-single-total">
+    <h1 class="article-title">{{article.title}}</h1>
+    <div [innerHTML]="article.content" class="article-content"></div>
 
-  <app-add-comment></app-add-comment>
-</mat-card>
+    <!--<img src="{{article.profileDTO.photo}}" alt="Profile pic" />-->
+    <h4>by {{article.profileDTO.firstName}} {{article.profileDTO.lastName}}</h4>
+    <button (click)="addUpvote(article.id)" class="like-button" mat-button>
+      <i *ngIf="!articleUpvoted" class=" material-icons">favorite_border</i>
+      <i *ngIf="articleUpvoted" class="material-icons">favorite</i>
+    </button>
+    <app-add-comment></app-add-comment>
+  </div>
+
+</div>

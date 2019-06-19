@@ -1,0 +1,46 @@
+.article-card-single {
+  .featured-img-wrapper {
+    width: 100%;
+    height: 600px;
+    margin-bottom: 40px;
+    overflow: hidden;
+    position: relative;
+    top: -30px;
+
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    //img{
+    //  width: 100%;
+    //  object-fit: cover;
+    //  object-position: center center;
+    //}
+  }
+
+  .article-single-total {
+    width: 60%;
+    margin: 0 auto;
+    text-align: justify;
+    font-family: 'Roboto', sans-serif;
+
+    .article-title {
+      font-size: 50px;
+      text-align: justify;
+      line-height: 85px;
+    }
+
+    .article-content {
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+
+    .like-button {
+      i {
+        font-size: 40px;
+      }
+    }
+  }
+
+
+}

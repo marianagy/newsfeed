@@ -1,15 +1,62 @@
 .article-list {
-  padding: 100px;
+  padding: 45px 0;
 
   .articles {
     list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    .control-button {
+      margin-right: 20px;
+      margin-bottom: 10px;
+    }
+
+    .article-card {
+      display: flex;
+      flex-flow: row;
+      max-height: 200px;
+      margin-bottom: 50px;
+
+      img {
+        width: 20%;
+        margin: 0 auto;
+        max-width: 600px;
+        height: auto;
+        border-radius: 0;
+        max-height: 100%;
+      }
+
+      .card-content {
+        width: 80%;
+        margin-left: 10px;
+        padding-left: 25px;
+
+        .title-link {
+          text-decoration: none;
+          color: #000000;
+
+          &:visited {
+            color: #000000;
+          }
+
+          &:hover {
+            color: #7e7e7e;
+          }
+
+          h2 {
+            margin-top: 0;
+            margin-bottom: 25px;
+          }
+        }
+      }
+    }
   }
 }
 
-.article-list #image {
-  height: 130px;
-  width: 180px;
-  border-radius: 0;
-  flex-shrink: 0;
-  object-fit: cover;
-}
+//.article-list #image {
+//  height: 130px;
+//  width: 180px;
+//  border-radius: 0;
+//  flex-shrink: 0;
+//  object-fit: cover;
+//}

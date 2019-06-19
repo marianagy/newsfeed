@@ -1,43 +1,48 @@
 <!--<h2>Articles</h2>-->
+
 <div class="article-list">
   <ul class="articles">
-  <li *ngFor="let article of articleList">
-    <mat-card class="article-card">
-      <img id="image" mat-card-avatar
-           src={{article.image}}>
+    <li *ngFor="let article of articleList">
 
-      <!--<mat-card-title>{{article.title}}</mat-card-title>-->
-      <a [routerLink]="['/article/'+article.id]">{{article.title}}</a>
-      <div [innerHTML]="article.content" class="article-content"></div>
-      <!--<button (click)="addUpvote(article.id)" mat-button>-->
-      <!--<i class="material-icons" *ngIf="!innerUpvoteCheck(article.id)">favorite_border</i>-->
-      <!--<i class="material-icons" *ngIf="innerUpvoteCheck(article.id)">favorite</i>-->
-      <!--</button>-->
+      <button (click)="editArticleDialog(article.id)" *ngIf="verifyUser(article.user.username)" class="control-button"
+              mat-raised-button>
+        Edit
+      </button>
+      <button (click)="deleteArticle(article.id)" *ngIf="verifyUser(article.user.username)" class="control-button"
+              mat-raised-button>Delete
+      </button>
+      <mat-card class="article-card">
+        <img id="image" mat-card-avatar
+             src={{article.image}}>
 
-    </mat-card>
-    <button (click)="editArticleDialog(article.id)" *ngIf="verifyUser(article.user.username)"
-            mat-raised-button>
-      Edit
-    </button>
-    <button (click)="deleteArticle(article.id)" *ngIf="verifyUser(article.user.username)"
-            mat-raised-button>Delete
-    </button>
-  </li>
+        <!--<mat-card-title>{{article.title}}</mat-card-title>-->
+        <div class="card-content">
+          <a [routerLink]="['/article/'+article.id]" class="title-link"><h2>{{article.title}}</h2></a>
+          <div [innerHTML]="this.shorten(article.content,200,' ')" class="article-content"></div>
+        </div>
+        <!--<button (click)="addUpvote(article.id)" mat-button>-->
+        <!--<i class="material-icons" *ngIf="!innerUpvoteCheck(article.id)">favorite_border</i>-->
+        <!--<i class="material-icons" *ngIf="innerUpvoteCheck(article.id)">favorite</i>-->
+        <!--</button>-->
+
+      </mat-card>
+
+    </li>
 
 
-</ul>
+  </ul>
 </div>
 <div class="paginator">
   <mat-paginator
-  [length]="length"
-  [pageSize]="pageSize"
-  [pageSizeOptions]="pageSizeOptions"
-  (page)="onPageChange($event)"
+    [length]="length"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="onPageChange($event)"
 
 
->
+  >
 
-</mat-paginator>
+  </mat-paginator>
 </div>
 <!--<mat-paginator-->
 <!--[length]="length"-->

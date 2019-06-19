@@ -1,9 +1,10 @@
+
 <form #addCommentControl="ngForm"
       #formElement
       (ngSubmit)="submitForm()"
       class="add-article-form">
 
-  <mat-form-field class="example-full-width">
+  <mat-form-field class="full-width-field">
     <textarea #contentControl="ngModel"
               #contentElement
               [(ngModel)]="comment.content"
@@ -21,20 +22,24 @@
 </form>
 <ul class="comments">
   <li *ngFor="let comment of commentList">
-    <mat-card class="article-card">
-
-      <h4>{{comment.user.username}}:</h4>
-      <p>{{comment.content}}</p>
-
-      <h4>{{comment.date | date: 'dd/MM/yyyy'}}</h4>
-
-    </mat-card>
-    <button (click)="editCommentDialog(comment.id)" *ngIf="verifyUser(comment.user.username)" color="primary"
+    <button class="control-button" (click)="editCommentDialog(comment.id)" *ngIf="verifyUser(comment.user.username)"
             mat-raised-button>
       Edit
     </button>
-    <button (click)="deleteComment(comment.id)" *ngIf="verifyUser(comment.user.username)" color="primary"
+    <button class="control-button" (click)="deleteComment(comment.id)" *ngIf="verifyUser(comment.user.username)"
             mat-raised-button>Delete
     </button>
+    <mat-card class="comment-card">
+
+      <div class="comment-meta">
+        <div>{{comment.date | date: 'dd/MM/yyyy'}}</div>
+
+        <div>{{comment.user.username}}:</div>
+      </div>
+      <div class="comment-content">{{comment.content}}</div>
+
+
+    </mat-card>
+
   </li>
 </ul>

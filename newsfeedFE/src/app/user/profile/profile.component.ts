@@ -162,7 +162,8 @@ export class ProfileComponent implements OnInit {
 
   addArticleDialog() {
     const dialogRef = this.dialog.open(AddArticleComponent, {
-      width: '350px',
+      width: '1200px',
+      height: '90vh',
       data: {"user": localStorage}
     });
 

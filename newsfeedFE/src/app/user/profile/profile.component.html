@@ -1,42 +1,48 @@
-<mat-card class="example-card">
-  <mat-card-header>
+<div class="wrapper">
 
-    <div mat-card-avatar class="example-header-image">
+  <mat-card class="profile-card example-card">
+    <mat-card-header>
 
-      <img mat-card-avatar
-           src={{profileData.photo}}>
-      <button (click)="editPhotoDialog()" class="edit-photo" mat-button>
-        <i class="material-icons">edit</i>
+      <div class="example-header-image" mat-card-avatar>
+
+        <img mat-card-avatar
+             src={{profileData.photo}}>
+        <button (click)="editPhotoDialog()" class="edit-photo" mat-button>
+          <i class="material-icons">edit</i>
+        </button>
+
+      </div>
+
+
+      <mat-card-title>{{profileData.firstName}}</mat-card-title>
+      <mat-card-title>{{profileData.lastName}}</mat-card-title>
+      <button (click)="editUserInfoDialog()" class="style-2-fab" color="primary" mat-mini-fab>
+        <i class="material-icons">edit</i> Edit Info
       </button>
 
-    </div>
+      <mat-card-subtitle style="color:#000000">
+
+        <h4 class="mat-card-content ">{{profileData.email}}</h4>
+        <h4 class="mat-card-content ">{{profileData.bio}}</h4>
+        <button (click)="editUserBioDialog()" class="style-2-fab" color="primary" mat-mini-fab>
+          <i class="material-icons ">edit</i> Edit Bio
+        </button>
+      </mat-card-subtitle>
+
+    </mat-card-header>
 
 
-    <mat-card-title>{{profileData.firstName}}</mat-card-title>
-    <mat-card-title>{{profileData.lastName}}</mat-card-title>
-    <button (click)="editUserInfoDialog()" color="primary" mat-mini-fab>
-      <i class="material-icons">edit</i></button>
+    <!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" width="400px"-->
+    <!--alt="Photo of a Shiba Inu">-->
 
-    <mat-card-subtitle style="color:#000000">
+  </mat-card>
 
-      <h4 class="mat-card-content">{{profileData.email}}</h4>
-      <h4 class="mat-card-content">{{profileData.bio}}</h4>
-      <button (click)="editUserBioDialog()" color="primary" mat-mini-fab>
-        <i class="material-icons">edit</i></button>
-    </mat-card-subtitle>
+  <!-- Articole -->
+  <button (click)="addArticleDialog()" color="primary" mat-raised-button>
+    Add Article
+  </button>
+  <app-article-list [articleFilter]="username"></app-article-list>
+  <!--<app-article-list></app-article-list>-->
+  <!--<app-article></app-article>-->
 
-  </mat-card-header>
-
-
-  <!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" width="400px"-->
-  <!--alt="Photo of a Shiba Inu">-->
-
-</mat-card>
-
-<!-- Articole -->
-<button (click)="addArticleDialog()" color="primary" mat-raised-button>
-  Add Article
-</button>
-<app-article-list [articleFilter]="username"></app-article-list>
-<!--<app-article-list></app-article-list>-->
-<!--<app-article></app-article>-->
+</div>

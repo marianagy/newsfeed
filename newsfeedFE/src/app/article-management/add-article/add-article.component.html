@@ -6,7 +6,7 @@
   >
     <h1 mat-dialog-title>Add Article</h1>
 
-    <mat-form-field>
+    <mat-form-field class="title-input">
       <input
         #titleControl="ngModel"
         #titleElement
@@ -36,6 +36,7 @@
     <div id="chosen_image" style="float:right" width="100px">
 
     </div>
+    <h3>Choose category: </h3>
     <mat-nav-list *ngFor="let category of categories"
 
     >
@@ -43,14 +44,14 @@
         (change)="checkedValue($event)"
         name="{{category.name}}">{{category.name}}</mat-checkbox>
     </mat-nav-list>
-    <textarea #tagControl="ngModel"
-              #tagElement
-              [(ngModel)]="tagString"
-              matInput
-              name="content"
-              placeholder="Leave a comment">
+    <!--<textarea #tagControl="ngModel"-->
+    <!--#tagElement-->
+    <!--[(ngModel)]="tagString"-->
+    <!--matInput-->
+    <!--name="content"-->
+    <!--placeholder="Leave a comment">-->
 
-    </textarea>
+    <!--</textarea>-->
 
     <div mat-dialog-actions>
       <button mat-button type="submit">Submit</button>

@@ -6,7 +6,7 @@
   >
     <h1 mat-dialog-title>Edit bio</h1>
     <mat-form-field>
-      <input
+      <textarea
         #bioControl="ngModel"
         #bioElement
         [(ngModel)]="data.bio"
@@ -14,7 +14,7 @@
         name="bio"
         placeholder="Bio"
         required
-      >
+      ></textarea>
     </mat-form-field>
 
 

@@ -146,7 +146,8 @@ export class ArticleListComponent implements OnInit {
         this.article = data;
         console.log(this.article);
         const dialogRef = this.dialog.open(EditArticleComponent, {
-          width: '350px',
+          width: '1200px',
+          height: '90vh',
           data: {
             "id": this.article.id,
             "title": this.article.title,
@@ -165,6 +166,7 @@ export class ArticleListComponent implements OnInit {
             this.new_article = result;
             this.article.title = this.new_article.title;
             this.article.content = this.new_article.content;
+            console.log(this.article.content);
             this.article.image = this.new_article.image;
             this.loadArticles();
           },
@@ -173,6 +175,12 @@ export class ArticleListComponent implements OnInit {
           }
         );
       });
+  }
+
+  // Shorten a string to less than maxLen characters without truncating words.
+  shorten(str, maxLen, separator = ' ') {
+    if (str.length <= maxLen) return str;
+    return str.substr(0, str.lastIndexOf(separator, maxLen));
   }
 
   deleteArticle(articleId) {
