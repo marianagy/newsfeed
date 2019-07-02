@@ -6,10 +6,10 @@
 
       <button (click)="editArticleDialog(article.id)" *ngIf="verifyUser(article.user.username)" class="control-button"
               mat-raised-button>
-        Edit
+        {{'articleList.editArticle' | translate}}
       </button>
       <button (click)="deleteArticle(article.id)" *ngIf="verifyUser(article.user.username)" class="control-button"
-              mat-raised-button>Delete
+              mat-raised-button>{{'articleList.deleteArticle' | translate}}
       </button>
       <mat-card class="article-card">
         <img id="image" mat-card-avatar

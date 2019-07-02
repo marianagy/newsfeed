@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {LoginComponent} from './login/login.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {
   MatButtonModule,
   MatCardModule,
@@ -31,11 +31,27 @@ import {AddArticleComponent} from "../article-management/add-article/add-article
 import {EditArticleComponent} from "../article-management/edit-article/edit-article.component";
 import {EditCommentComponent} from "../article-management/edit-comment/edit-comment.component";
 import {AddCommentComponent} from "../article-management/add-comment/add-comment.component";
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {HttpLoaderFactory} from "../app.module";
 
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent, ProfileComponent, EditProfileComponent, EditBioComponent, EditPhotoComponent],
   imports: [
+
+    TranslateModule.forChild({
+
+      loader: {
+
+        provide: TranslateLoader,
+
+        useFactory: HttpLoaderFactory,
+
+        deps: [HttpClient]
+
+      }
+
+    }),
     BrowserAnimationsModule,
     CommonModule,
     MatFormFieldModule,
@@ -56,7 +72,7 @@ import {AddCommentComponent} from "../article-management/add-comment/add-comment
     MatSelectModule,
     ReactiveFormsModule,
     BrowserModule,
-    ArticleManagementModule,
+    ArticleManagementModule
   ],
   exports: [LoginComponent, RouterModule],
   entryComponents: [EditProfileComponent,

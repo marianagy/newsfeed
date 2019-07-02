@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ArticleService} from "../article.service";
 import {ActivatedRoute} from "@angular/router";
 import {MatDialog} from "@angular/material";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-article',
@@ -15,7 +16,8 @@ export class ArticleComponent implements OnInit {
 
   constructor(private articleServie: ArticleService,
               private activatedRoute: ActivatedRoute,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private translate: TranslateService) {
     this.article = {
       id: "",
       title: "",

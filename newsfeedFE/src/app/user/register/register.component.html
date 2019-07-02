@@ -5,16 +5,16 @@
     (ngSubmit)="submitRegister()"
     class="register-form"
   >
-    <h1>Sign Up</h1>
+    <h1>{{'registerPage.signUp' | translate}}</h1>
     <mat-form-field appearance="outline" class="first-name form-field">
-      <mat-label>First Name</mat-label>
+      <mat-label>{{'registerPage.firstNamePlaceholder' | translate}}</mat-label>
       <input
 
         #firstNameElement
         [(ngModel)]="userRegisterData.firstName"
         matInput
         name="first-name"
-        placeholder="first name"
+        placeholder="{{'registerPage.firstNamePlaceholder' | translate}}"
         required
         type="text"
       >
@@ -22,20 +22,20 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="last-name form-field">
-      <mat-label>Last Name</mat-label>
+      <mat-label>{{'registerPage.lastNamePlaceholder' | translate}}</mat-label>
       <input
 
         #lastNameElement
         [(ngModel)]="userRegisterData.lastName"
         matInput
         name="last-name"
-        placeholder="last name"
+        placeholder="{{'registerPage.lastNamePlaceholder' | translate}}"
         required
         type="text">
       <!--<mat-icon matSuffix color="primary">security</mat-icon>-->
     </mat-form-field>
     <mat-form-field appearance="outline" class="email form-field">
-      <mat-label>Email</mat-label>
+      <mat-label>{{'registerPage.emailPlaceholder' | translate}}</mat-label>
       <input
         #emailElement
         [(ngModel)]="userRegisterData.email"
@@ -43,7 +43,7 @@
         [formControl]="emailFormControl"
         matInput
         name="email"
-        placeholder="email"
+        placeholder="{{'registerPage.emailPlaceholder' | translate}}"
         required
 
         type="text">
@@ -54,13 +54,13 @@
       <!--<mat-icon matSuffix color="primary">security</mat-icon>-->
     </mat-form-field>
     <mat-form-field appearance="outline" class="username form-field">
-      <mat-label>Username</mat-label>
+      <mat-label>{{'registerPage.usernamePlaceholder' | translate}}</mat-label>
       <input
         #userElement
         [(ngModel)]="userRegisterData.username"
         matInput
         name="user"
-        placeholder="username"
+        placeholder="{{'registerPage.userPlaceholder' | translate}}"
         required
         type="text"
       >
@@ -68,7 +68,7 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="password form-field">
-      <mat-label>Password</mat-label>
+      <mat-label>{{'registerPage.passwordPlaceholder' | translate}}</mat-label>
       <input
         #passwordElement
         [(ngModel)]="userRegisterData.password"
@@ -76,7 +76,7 @@
         [formControl]="passwordFormControl"
         matInput
         name="password"
-        placeholder="password"
+        placeholder="{{'registerPage.firstNamePlaceholder' | translate}}"
         required
         type="password">
       <!--<mat-icon matSuffix color="primary">security</mat-icon>-->
@@ -84,7 +84,7 @@
 
     </mat-form-field>
     <mat-form-field appearance="outline" class="password-confirmation form-field">
-      <mat-label>Password Confirmation</mat-label>
+      <mat-label>{{'registerPage.passwordConfirmationPlaceholder' | translate}}</mat-label>
       <input
         #passwordConfirmationElement
         [(ngModel)]="userRegisterData.passwordConfirmation"
@@ -92,7 +92,7 @@
         [formControl]="passwordFormControl"
         matInput
         name="password-confirmation"
-        placeholder="password confirmation"
+        placeholder="{{'registerPage.passwordConfirmationPlaceholder' | translate}}"
         required
         type="password">
       <!--<mat-icon matSuffix color="primary">security</mat-icon>-->
@@ -100,6 +100,6 @@
 
     </mat-form-field>
 
-    <button mat-raised-button type="submit">Sign Up</button>
+    <button mat-raised-button type="submit">{{'registerPage.submit' | translate}}</button>
   </form>
 </mat-card>

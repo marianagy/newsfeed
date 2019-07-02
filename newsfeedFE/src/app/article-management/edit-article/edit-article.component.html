@@ -4,7 +4,7 @@
     #formElement
     (ngSubmit)="submitForm()"
   >
-    <h1 mat-dialog-title>Edit Article</h1>
+    <h1 mat-dialog-title>{{'editArticleDialog.editArticle' | translate}}</h1>
 
     <mat-form-field class="title-input">
       <input
@@ -13,7 +13,7 @@
         [(ngModel)]="data.title"
         matInput
         name="title"
-        placeholder="Title"
+
         required
       >
     </mat-form-field>
@@ -24,12 +24,13 @@
       [(ngModel)]="data.content"
       matInput
       name="content"
-      placeholder="Content"
+
       required
     >
     </textarea>
 
-    <button (click)="imgFileInput.click()" mat-button md-button type="button">Add Photo
+    <button (click)="imgFileInput.click()" mat-button md-button
+            type="button">{{'editArticleDialog.addPhoto' | translate}}
     </button>
 
     <input #imgFileInput (change)="previewImage($event)" hidden type="file"/>
@@ -38,7 +39,7 @@
     </div>
 
     <div mat-dialog-actions>
-      <button mat-button type="submit">Submit</button>
+      <button mat-button type="submit">{{'editArticleDialog.submit' | translate}}</button>
 
     </div>
 

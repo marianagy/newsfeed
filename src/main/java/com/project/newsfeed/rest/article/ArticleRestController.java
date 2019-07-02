@@ -158,9 +158,9 @@ public class ArticleRestController {
         User requester = null;
         try {
             requester = userService.getUserByUsername(RequestUtils.getRequesterUsername(token));
-            System.out.println("I am here");
+//            System.out.println("I am here");
         } catch (BusinessException e) {
-            System.out.println("I am here");
+//            System.out.println("I am here");
             e.printStackTrace();
         }
         return ResponseEntity.ok().body(articleService.getRecommendedArticlesForUser(requester, pageIndex, pageSize));

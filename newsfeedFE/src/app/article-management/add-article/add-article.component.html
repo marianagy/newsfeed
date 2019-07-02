@@ -4,7 +4,7 @@
     #formElement
     (ngSubmit)="submitForm()"
   >
-    <h1 mat-dialog-title>Add Article</h1>
+    <h1 mat-dialog-title>{{'addArticleDialog.addArticle' | translate}}</h1>
 
     <mat-form-field class="title-input">
       <input
@@ -13,30 +13,31 @@
         [(ngModel)]="data.title"
         matInput
         name="title"
-        placeholder="Title"
+        placeholder="{{'addArticleDialog.titlePlaceholder' | translate}}"
         required
       >
     </mat-form-field>
     <textarea
 
-        #contentControl="ngModel"
-        #contentElement
-        [(ngModel)]="data.content"
-        matInput
-        name="content"
-        placeholder="Content"
-        required
+      #contentControl="ngModel"
+      #contentElement
+      [(ngModel)]="data.content"
+      matInput
+      name="content"
+      placeholder="{{'addArticleDialog.contentPlaceholder' | translate}}"
+      required
       >
     </textarea>
 
-    <button (click)="imgFileInput.click()" mat-button md-button type="button">Add Photo
+    <button (click)="imgFileInput.click()" mat-button md-button
+            type="button">{{'addArticleDialog.addPhoto' | translate}}
     </button>
 
     <input #imgFileInput (change)="previewImage($event)" hidden type="file"/>
     <div id="chosen_image" style="float:right" width="100px">
 
     </div>
-    <h3>Choose category: </h3>
+    <h3>{{'addArticleDialog.chooseCategory' | translate}} </h3>
     <mat-nav-list *ngFor="let category of categories"
 
     >
@@ -44,17 +45,17 @@
         (change)="checkedValue($event)"
         name="{{category.name}}">{{category.name}}</mat-checkbox>
     </mat-nav-list>
-    <!--<textarea #tagControl="ngModel"-->
-    <!--#tagElement-->
-    <!--[(ngModel)]="tagString"-->
-    <!--matInput-->
-    <!--name="content"-->
-    <!--placeholder="Leave a comment">-->
+    <textarea #tagControl="ngModel" #tagElement
+              [(ngModel)]="tagString"
+              class="tags"
+              matInput
+              name="content"
+              placeholder="{{'addArticleDialog.addTagsPlaceholder' | translate}}">
 
-    <!--</textarea>-->
+    </textarea>
 
     <div mat-dialog-actions>
-      <button mat-button type="submit">Submit</button>
+      <button mat-button type="submit">{{'addArticleDialog.submit' | translate}}</button>
 
     </div>
 

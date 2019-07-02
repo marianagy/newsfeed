@@ -4,7 +4,7 @@
     #formElement
     (ngSubmit)="submitForm()"
   >
-    <h1 mat-dialog-title>Edit profile info</h1>
+    <h1 mat-dialog-title>{{'editInfoDialog.editProfileInfo' | translate}}</h1>
   <mat-form-field>
     <input
       #firstNameControl="ngModel"
@@ -12,7 +12,7 @@
       [(ngModel)]="data.firstName"
       matInput
       name="firstName"
-      placeholder="First Name"
+      placeholder="{{'editInfoDialog.firstNamePlaceholder' | translate}}"
       required
     >
   </mat-form-field>
@@ -23,7 +23,7 @@
       [(ngModel)]="data.lastName"
       matInput
       name="lastName"
-      placeholder="Last Name"
+      placeholder="{{'editInfoDialog.lastNamePlaceholder' | translate}}"
       required
     >
 
@@ -38,14 +38,14 @@
       matInput
       name="email"
 
-      placeholder="Email"
+      placeholder="{{'editInfoDialog.emailPlaceholder' | translate}}"
     >
     <mat-error *ngIf="emailFormControl.invalid">Error email</mat-error>
 
   </mat-form-field>
 
   <div mat-dialog-actions>
-    <button mat-button type="submit">Submit</button>
+    <button mat-button type="submit">{{'editInfoDialog.submit' | translate}}</button>
 
   </div>
   </form>

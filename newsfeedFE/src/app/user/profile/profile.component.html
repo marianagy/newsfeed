@@ -17,7 +17,7 @@
       <mat-card-title>{{profileData.firstName}}</mat-card-title>
       <mat-card-title>{{profileData.lastName}}</mat-card-title>
       <button (click)="editUserInfoDialog()" class="style-2-fab" color="primary" mat-mini-fab>
-        <i class="material-icons">edit</i> Edit Info
+        <i class="material-icons">edit</i> {{'profile.editInfo' | translate}}
       </button>
 
       <mat-card-subtitle style="color:#000000">
@@ -25,7 +25,7 @@
         <h4 class="mat-card-content ">{{profileData.email}}</h4>
         <h4 class="mat-card-content ">{{profileData.bio}}</h4>
         <button (click)="editUserBioDialog()" class="style-2-fab" color="primary" mat-mini-fab>
-          <i class="material-icons ">edit</i> Edit Bio
+          <i class="material-icons ">edit</i> {{'profile.editBio' | translate}}
         </button>
       </mat-card-subtitle>
 
@@ -39,7 +39,7 @@
 
   <!-- Articole -->
   <button (click)="addArticleDialog()" color="primary" mat-raised-button>
-    Add Article
+    {{'profile.addArticle' | translate}}
   </button>
   <app-article-list [articleFilter]="username"></app-article-list>
   <!--<app-article-list></app-article-list>-->

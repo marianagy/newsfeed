@@ -4,7 +4,7 @@
     #formElement
     (ngSubmit)="submitForm()"
   >
-    <h1 mat-dialog-title>Edit Comment</h1>
+    <h1 mat-dialog-title>{{'editCommentDialog.editComment' | translate}}</h1>
 
     <mat-form-field>
       <input
@@ -13,12 +13,12 @@
         [(ngModel)]="data.content"
         matInput
         name="comment"
-        placeholder="comment"
+
         required
       >
     </mat-form-field>
     <div mat-dialog-actions>
-      <button mat-button type="submit">Submit</button>
+      <button mat-button type="submit">{{'editCommentDialog.submit' | translate}}</button>
 
     </div>
 

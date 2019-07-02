@@ -10,10 +10,7 @@ import com.project.newsfeed.entity.article.Tag;
 import com.project.newsfeed.entity.user.User;
 import com.project.newsfeed.exception.BusinessException;
 import com.project.newsfeed.exception.ExceptionCode;
-import com.project.newsfeed.service.article.dto.ArticleDTO;
-import com.project.newsfeed.service.article.dto.ArticleDTOHelper;
-import com.project.newsfeed.service.article.dto.ArticleListDTO;
-import com.project.newsfeed.service.article.dto.TagDTOHelper;
+import com.project.newsfeed.service.article.dto.*;
 import com.project.newsfeed.service.upvote.TagLikeService;
 import com.project.newsfeed.service.upvote.dto.TagLikeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -214,7 +211,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     /**
-     * Methid gets the articles that a specifid user would be interested in
+     * Method gets the articles that a specifid user would be interested in
      *
      * @param user
      * @return
@@ -255,6 +252,24 @@ public class ArticleServiceImpl implements ArticleService {
 
 
         return new ArticleListDTO(articleDTOList, amount);
+    }
+
+    /**
+     * Method return all the articles that have the specified categories
+     *
+     * @param categoryDTOList
+     * @return
+     */
+    @Override
+    public List<ArticleDTO> getAllArticlesByCategory(List<CategoryDTO> categoryDTOList) {
+        List<Category> categoryList = new ArrayList<>();
+        for (CategoryDTO categoryDTO : categoryDTOList) {
+            categoryList.add(CategoryDTOHelper.toEntity(categoryDTO));
+        }
+        return articleDAO.getAllArticlesByCategory(categoryList)
+                .stream()
+                .map(ArticleDTOHelper::fromEntity)
+                .collect(Collectors.toList());
     }
 
 

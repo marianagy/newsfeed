@@ -6,33 +6,33 @@
     (ngSubmit)="submitForm()"
     class="login-form"
   >
-    <h1>Login Page</h1>
+    <h1>{{'loginPage.login' | translate}}</h1>
     <mat-form-field appearance="outline" class="username form-field">
-      <mat-label>Username</mat-label>
+      <mat-label>{{'loginPage.usernamePlaceholder' | translate}}</mat-label>
       <input #userControl="ngModel"
              #userElement
              [(ngModel)]="userLoginData.username"
              matInput
              name="user"
-             placeholder="username"
+             placeholder="{{'loginPage.usernamePlaceholder' | translate}}"
              required
       >
       <!--<mat-icon matSuffix color="primary">username</mat-icon>-->
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="password form-field">
-      <mat-label>Password</mat-label>
+      <mat-label>{{'loginPage.passwordPlaceholder' | translate}}</mat-label>
       <input #passwordControl="ngModel"
              #passwordElement
              [(ngModel)]="userLoginData.password"
              matInput
              name="password"
-             placeholder="password"
+             placeholder="{{'loginPage.passwordPlaceholder' | translate}}"
              required
              type="password">
       <!--<mat-icon matSuffix color="primary">security</mat-icon>-->
     </mat-form-field>
 
-    <button mat-raised-button type="submit">Login</button>
+    <button mat-raised-button type="submit">{{'loginPage.submit' | translate}}</button>
   </form>
 </mat-card>

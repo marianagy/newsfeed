@@ -12,7 +12,10 @@ import {HomePageManagementModule} from "../home-page-management/home-page-manage
 import {HomePageComponent} from "../home-page-management/home-page/home-page.component";
 import {ArticleComponent} from "../article-management/article/article.component";
 import {ArticleManagementModule} from "../article-management/article-management.module";
-
+import {HttpLoaderFactory} from "../app.module";
+import {HttpClient} from "@angular/common/http";
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {InternationalisationModule} from "../internationalisation/internationalisation.module";
 
 const loginRoutes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -35,6 +38,19 @@ const loginRoutes: Routes = [
 
   ],
   imports: [
+    TranslateModule.forChild({
+
+      loader: {
+
+        provide: TranslateLoader,
+
+        useFactory: HttpLoaderFactory,
+
+        deps: [HttpClient]
+
+      }
+
+    }),
     CommonModule,
     RouterModule.forChild(loginRoutes),
     MatToolbarModule,
@@ -44,7 +60,10 @@ const loginRoutes: Routes = [
     MatIconModule,
     UserModule,
     HomePageManagementModule,
-    ArticleManagementModule
+    ArticleManagementModule,
+    InternationalisationModule
+
+
   ]
 })
 export class NavigationModule {

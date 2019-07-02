@@ -4,7 +4,7 @@
     #formElement
     (ngSubmit)="submitForm()"
   >
-    <h1 mat-dialog-title>Edit bio</h1>
+    <h1 mat-dialog-title>{{'editBioDialog.editBio' | translate}}</h1>
     <mat-form-field>
       <textarea
         #bioControl="ngModel"
@@ -19,7 +19,7 @@
 
 
     <div mat-dialog-actions>
-      <button mat-button type="submit">Submit</button>
+      <button mat-button type="submit">{{'editBioDialog.submit' | translate}}</button>
 
     </div>
   </form>

@@ -9,7 +9,7 @@ import java.util.List;
 public interface TagLikeDAO extends JpaRepository<TagLike, Integer> {
 
     @Query("Select t FROM TagLike t where t.userId=?1")
-    public List<TagLike> findTagLikeByUserId(Integer userId);
+    List<TagLike> findTagLikeByUserId(Integer userId);
 
 
 }

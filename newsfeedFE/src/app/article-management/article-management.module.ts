@@ -20,7 +20,7 @@ import {
   MatSelectModule,
   MatSnackBarModule
 } from "@angular/material";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserModule} from "@angular/platform-browser";
 import {RouterModule} from "@angular/router";
@@ -31,12 +31,25 @@ import {EditArticleComponent} from './edit-article/edit-article.component';
 import {AddCommentComponent} from './add-comment/add-comment.component';
 import {EditCommentComponent} from './edit-comment/edit-comment.component';
 import {ClickOutsideModule} from "ng-click-outside";
+import {HttpLoaderFactory} from "../app.module";
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 
 
 @NgModule({
   declarations: [ArticleComponent, ArticleListComponent, AddArticleComponent, EditArticleComponent, AddCommentComponent, EditCommentComponent],
   imports: [
+    TranslateModule.forChild({
 
+      loader: {
+
+        provide: TranslateLoader,
+
+        useFactory: HttpLoaderFactory,
+
+        deps: [HttpClient]
+
+      }
+    }),
     CommonModule,
     BrowserAnimationsModule,
     MatFormFieldModule,

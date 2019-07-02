@@ -1,0 +1,74 @@
+{
+  "registerPage": {
+    "signUp": "Sign Up",
+    "firstNamePlaceholder": "First Name",
+    "lastNamePlaceholder": "Last Name",
+    "emailPlaceholder": "Email",
+    "userNamePlaceholder": "Username",
+    "passwordPlaceholder": "Password",
+    "passwordConfirmationPlaceholder": "Password Confirmation",
+    "submit": "Sign Up"
+  },
+  "loginPage": {
+    "login": "Login",
+    "usernamePlaceholder": "Username",
+    "passwordPlaceholder": "Password",
+    "submit": "Login"
+  },
+  "navbar": {
+    "login": "Login",
+    "signUp": "Sign Up",
+    "home": "Home",
+    "language": "Language"
+  },
+  "profile": {
+    "editInfo": "Edit Info",
+    "editBio": "Edit Bio",
+    "addArticle": "Add Article"
+  },
+  "addArticleDialog": {
+    "addArticle": "Add Article",
+    "titlePlaceholder": "Title",
+    "contentPlaceholder": "Content",
+    "addPhoto": "Add Photo",
+    "chooseCategory": "Choose Category",
+    "addTagsPlaceholder": "Add tags",
+    "submit": "Submit"
+  },
+  "editInfoDialog": {
+    "editProfileInfo": "Edit Profile Info",
+    "firstNamePlaceholder": "First Name",
+    "lastNamePlaceholder": "Last Name",
+    "emailPlaceholder": "Email",
+    "submit": "Submit"
+  },
+  "editBioDialog": {
+    "editBio": "Edit Bio",
+    "bioPlaceholder": "Bio",
+    "submit": "Submit"
+  },
+  "editPhotoDialog": {
+    "addPhoto": "Add Photo",
+    "submit": "submit"
+  },
+  "article": {
+    "author": "written by "
+  },
+  "editArticleDialog": {
+    "editArticle": "Edit Article",
+    "addPhoto": "Add Photo",
+    "submit": "Submit"
+  },
+  "addComment": {
+    "leaveACommentPlaceholder": "Leave a comment"
+  },
+  "editCommentDialog": {
+    "editComment": "Edit Comment",
+    "submit": "submit"
+  },
+  "articleList": {
+    "editArticle": "Edit",
+    "deleteArticle": "Delete"
+  }
+}
+

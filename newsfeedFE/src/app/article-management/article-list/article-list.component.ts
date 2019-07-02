@@ -3,6 +3,7 @@ import {ArticleService} from "../article.service";
 import {MatDialog, MatPaginator, PageEvent} from "@angular/material";
 import {EditArticleComponent} from "../edit-article/edit-article.component";
 import {ActivatedRoute} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
 
 export interface ArticleData {
   id: any;
@@ -44,7 +45,8 @@ export class ArticleListComponent implements OnInit {
 
   constructor(private articleServie: ArticleService,
               public dialog: MatDialog,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private translate: TranslateService) {
 
   }
 

@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {ProfileComponent} from "../../user/profile/profile.component";
 import {ArticleService} from "../article.service";
-
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-add-article',
@@ -13,6 +13,7 @@ export class AddArticleComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<ProfileComponent>,
               private articleService: ArticleService,
+              private translate: TranslateService,
               @Inject(MAT_DIALOG_DATA) public data) {
   }
 

@@ -1,0 +1,74 @@
+{
+  "registerPage": {
+    "signUp": "Inregistrare",
+    "firstNamePlaceholder": "Nume",
+    "lastNamePlaceholder": "Prenume",
+    "emailPlaceholder": "Email",
+    "userNamePlaceholder": "Username",
+    "passwordPlaceholder": "Parola",
+    "passwordConfirmationPlaceholder": "Confirmare Parola",
+    "submit": "Inregistrare"
+  },
+  "loginPage": {
+    "login": "Logare",
+    "usernamePlaceholder": "Username",
+    "passwordPlaceholder": "parola",
+    "submit": "Logare"
+  },
+  "navbar": {
+    "login": "Logare",
+    "signUp": "Inregistrare",
+    "home": "Acasa",
+    "language": "Limba"
+  },
+  "profile": {
+    "editInfo": "Editeaza Info",
+    "editBio": "Editeaza Bio",
+    "addArticle": "Adauga Imagine"
+  },
+  "addArticleDialog": {
+    "addArticle": "Adauga Articol",
+    "titlePlaceholder": "Titlu",
+    "contentPlaceholder": "Continut",
+    "addPhoto": "Adauga Imagine",
+    "chooseCategory": "Alege Categoria",
+    "addTagsPlaceholder": "Agauga tag-uri",
+    "submit": "Submit"
+  },
+  "editInfoDialog": {
+    "editProfileInfo": "Editeaza Profil",
+    "firstNamePlaceholder": "Nume",
+    "lastNamePlaceholder": "Prenume",
+    "emailPlaceholder": "Email",
+    "submit": "Submit"
+  },
+  "editBioDialog": {
+    "editBio": "Editeaza Bio",
+    "bioPlaceholder": "Bio",
+    "submit": "Submit"
+  },
+  "editPhotoDialog": {
+    "addPhoto": "Adauga Imagine",
+    "submit": "submit"
+  },
+  "article": {
+    "author": "scris de catre "
+  },
+  "editArticleDialog": {
+    "editArticle": "Editeaza Articol",
+    "addPhoto": "Adauga Imagine",
+    "submit": "Submit"
+  },
+  "addComment": {
+    "leaveACommentPlaceholder": "Lasa un comentariu"
+  },
+  "editCommentDialog": {
+    "editComment": "Editeaza Comentariu",
+    "submit": "submit"
+  },
+  "articleList": {
+    "editArticle": "Editeaza",
+    "deleteArticle": "Sterge"
+  }
+}
+

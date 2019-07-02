@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {RegistrationService, UserRegisterData} from "../registration.service";
 import {FormControl, Validators} from "@angular/forms";
 import {ErrorStateMatcher} from "@angular/material";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-register',
@@ -28,7 +29,8 @@ export class RegisterComponent implements OnInit {
   emailErrorMessage: string;
   matcher = new ErrorStateMatcher();
 
-  constructor(private registrationService: RegistrationService) {
+  constructor(private registrationService: RegistrationService,
+              private translate: TranslateService) {
 
     this.userRegisterData = {
       firstName: '',

@@ -5,6 +5,7 @@ import com.project.newsfeed.entity.user.User;
 import com.project.newsfeed.exception.BusinessException;
 import com.project.newsfeed.service.article.dto.ArticleDTO;
 import com.project.newsfeed.service.article.dto.ArticleListDTO;
+import com.project.newsfeed.service.article.dto.CategoryDTO;
 
 import java.util.List;
 
@@ -27,4 +28,6 @@ public interface ArticleService {
     List<Tag> getTagsFromDTO(ArticleDTO articleDTO);
 
     ArticleListDTO getRecommendedArticlesForUser(User user, Integer pageIndex, Integer pageSize);
+
+    List<ArticleDTO> getAllArticlesByCategory(List<CategoryDTO> categoryDTOList);
 }

@@ -4,7 +4,7 @@
   <!--#photoElement-->
   <!--(ngSubmit)="submitForm()"-->
   <!--&gt;-->
-  <h1 mat-dialog-title>Edit photo</h1>
+  <h1 mat-dialog-title>{{'editPhotoDialog.editPhoto' | translate}}</h1>
   <button (click)="imgFileInput.click()" mat-button md-button type="button">Add Photo
   </button>
 
@@ -15,7 +15,7 @@
 
 
   <div mat-dialog-actions>
-    <button [mat-dialog-close]="data" mat-button>Submit</button>
+    <button [mat-dialog-close]="data" mat-button>{{'editPhotoDialog.submit' | translate}}</button>
 
   </div>
   <!--</form>-->

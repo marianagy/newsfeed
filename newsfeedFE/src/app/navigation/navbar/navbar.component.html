@@ -1,20 +1,26 @@
 <mat-toolbar class="menu" color="primary">
   <span style="margin-right: 20px">read<i>a</i>r</span>
-  <button *ngIf="!isLoggedIn()" mat-button routerLink='/login' routerLinkActive="active">Login
+  <button *ngIf="!isLoggedIn()" mat-button routerLink='/login' routerLinkActive="active">
+    {{'navbar.login' | translate}}
   </button>
-  <button *ngIf="!isLoggedIn()" mat-button routerLink='/register' routerLinkActive="active">Sign Up
+  <button *ngIf="!isLoggedIn()" mat-button routerLink='/register' routerLinkActive="active">
+    {{'navbar.signUp' | translate}}
   </button>
   <button *ngIf="isLoggedIn()" mat-button routerLink='/profile'>
     <i class="material-icons">account_circle</i>
   </button>
   <button *ngIf="isLoggedIn()" mat-button routerLink='/home-page'>
-    Home
+    {{'navbar.home' | translate}}
   </button>
 
 
   <button (click)="logout()" *ngIf="isLoggedIn()" mat-button>
     <i class="material-icons">logout</i></button>
 
-
+  <div class="align-right">
+    <div class="language">
+      <app-translate-content></app-translate-content>
+    </div>
+  </div>
 </mat-toolbar>
 

@@ -3,6 +3,7 @@ import {ErrorStateMatcher, MAT_DIALOG_DATA, MatDialogRef} from "@angular/materia
 import {ProfileComponent} from "../profile/profile.component";
 import {ProfileService} from "../profile.service";
 import {FormControl, FormGroupDirective, NgForm, Validators} from "@angular/forms";
+import {TranslateService} from "@ngx-translate/core";
 
 export interface ProfileDialogData {
   id: any;
@@ -40,9 +41,10 @@ export class EditProfileComponent implements OnInit {
   ]);
 
   constructor(public dialogRef: MatDialogRef<ProfileComponent>,
-
               private profileService: ProfileService,
-              @Inject(MAT_DIALOG_DATA) public data: ProfileDialogData) {
+              private translate: TranslateService,
+              @Inject(MAT_DIALOG_DATA) public data: ProfileDialogData
+  ) {
 
 
   }

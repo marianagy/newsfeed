@@ -17,17 +17,32 @@ import {
   MatSelectModule,
   MatSnackBarModule
 } from "@angular/material";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserModule} from "@angular/platform-browser";
 import {AppRoutingModule} from "../app-routing.module";
 import {ArticleManagementModule} from "../article-management/article-management.module";
 import {RouterModule} from "@angular/router";
 import {TokenInterceptorService} from "../token-interceptor.service";
+import {HttpLoaderFactory} from "../app.module";
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
   declarations: [HomePageComponent],
   imports: [
+    TranslateModule.forChild({
+
+      loader: {
+
+        provide: TranslateLoader,
+
+        useFactory: HttpLoaderFactory,
+
+        deps: [HttpClient]
+
+      }
+
+    }),
     CommonModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
@@ -49,7 +64,8 @@ import {TokenInterceptorService} from "../token-interceptor.service";
     ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
-    ArticleManagementModule
+    ArticleManagementModule,
+
   ],
   exports: [
     HomePageComponent,

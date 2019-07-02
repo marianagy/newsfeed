@@ -26,13 +26,27 @@
   textarea {
     min-height: 400px;
     width: 90%;
-    box-shadow: 0px 0px 4px gray inset;
-    padding: 13px;
+    box-shadow: 0 0 4px gray inset;
+    padding: 15px;
     border-radius: 15px;
   }
 
+  .tags {
+    min-height: 25px;
+    width: 50%;
+    box-shadow: 0 0 4px gray inset;
+    padding: 15px;
+    border-radius: 15px;
+    margin-top: 10px;
+  }
+
+
   .title-input {
     width: 500px;
+  }
+
+  h3 {
+    font-family: "Roboto", sans-serif;
   }
 
   .cancel-button {

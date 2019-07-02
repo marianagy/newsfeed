@@ -7,6 +7,7 @@ import {EditPhotoComponent} from "../edit-photo/edit-photo.component";
 import {AddArticleComponent} from "../../article-management/add-article/add-article.component";
 import {ArticleService} from "../../article-management/article.service";
 import {ArticleListComponent} from "../../article-management/article-list/article-list.component";
+import {TranslateService} from "@ngx-translate/core";
 
 export interface ProfileData {
   id: any;
@@ -36,6 +37,7 @@ export class ProfileComponent implements OnInit {
   constructor(private profileService: ProfileService,
               public dialog: MatDialog,
               private articleService: ArticleService,
+              private translate: TranslateService
   ) {
     this.profileData = {
       id: "",

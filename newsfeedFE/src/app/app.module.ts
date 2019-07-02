@@ -8,7 +8,15 @@ import {MatButtonModule, MatCheckboxModule} from "@angular/material";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {LoginguardGuard} from "./user/loginguard.guard";
 import {TokenInterceptorService} from "./token-interceptor.service";
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient} from "@angular/common/http";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+
+export function HttpLoaderFactory(http: HttpClient) {
+
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+
+}
 
 @NgModule({
   declarations: [
@@ -17,6 +25,19 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
 
   ],
   imports: [
+    TranslateModule.forRoot({
+
+      loader: {
+
+        provide: TranslateLoader,
+
+        useFactory: HttpLoaderFactory,
+
+        deps: [HttpClient]
+
+      }
+
+    }),
     BrowserModule,
     AppRoutingModule,
     NavigationModule,
@@ -24,7 +45,8 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
     MatCheckboxModule,
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    // InternationalisationModule
 
   ],
   providers: [LoginguardGuard,

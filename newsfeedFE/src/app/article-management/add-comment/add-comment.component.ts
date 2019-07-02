@@ -5,6 +5,7 @@ import {AuthenticationService} from "../../user/authentication.service";
 import {DatePipe} from "@angular/common";
 import {MatDialog} from "@angular/material";
 import {EditCommentComponent} from "../edit-comment/edit-comment.component";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-add-comment',
@@ -26,7 +27,8 @@ export class AddCommentComponent implements OnInit {
   constructor(private articleService: ArticleService,
               private authenticationService: AuthenticationService,
               private activatedRoute: ActivatedRoute,
-              public dialog: MatDialog
+              public dialog: MatDialog,
+              private translate: TranslateService
   ) {
     this.comment = {
       id: "",
