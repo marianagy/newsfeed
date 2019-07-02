@@ -1,5 +1,20 @@
 .home-wrapper {
   width: 80%;
-  margin: 40px auto;
 
+
+  margin: 40px 10px 40px 260px;
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-end;
+
+  .control-box {
+
+    position: fixed;
+    left: 20px;
+    top: 10px;
+    width: 200px;
+    padding: 100px 20px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+  }
 }
+

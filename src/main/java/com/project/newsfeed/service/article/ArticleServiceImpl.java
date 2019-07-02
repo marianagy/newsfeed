@@ -33,6 +33,7 @@ public class ArticleServiceImpl implements ArticleService {
     private FilterArticle filterArticle;
     private TagLikeService tagLikeService;
     private TagService tagService;
+    private ArticleService articleService;
 
     @Autowired
     public void setTagLikeService(TagLikeService tagLikeService) {
@@ -189,7 +190,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     /**
-     * Get filtered articles for a user
+     * Get filtered articles for a user (using pagination)
      *
      * @param user
      * @param pageIndex
@@ -239,37 +240,55 @@ public class ArticleServiceImpl implements ArticleService {
         List<ArticleDTO> articleDTOList = new ArrayList<>();
         for (Tag tag : tagList) {
 
-            articleDAO.findArticleByTag(tag, page)
-                    .forEach(article -> {
-                        if (article != null && !articleDTOList.contains(ArticleDTOHelper.fromEntity(article))) {
+            List<Article> articleByTag = articleDAO.findArticleByTag(tag);
+            articleByTag.forEach(article -> {
+
+                if (article != null &&
+                        !articleDTOList.contains(ArticleDTOHelper.fromEntity(article))
+
+                ) {
                             articleDTOList.add(ArticleDTOHelper.fromEntity(article));
                         }
                     });
         }
 
+        // concatenate with rest of the articles
+        List<ArticleDTO> all = this.findAll();
+        all.removeAll(articleDTOList);
+        articleDTOList.addAll(all);
+
+        //solve pagination
+        int pagestart = pageIndex * pageSize;
+        int pageEnd = pagestart + pageSize;
+        if (pageEnd > articleDTOList.size()) {
+            pageEnd = articleDTOList.size();
+        }
+        List<ArticleDTO> articleDTOListFinal = articleDTOList.subList(pagestart, pageEnd);
+
 
         Integer amount = articleDAO.countAllArticles();
 
 
-        return new ArticleListDTO(articleDTOList, amount);
+        return new ArticleListDTO(articleDTOListFinal, amount);
     }
 
     /**
      * Method return all the articles that have the specified categories
      *
-     * @param categoryDTOList
+     * @param
      * @return
      */
     @Override
-    public List<ArticleDTO> getAllArticlesByCategory(List<CategoryDTO> categoryDTOList) {
-        List<Category> categoryList = new ArrayList<>();
-        for (CategoryDTO categoryDTO : categoryDTOList) {
-            categoryList.add(CategoryDTOHelper.toEntity(categoryDTO));
-        }
-        return articleDAO.getAllArticlesByCategory(categoryList)
+    public ArticleListDTO getAllArticlesByCategory(CategoryDTO categoryDTO, Integer pageIndex, Integer pageSize) {
+
+        Pageable page = PageRequest.of(pageIndex, pageSize);
+        Category category = categoryDAO.findByName(categoryDTO.getName());
+        Integer amount = articleDAO.countAllArticlesForCategory(category);
+        List<ArticleDTO> articleDTOS = articleDAO.getAllArticlesByCategory(category, page)
                 .stream()
                 .map(ArticleDTOHelper::fromEntity)
                 .collect(Collectors.toList());
+        return new ArticleListDTO(articleDTOS, amount);
     }
 
 

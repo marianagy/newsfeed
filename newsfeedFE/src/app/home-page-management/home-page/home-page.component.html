@@ -1,5 +1,17 @@
 <div class="home-wrapper">
-  <app-article-list></app-article-list>
+  <div class="control-box">
+    <h3>Choose Category</h3>
+    <mat-form-field>
+      <mat-label>Category</mat-label>
+      <mat-select [(value)]="category">
+        <mat-option></mat-option>
+        <mat-option *ngFor="let category of categories" [value]="category.name">
+          {{category.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <app-article-list [dynamicdata]="category"></app-article-list>
 
 </div>
 

@@ -5,6 +5,7 @@ import com.project.newsfeed.exception.BusinessException;
 import com.project.newsfeed.service.article.ArticleService;
 import com.project.newsfeed.service.article.dto.ArticleDTO;
 import com.project.newsfeed.service.article.dto.ArticleListDTO;
+import com.project.newsfeed.service.article.dto.CategoryDTO;
 import com.project.newsfeed.service.user.UserService;
 import com.project.newsfeed.service.user.dto.UserDTOHelper;
 import com.project.newsfeed.utils.RequestUtils;
@@ -165,6 +166,21 @@ public class ArticleRestController {
         }
         return ResponseEntity.ok().body(articleService.getRecommendedArticlesForUser(requester, pageIndex, pageSize));
 
+    }
+
+    @RequestMapping(value = "/articles-by-category/{category}/{pageIndex}/{pageSize}",
+            method = RequestMethod.GET
+    )
+    @ResponseBody
+    public ResponseEntity<ArticleListDTO> getAllArticlesByCategory(@PathVariable String category,
+                                                                   @PathVariable Integer pageIndex,
+                                                                   @PathVariable Integer pageSize) {
+
+        // transform in dto
+        CategoryDTO categoryDTO = new CategoryDTO();
+        categoryDTO.setName(category);
+        return ResponseEntity.ok().body(
+                articleService.getAllArticlesByCategory(categoryDTO, pageIndex, pageSize));
     }
 
 }

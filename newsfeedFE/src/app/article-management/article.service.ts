@@ -38,7 +38,7 @@ export class ArticleService {
     console.log(this.getTagLike());
     if (articleFilter === undefined) {
       console.log("I am in article service getFilteredArticles");
-
+      console.log(pageSize);
       // return this.http.get(this.baseURL + '/get-filtered/' + pageIndex + "/" + pageSize);
       return this.http.get(this.baseURL + '/recommended-articles/' + pageIndex + "/" + pageSize);
 
@@ -46,6 +46,22 @@ export class ArticleService {
       return this.http.get(this.baseURL + '/get-user-articles/' + pageIndex + "/" + pageSize);
     }
   }
+
+  getCategoryArticles(category, pageIndex, pageSize) {
+
+    if (category === undefined || category == '') {
+      console.log("I am in article service getFilteredArticles");
+
+      // return this.http.get(this.baseURL + '/get-filtered/' + pageIndex + "/" + pageSize);
+
+      return this.http.get(this.baseURL + '/recommended-articles/' + pageIndex + "/" + pageSize);
+    } else {
+
+      return this.http.get(this.baseURL + '/articles-by-category/' + category + "/" + pageIndex + "/" + pageSize);
+
+    }
+  }
+
   getCommentsForArticle(articleId) {
 
     return this.http.get(this.baseURL + '/get-article-comments/' + articleId,

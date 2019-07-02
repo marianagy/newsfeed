@@ -2,6 +2,7 @@
 
 <div class="article-list">
   <ul class="articles">
+
     <li *ngFor="let article of articleList">
 
       <button (click)="editArticleDialog(article.id)" *ngIf="verifyUser(article.user.username)" class="control-button"

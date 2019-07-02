@@ -18,16 +18,20 @@ public interface ArticleDAO extends JpaRepository<Article, Integer> {
     @Query("Select count(a) from Article a")
     Integer countAllArticles();
 
+    @Query("Select count(a) from Article a join a.categoryList categ where categ=?1")
+    Integer countAllArticlesForCategory(Category category);
+
+
     @Query("Select count(a) from Article a where a.user=?1")
     Integer countAllUserArticles(User user);
 
-    @Query("Select a from Article a where a.categoryList=?1")
-    List<Article> getAllArticlesByCategory(List<Category> categoryList);
+    @Query("Select a from Article a join a.categoryList categ where categ=?1")
+    List<Article> getAllArticlesByCategory(Category category, Pageable pageable);
 
     @Query("Select t.tagList from Article t where t.id=?1")
     List<Tag> getTagsForArticle(Integer articleId);
 
     @Query("Select t From Article t join t.tagList tag where tag=?1")
-    List<Article> findArticleByTag(Tag tag, Pageable pageable);
+    List<Article> findArticleByTag(Tag tag);
 
 }

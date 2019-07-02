@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {ArticleService} from "../../article-management/article.service";
 
 @Component({
   selector: 'app-home-page',
@@ -7,10 +8,22 @@ import {Component, OnInit} from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor() {
+  categories;
+  category: string;
+
+  constructor(private articleService: ArticleService) {
   }
 
   ngOnInit() {
+    this.articleService.getAllCategories().subscribe(
+      data => {
+        console.log("I am good gboy");
+        console.log(data);
+        this.categories = data;
+      }, err => {
+        console.log(err);
+      }
+    );
   }
 
 }

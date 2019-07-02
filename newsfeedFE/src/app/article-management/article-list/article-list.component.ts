@@ -23,6 +23,23 @@ export interface ArticleData {
 
 })
 export class ArticleListComponent implements OnInit {
+  // MatPaginator Inputs
+  pageSize = 5;
+
+  private _dynamicdata: string;
+
+  get dynamicdata(): string {
+    return this._dynamicdata;
+  }
+
+  @Input()
+  set dynamicdata(name: string) {
+    //this._dynamicdata = (name && name.trim()) || '<no name set>';
+    console.log("I am in load articles by categ");
+    this._dynamicdata = name;
+    this.doCategs(name);
+
+  }
 
   // daca sunt articolele unui user sau sau toate articolele
   @Input() articleFilter: string;
@@ -34,8 +51,21 @@ export class ArticleListComponent implements OnInit {
   article: any;
   articles: any;
   new_article: any;
-  // MatPaginator Inputs
-  pageSize = 3;
+
+  doCategs(name) {
+    this.articleServie.getCategoryArticles(name, this.pageIndex, this.pageSize)
+      .subscribe(
+        data => {
+          console.log(data);
+          this.articleList = (Object.values(data['articleDTOList']));
+          this.length = data['amount'];
+
+        }, err => {
+          console.log("Error happened.");
+          console.log(err);
+        }
+      )
+  }
   length = 100;
   pageIndex = 0;
   pageSizeOptions: number[] = [5, 10, 25, 100];
@@ -108,10 +138,16 @@ export class ArticleListComponent implements OnInit {
 
   onPageChange(event) {
     console.log(event);
-
+    console.log(this.pageIndex);
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
-    this.loadArticles();
+    if (this.dynamicdata !== '' && this.dynamicdata !== null) {
+      this.doCategs(this._dynamicdata);
+    } else {
+
+      this.loadArticles();
+
+    }
   }
 
   loadArticles() {
@@ -122,17 +158,7 @@ export class ArticleListComponent implements OnInit {
           console.log(data);
           this.articleList = (Object.values(data['articleDTOList']));
           this.length = data['amount'];
-          // this.articleData.id = data[0]["id"];
-          // this.articleData.title = data[0]["title"];
-          // this.articleData.content = data[0]["content"];
-          // this.articleData.user = data[0]["user"];
-          // this.articleData.tags = data[0]["tags"];
-          // this.articleData.categories = data[0]["categories"];
-          // this.articleData.nrUpvotes = data[0]["nrUpvotes"];
 
-          // this.articles = data;
-          // console.log("Articles: ");
-          // console.log(this.articles);
 
         }, err => {
           console.log("Error happened.");

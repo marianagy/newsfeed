@@ -29,5 +29,5 @@ public interface ArticleService {
 
     ArticleListDTO getRecommendedArticlesForUser(User user, Integer pageIndex, Integer pageSize);
 
-    List<ArticleDTO> getAllArticlesByCategory(List<CategoryDTO> categoryDTOList);
+    ArticleListDTO getAllArticlesByCategory(CategoryDTO categoryDTO, Integer pageIndex, Integer pageSize);
 }
