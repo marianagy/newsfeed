@@ -114,7 +114,7 @@ export class RegisterComponent implements OnInit {
   }
 
   getPasswordErrorMessage() {
-    //TODO: sa modific aici si sa pun eroarea in alta parte
+
     return "Password must have at least 6 characters, one lowercase letter, one uppercase letter, one numeric digit, and one special character.";
   }
 

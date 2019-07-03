@@ -1,5 +1,6 @@
 package com.project.newsfeed.entity.article;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.project.newsfeed.entity.user.User;
 import org.hibernate.annotations.OnDelete;
@@ -11,6 +12,7 @@ import javax.validation.constraints.Size;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -43,22 +45,25 @@ public class Article {
     private Integer nrUpvotes;
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(
             name = "article_tag", // name of many-to-many table
             joinColumns = @JoinColumn(name = "article_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private List<Tag> tagList;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany
+    @JsonIgnore
     @JoinTable(
             name = "article_category", // name of many-to-many table
             joinColumns = @JoinColumn(name = "article_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categoryList;
 
-    public Article() {
-    }
 
-    public Article(@NotNull @Size(max = 150) String title, @NotNull String content, byte[] image, User user, Integer nrUpvotes, List<Tag> tagList, List<Category> categoryList) {
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Comment> comments;
+
+    public Article(@NotNull @Size(max = 150) String title, @NotNull String content, byte[] image, User user, Integer nrUpvotes, List<Tag> tagList, List<Category> categoryList, Set<Comment> comments) {
         this.title = title;
         this.content = content;
         this.image = image;
@@ -66,6 +71,18 @@ public class Article {
         this.nrUpvotes = nrUpvotes;
         this.tagList = tagList;
         this.categoryList = categoryList;
+        this.comments = comments;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public Article() {
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 
     public Integer getId() {

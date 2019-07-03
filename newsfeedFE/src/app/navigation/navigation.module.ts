@@ -26,7 +26,7 @@ const loginRoutes: Routes = [
   {path: 'home-page', component: HomePageComponent, canActivate: [LoginguardGuard]},
   {path: '', pathMatch: 'full', redirectTo: '/login'},
   {path: 'article/:id', component: ArticleComponent, canActivate: [LoginguardGuard]},
-  {path: 'admin', component: AdminComponent, canActivate: [AdminGuard]} // TODO: add guard
+  {path: 'admin', component: AdminComponent, canActivate: [AdminGuard]}
 ];
 
 @NgModule({

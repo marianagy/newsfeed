@@ -136,7 +136,6 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", role=" + role +
                 ", flag=" + flag +
                 ", profile=" + profile +
                 '}';

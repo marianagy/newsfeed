@@ -23,7 +23,7 @@ public class Category {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "categoryList")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "categoryList")
     private List<Article> categoryArticleList;
 
     public Category() {

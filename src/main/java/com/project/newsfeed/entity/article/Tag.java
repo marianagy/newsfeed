@@ -1,5 +1,6 @@
 package com.project.newsfeed.entity.article;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -23,7 +24,8 @@ public class Tag {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(mappedBy = "tagList")
+    @ManyToMany(mappedBy = "tagList", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Article> taggedArticleList;
 
     public Tag() {

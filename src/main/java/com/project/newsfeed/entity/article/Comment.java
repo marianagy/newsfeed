@@ -40,9 +40,8 @@ public class Comment {
     @JsonIgnore
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "article_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Article article;
 
