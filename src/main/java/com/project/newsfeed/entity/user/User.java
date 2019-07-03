@@ -1,6 +1,7 @@
 package com.project.newsfeed.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.project.newsfeed.entity.article.Comment;
 import com.project.newsfeed.entity.profile.Profile;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -9,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -50,18 +52,31 @@ public class User {
     @JoinColumn(name = "profile_id", nullable = false)
     private Profile profile;
 
-
-    public User(){}
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Comment> comments;
 
     public User(@NotNull @Size(max = 100) String username,
                 @NotNull @Size(max = 100) String password,
                 Role role, boolean flag,
-                Profile profile) {
+                Profile profile,
+                Set<Comment> comments) {
         this.username = username;
         this.password = password;
         this.role = role;
         this.flag = flag;
         this.profile = profile;
+        this.comments = comments;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public User() {
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 
     public Integer getId() {

@@ -12,7 +12,6 @@ import javax.validation.constraints.Size;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -60,10 +59,10 @@ public class Article {
     private List<Category> categoryList;
 
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private Set<Comment> comments;
+    @OneToMany(mappedBy = "article", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    private List<Comment> comments;
 
-    public Article(@NotNull @Size(max = 150) String title, @NotNull String content, byte[] image, User user, Integer nrUpvotes, List<Tag> tagList, List<Category> categoryList, Set<Comment> comments) {
+    public Article(@NotNull @Size(max = 150) String title, @NotNull String content, byte[] image, User user, Integer nrUpvotes, List<Tag> tagList, List<Category> categoryList, List<Comment> comments) {
         this.title = title;
         this.content = content;
         this.image = image;
@@ -74,14 +73,14 @@ public class Article {
         this.comments = comments;
     }
 
-    public Set<Comment> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
     public Article() {
     }
 
-    public void setComments(Set<Comment> comments) {
+    public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
 
