@@ -15,7 +15,8 @@ import {
   MatListModule,
   MatNativeDateModule,
   MatSelectModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatTableModule
 } from "@angular/material";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
@@ -33,10 +34,11 @@ import {EditCommentComponent} from "../article-management/edit-comment/edit-comm
 import {AddCommentComponent} from "../article-management/add-comment/add-comment.component";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {HttpLoaderFactory} from "../app.module";
+import {AdminComponent} from './admin/admin.component';
 
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, ProfileComponent, EditProfileComponent, EditBioComponent, EditPhotoComponent],
+  declarations: [LoginComponent, RegisterComponent, ProfileComponent, EditProfileComponent, EditBioComponent, EditPhotoComponent, AdminComponent],
   imports: [
 
     TranslateModule.forChild({
@@ -72,9 +74,10 @@ import {HttpLoaderFactory} from "../app.module";
     MatSelectModule,
     ReactiveFormsModule,
     BrowserModule,
-    ArticleManagementModule
+    ArticleManagementModule,
+    MatTableModule
   ],
-  exports: [LoginComponent, RouterModule],
+  exports: [LoginComponent, RouterModule, AdminComponent],
   entryComponents: [EditProfileComponent,
     EditBioComponent,
     EditPhotoComponent,

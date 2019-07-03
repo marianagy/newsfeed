@@ -62,6 +62,9 @@ public class ProfileServiceImpl implements ProfileService {
         if (profile.getEmail() == null || profile.getEmail().trim().equals("")) {
             throw new BusinessException(ExceptionCode.FIELD_VALUE_IS_NULL);
         }
+        if (profileDAO.findbyEmail(profile.getEmail()) != null) {
+            throw new BusinessException(ExceptionCode.EMAIL_EXISTS_ALREADY);
+        }
     }
 
     @Override

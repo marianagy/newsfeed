@@ -16,6 +16,7 @@ import {HttpLoaderFactory} from "../app.module";
 import {HttpClient} from "@angular/common/http";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {InternationalisationModule} from "../internationalisation/internationalisation.module";
+import {AdminComponent} from "../user/admin/admin.component";
 
 const loginRoutes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -23,7 +24,8 @@ const loginRoutes: Routes = [
   {path: 'profile', component: ProfileComponent, canActivate: [LoginguardGuard]},
   {path: 'home-page', component: HomePageComponent, canActivate: [LoginguardGuard]},
   {path: '', pathMatch: 'full', redirectTo: '/login'},
-  {path: 'article/:id', component: ArticleComponent, canActivate: [LoginguardGuard]}
+  {path: 'article/:id', component: ArticleComponent, canActivate: [LoginguardGuard]},
+  {path: 'admin', component: AdminComponent} // TODO: add guard
 ];
 
 @NgModule({

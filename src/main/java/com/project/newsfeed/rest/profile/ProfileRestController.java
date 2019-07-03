@@ -64,17 +64,18 @@ public class ProfileRestController {
             method = RequestMethod.PUT
     )
     @ResponseBody
-    public ResponseEntity<ProfileDTO> updateProfile(@RequestBody ProfileDTO profileDTO) {
+    public ResponseEntity<Object> updateProfile(@RequestBody ProfileDTO profileDTO) {
 
 
         try {
             profileService.save(ProfileDTOHelper.toEntity(profileDTO));
+            return ResponseEntity.ok().body(profileDTO);
         } catch (BusinessException e) {
-            //todo : fa-l bine
-            e.printStackTrace();
+            //todo : fa bine si la restul!!
+            return ResponseEntity.badRequest().body(e.getExceptionCode().getMessage());
         }
 
-        return ResponseEntity.ok().body(profileDTO);
+
     }
 
     @DeleteMapping("/delete-profile/{profileId}")

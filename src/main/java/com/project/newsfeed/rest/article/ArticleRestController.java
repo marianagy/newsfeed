@@ -115,7 +115,7 @@ public class ArticleRestController {
 
         // throw exception if null
         if (tempArticleDTO == null) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body("No such article found");
         }
 
         articleService.deleteById(id);

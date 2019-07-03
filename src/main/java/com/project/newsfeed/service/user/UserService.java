@@ -18,6 +18,12 @@ public interface UserService {
 
     User getUserByUsername(String username) throws BusinessException;
 
+    void activateUser(String username) throws BusinessException;
+
+    void deactivateUser(String username) throws BusinessException;
+
+    Boolean isActive(String username);
+
 
 
 }

@@ -12,7 +12,10 @@
   <button *ngIf="isLoggedIn()" mat-button routerLink='/home-page'>
     {{'navbar.home' | translate}}
   </button>
-
+  <button *ngIf="isLoggedIn()" mat-button routerLink='/admin'>
+    <!--{{'navbar.admin' | translate}}-->
+    Admin
+  </button>
 
   <button (click)="logout()" *ngIf="isLoggedIn()" mat-button>
     <i class="material-icons">logout</i></button>

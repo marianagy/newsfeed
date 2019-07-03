@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
     public void save(User user) {
 
         Role role = new Role();
-        role.setId(1);
+        role.setId(2);
         role.setName("user");
         user.setRole(role);
         user.setFlag(true);
@@ -266,6 +266,19 @@ public class UserServiceImpl implements UserService {
             //log.catching(exception);
             return "{token: ''}";
         }
+
+    }
+
+    /**
+     * Method returns true is user is active and false if not
+     *
+     * @param username
+     * @return
+     */
+    public Boolean isActive(String username) {
+
+        User user = userDAO.findByUsername(username);
+        return user.getFlag();
 
     }
 

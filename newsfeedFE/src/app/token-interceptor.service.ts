@@ -48,6 +48,7 @@ export class TokenInterceptorService implements HttpInterceptor {
     this.errorString = 'exceptionCodes.' + err.error.value;
     console.log(err);
     // this.translate.get(this.errorString).subscribe((res: string) => this.errorMsg = res);
+    this.errorMsg = err.error;
     this.openSnackBar(this.errorMsg);
 
   }

@@ -4,10 +4,10 @@ package com.project.newsfeed.exception;
      */
     public enum ExceptionCode {
 
-        //    Error codes are grouped by logic  -> 1XXX for user, 2xxx for permission, etc
+        //    Error codes are grouped by logic  -> 1XXX for user, 2xxx for permission, etc TODO: Schimba nume in nume bune
         UNKNOWN_EXCEPTION(1000, "Unknown Exception"),
         USER_VALIDATION_EXCEPTION(1002, "Validation Exception"),
-        EMAIL_EXISTS_ALREADY(1003, "Email already exists Exception"),
+        EMAIL_EXISTS_ALREADY(1003, "Email already exists"),
         EMAIL_VALIDATION_EXCEPTION(1004, "Email validation Exception"),
         EMAIL_NOT_FOUND(1005, "User is not registered with this email, or is not registered at all."),
         USERNAME_NOT_FOUND(1006, "Username is not found."),
@@ -26,11 +26,7 @@ package com.project.newsfeed.exception;
         TAGLIKE_NOT_FOUND(4019, "TagLike not found"),
         USER_PERMISSION_VALIDATION(2001, "User does not have this permission"),
         ROLE_DOESNT_EXIST(2002, "User does not have this permission"),
-        PROFILE_VALIDATION_EXCEPTION(5001, "Validation Exception"),
-        PROFILE_DOES_NOT_EXIST(5002, "Profile not found"),
-        PROFILE_NOT_EXPORTED(7001, "Profile could not be exported to pdf."),
-        NOTIFICATION_VALIDATION_EXCEPTION(7000, "This notification doesn't exist"),
-        SEND_EMAIL_EXCEPTION(8000, "Exception appeared while sending email");
+        PROFILE_DOES_NOT_EXIST(5002, "Profile not found");
         int id;
         String message;
 

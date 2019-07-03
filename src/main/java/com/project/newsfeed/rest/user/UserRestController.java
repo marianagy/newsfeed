@@ -5,6 +5,9 @@ import com.project.newsfeed.exception.BusinessException;
 import com.project.newsfeed.service.user.UserService;
 import com.project.newsfeed.service.user.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,13 +15,13 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("/api")
-public class UserRestController{
+public class UserRestController {
 
     private UserService userService;
 
     @Autowired
-    public UserRestController(UserService userService){
-        this.userService=userService;
+    public UserRestController(UserService userService) {
+        this.userService = userService;
     }
 
     public UserService getUserService() {
@@ -40,7 +43,7 @@ public class UserRestController{
     @GetMapping("/users/{userId}")
     public User getUserById(@PathVariable int userId) throws BusinessException {
         User user = userService.findById(userId);
-        if(user==null){
+        if (user == null) {
             throw new RuntimeException("User id not found - " + userId);
         }
         return user;
@@ -48,7 +51,7 @@ public class UserRestController{
 
     // add mapping for POST /users - add new user
     @PostMapping("/users")
-    public User addUser(@RequestBody User user){
+    public User addUser(@RequestBody User user) {
 
 
         userService.save(user);
@@ -89,7 +92,54 @@ public class UserRestController{
         return userService.getUserByUsername(username);
     }
 
+    @RequestMapping(value = "/deactivate-user",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+    )
+    @ResponseBody
+    public ResponseEntity<Object> deactivateUser(@RequestBody MultiValueMap<String, String> paramMap) {
+        String username = paramMap.getFirst("username");
+        try {
+            userService.deactivateUser(username);
+            return ResponseEntity.ok().build();
+        } catch (BusinessException e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().build();
+        }
 
+
+    }
+
+    @RequestMapping(value = "/activate-user",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+    )
+    @ResponseBody
+    public ResponseEntity<Object> activateUser(@RequestBody MultiValueMap<String, String> paramMap) {
+
+        try {
+            userService.activateUser(paramMap.getFirst("username"));
+
+            return ResponseEntity.ok().build();
+        } catch (BusinessException e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().build();
+        }
+
+
+    }
+
+    @RequestMapping(value = "/is-user-active/{username}",
+            method = RequestMethod.GET
+
+    )
+    @ResponseBody
+    public Boolean isUserActive(@PathVariable String username) {
+
+        return userService.isActive(username);
+
+
+    }
 }
 
 
