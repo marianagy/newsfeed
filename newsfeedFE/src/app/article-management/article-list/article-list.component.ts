@@ -141,7 +141,9 @@ export class ArticleListComponent implements OnInit {
     console.log(this.pageIndex);
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
-    if (this.dynamicdata !== '' && this.dynamicdata !== null) {
+    console.log(this._dynamicdata)
+
+    if (this._dynamicdata !== '' && this._dynamicdata !== undefined) {
       this.doCategs(this._dynamicdata);
     } else {
 
@@ -151,7 +153,10 @@ export class ArticleListComponent implements OnInit {
   }
 
   loadArticles() {
-    console.log("I am in load articles");
+    console.log("I am in load articles!!!!!!!!!");
+    console.log("Article filter: ");
+    console.log(this.articleFilter);
+
     this.articleServie.getFilteredArticles(this.articleFilter, this.pageIndex, this.pageSize)
       .subscribe(
         data => {
