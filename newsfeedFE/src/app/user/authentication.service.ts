@@ -78,8 +78,7 @@ export class AuthenticationService {
   }
 
   public getRoleOfUser() {
-    let role = localStorage['role'];
-    return JSON.parse(role);
+    return localStorage['role'];
   }
 
   public userHasPermission(permissionString) {

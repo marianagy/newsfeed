@@ -8,8 +8,6 @@ public class UserDTO {
     private Boolean flag;
     private Integer id;
 
-    //Todo: sa pun si lista de notificari cand termin cu notificarile
-
 
     public String getUsername() {
         return username;

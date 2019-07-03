@@ -10,5 +10,4 @@ public interface UserDAO extends JpaRepository<User, Integer> {
     User findByUsername(String username);
 
 
-    // Todo: get roles for user
 }

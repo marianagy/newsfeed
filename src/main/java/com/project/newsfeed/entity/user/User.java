@@ -50,7 +50,6 @@ public class User {
     @JoinColumn(name = "profile_id", nullable = false)
     private Profile profile;
 
-    // Todo: sa ii pun si lista de notificari la user
 
     public User(){}
 

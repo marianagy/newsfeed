@@ -12,7 +12,7 @@
   <button *ngIf="isLoggedIn()" mat-button routerLink='/home-page'>
     {{'navbar.home' | translate}}
   </button>
-  <button *ngIf="isLoggedIn()" mat-button routerLink='/admin'>
+  <button *ngIf="isAdmin()" mat-button routerLink='/admin'>
     <!--{{'navbar.admin' | translate}}-->
     Admin
   </button>

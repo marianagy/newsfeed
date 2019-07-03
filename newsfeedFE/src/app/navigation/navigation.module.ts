@@ -17,6 +17,7 @@ import {HttpClient} from "@angular/common/http";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {InternationalisationModule} from "../internationalisation/internationalisation.module";
 import {AdminComponent} from "../user/admin/admin.component";
+import {AdminGuard} from "../user/admin.guard";
 
 const loginRoutes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -25,7 +26,7 @@ const loginRoutes: Routes = [
   {path: 'home-page', component: HomePageComponent, canActivate: [LoginguardGuard]},
   {path: '', pathMatch: 'full', redirectTo: '/login'},
   {path: 'article/:id', component: ArticleComponent, canActivate: [LoginguardGuard]},
-  {path: 'admin', component: AdminComponent} // TODO: add guard
+  {path: 'admin', component: AdminComponent, canActivate: [AdminGuard]} // TODO: add guard
 ];
 
 @NgModule({

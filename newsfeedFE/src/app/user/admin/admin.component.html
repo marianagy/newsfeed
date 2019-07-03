@@ -1,0 +1,31 @@
+<div class="page-content">
+
+
+  <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table>
+
+    <ng-container matColumnDef="username">
+      <th *matHeaderCellDef mat-header-cell>Username</th>
+      <td *matCellDef="let element" mat-cell> {{element.username}}</td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="activation">
+      <th *matHeaderCellDef mat-header-cell> Activation Status</th>
+      <td *matCellDef="let element" mat-cell>
+        <button (click)="toggleActivation(element.flag, element.username)"
+                color="warn"
+                id="toggleButton"
+                mat-raised-button>
+
+          {{getActivationButtonText(element.flag)}}
+        </button>
+      </td>
+    </ng-container>
+
+
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+
+  </table>
+
+</div>
