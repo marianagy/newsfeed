@@ -103,8 +103,7 @@ public class UserRestController {
             userService.deactivateUser(username);
             return ResponseEntity.ok().build();
         } catch (BusinessException e) {
-            e.printStackTrace();
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(e.getExceptionCode().getMessage());
         }
 
 
@@ -122,8 +121,8 @@ public class UserRestController {
 
             return ResponseEntity.ok().build();
         } catch (BusinessException e) {
-            e.printStackTrace();
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(e.getExceptionCode().getMessage());
+
         }
 
 

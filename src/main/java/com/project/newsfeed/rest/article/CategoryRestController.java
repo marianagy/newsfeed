@@ -60,14 +60,14 @@ public class CategoryRestController {
             method = RequestMethod.PUT
     )
     @ResponseBody
-    public ResponseEntity<CategoryDTO> updateCategory(@RequestBody CategoryDTO categoryDTO) {
+    public ResponseEntity<Object> updateCategory(@RequestBody CategoryDTO categoryDTO) {
 
 
         try {
             categoryService.save(categoryDTO);
         } catch (BusinessException e) {
-            //todo : fa-l bine
-            e.printStackTrace();
+
+            return ResponseEntity.badRequest().body(e.getExceptionCode().getMessage());
         }
 
         return ResponseEntity.ok().body(categoryDTO);

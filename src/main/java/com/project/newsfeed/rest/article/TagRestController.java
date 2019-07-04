@@ -45,13 +45,13 @@ public class TagRestController {
             method = RequestMethod.POST
     )
     @ResponseBody
-    public ResponseEntity<TagDTO> addTag(@RequestBody TagDTO tagDTO) {
+    public ResponseEntity<Object> addTag(@RequestBody TagDTO tagDTO) {
 
 
         try {
             tagService.save(tagDTO);
         } catch (BusinessException e) {
-            e.printStackTrace();
+            return ResponseEntity.badRequest().body(e.getExceptionCode().getMessage());
         }
         return ResponseEntity.ok().body(tagDTO);
     }
@@ -60,14 +60,14 @@ public class TagRestController {
             method = RequestMethod.PUT
     )
     @ResponseBody
-    public ResponseEntity<TagDTO> updateTag(@RequestBody TagDTO tagDTO) {
+    public ResponseEntity<Object> updateTag(@RequestBody TagDTO tagDTO) {
 
 
         try {
             tagService.save(tagDTO);
         } catch (BusinessException e) {
-            //todo : fa-l bine
-            e.printStackTrace();
+
+            return ResponseEntity.badRequest().body(e.getExceptionCode().getMessage());
         }
 
         return ResponseEntity.ok().body(tagDTO);

@@ -48,13 +48,13 @@ public class ProfileRestController {
             method = RequestMethod.POST
     )
     @ResponseBody
-    public ResponseEntity<ProfileDTO> addProfile(@RequestBody ProfileDTO profileDTO) {
+    public ResponseEntity<Object> addProfile(@RequestBody ProfileDTO profileDTO) {
 
 
         try {
             profileService.save(ProfileDTOHelper.toEntity(profileDTO));
         } catch (BusinessException e) {
-            e.printStackTrace();
+            return ResponseEntity.badRequest().body(e.getExceptionCode().getMessage());
         }
         return ResponseEntity.ok().body(profileDTO);
     }
@@ -71,7 +71,7 @@ public class ProfileRestController {
             profileService.save(ProfileDTOHelper.toEntity(profileDTO));
             return ResponseEntity.ok().body(profileDTO);
         } catch (BusinessException e) {
-            //todo : fa bine si la restul!!
+
             return ResponseEntity.badRequest().body(e.getExceptionCode().getMessage());
         }
 

@@ -98,8 +98,8 @@ public class CommentRestController {
             commentDTO.setUser(UserDTOHelper.fromEntity(requester));
             commentService.save(commentDTO);
         } catch (BusinessException e) {
-            //todo : sa fac sa afiseze eroarea
-            ResponseEntity.badRequest().body(e.getMessage());
+
+            return ResponseEntity.badRequest().body(e.getExceptionCode().getMessage());
         }
 
         return ResponseEntity.ok().body(commentDTO);

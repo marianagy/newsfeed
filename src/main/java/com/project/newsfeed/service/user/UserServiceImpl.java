@@ -223,8 +223,8 @@ public class UserServiceImpl implements UserService {
     private boolean isValidForCreation(User user) throws BusinessException {
         //validate if email already exists
         if (userDAO.findByUsername(user.getUsername()) != null) {
-            //Todo: username already exists
-            throw new BusinessException(ExceptionCode.UNKNOWN_EXCEPTION);
+
+            throw new BusinessException(ExceptionCode.USERNAME_ALREADY_EXISTS);
         }
         return validateFields(user)
                 && user.getPassword() != null;
