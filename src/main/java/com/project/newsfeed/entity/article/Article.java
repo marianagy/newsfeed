@@ -58,8 +58,8 @@ public class Article {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categoryList;
 
-
-    @OneToMany(mappedBy = "article", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    //orphanRemoval = true,
+    @OneToMany(mappedBy = "article", cascade = CascadeType.PERSIST)
     private List<Comment> comments;
 
     public Article(@NotNull @Size(max = 150) String title, @NotNull String content, byte[] image, User user, Integer nrUpvotes, List<Tag> tagList, List<Category> categoryList, List<Comment> comments) {

@@ -141,7 +141,7 @@ export class ArticleListComponent implements OnInit {
     console.log(this.pageIndex);
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
-    console.log(this._dynamicdata)
+    console.log(this._dynamicdata);
 
     if (this._dynamicdata !== '' && this._dynamicdata !== undefined) {
       this.doCategs(this._dynamicdata);

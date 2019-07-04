@@ -68,7 +68,7 @@ export class ProfileComponent implements OnInit {
           this.profileData.email = data["email"];
           this.profileData.bio = data["bio"];
           if (data["photo"] == "" || data["photo"] == undefined) {
-            this.profileData.photo = "https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg";
+            this.profileData.photo = "https://images.vexels.com/media/users/3/137047/isolated/preview/5831a17a290077c646a48c4db78a81bb-user-profile-blue-icon-by-vexels.png";
           } else {
             this.profileData.photo = data["photo"];
           }
